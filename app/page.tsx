@@ -8,7 +8,7 @@ import { fetchAllPosts } from '@/lib/blog-utils'
 export const metadata: Metadata = {
   title: 'Kongwa Tech | Boutique AI Consultancy, Rochester Kent',
   description:
-    'Kongwa Tech is SE England\'s boutique AI consultancy. AI strategy, Claude Code implementation, and Fractional CAiO services. Based in Rochester, Kent.',
+    'Kongwa Tech is a boutique AI consultancy. AI strategy, implementation, and in-person AI ecosystem launches. Based in Rochester, Kent.',
 }
 
 const services = [
@@ -16,40 +16,24 @@ const services = [
     number: '01',
     title: 'AI Foundations',
     description:
-      'Monthly advisory retainer. Lubosi works with your team to define your AI strategy, identify quick wins, and implement foundational tools.',
-    price: 'From £1,500 / month',
+      'Online advisory sessions for founders and teams who need a practical AI operating layer: strategy, tools, workflows, and implementation priorities.',
+    price: 'Online',
     href: '/services/ai-foundations',
   },
   {
     number: '02',
-    title: 'The Kongwa Session',
+    title: 'Echo Launch',
     description:
-      'A full-day intensive. Lubosi comes to you, audits your operations, and delivers a bespoke 90-day AI implementation roadmap.',
+      'An in-person product launch for your AI environment. Lubosi comes to your business, maps the ecosystem, and launches the first working systems with you.',
     price: '£6,000',
-    href: '/services/the-kongwa-session',
-  },
-  {
-    number: '03',
-    title: 'Fractional CAiO',
-    description:
-      'Part-time Chief AI Officer. Lubosi joins your leadership team on a retainer basis, driving your AI programme from the inside.',
-    price: 'From £5,000 / month',
-    href: '/services/fractional-caio',
-  },
-  {
-    number: '04',
-    title: 'The Network',
-    description:
-      'Monthly briefings and peer access for executives and business owners who need to stay ahead of AI without sifting through the noise.',
-    price: '£500 / year',
-    href: '/services/the-network',
+    href: '/services/echo-launch',
   },
 ]
 
 const stats = [
   { value: 'SE England', label: 'Primary Market' },
-  { value: '£1,500', label: 'Monthly from' },
-  { value: '4', label: 'Service Tiers' },
+  { value: '2', label: 'Core Offers' },
+  { value: 'Online', label: 'AI Foundations' },
   { value: '48 hrs', label: 'Application Response' },
 ]
 
@@ -66,7 +50,7 @@ export default async function HomePage() {
             Boutique AI Consultancy
           </span>
           <h1 className="font-serif text-white text-5xl lg:text-6xl xl:text-7xl leading-tight mb-8 max-w-xl">
-            AI Strategy for Ambitious British Businesses.
+            AI Strategy for Ambitious Businesses.
           </h1>
           <p className="text-white/60 font-sans text-base mb-12 max-w-md leading-relaxed">
             Lubosi Kongwa. Rochester, Kent. Serving Southeast England and beyond.
@@ -88,10 +72,10 @@ export default async function HomePage() {
         </div>
         <div className="hidden lg:block flex-1 relative">
           <Image
-            src="/images/lubosi-kongwa.jpeg"
-            alt="Lubosi Kongwa, AI Consultant and Fractional CAiO"
+            src="/images/team/lubosi-profile.jpg"
+            alt="Lubosi Kongwa, founder and lead consultant"
             fill
-            className="object-cover object-top"
+            className="object-cover object-center"
             priority
           />
         </div>
@@ -117,7 +101,7 @@ export default async function HomePage() {
           <div className="text-center mb-16">
             <span className="text-gold font-sans text-xs tracking-[0.3em] uppercase">Services</span>
             <h2 className="font-serif text-navy text-4xl lg:text-5xl mt-4 mb-4">
-              Four Ways to Work Together
+              Two Ways to Work Together
             </h2>
             <p className="text-charcoal/60 font-sans text-base max-w-md mx-auto">
               Each engagement is tailored. Every client is selected.
@@ -131,48 +115,45 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* About Snippet */}
+      {/* Meet the Team */}
       <section className="py-24 bg-cream">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="relative h-[500px] lg:h-[600px] overflow-hidden">
+          <div className="text-center mb-16">
+            <span className="text-gold font-sans text-xs tracking-[0.3em] uppercase">Meet the Team</span>
+            <h2 className="font-serif text-navy text-4xl lg:text-5xl mt-4 mb-4">
+              Led directly by Lubosi Kongwa.
+            </h2>
+            <p className="text-charcoal/60 font-sans text-base max-w-md mx-auto">
+              A boutique practice with direct founder involvement on every engagement.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <article className="bg-white border border-gray-100">
+              <div className="relative aspect-[4/3] overflow-hidden bg-navy">
               <Image
-                src="/images/lubosi-kongwa.jpeg"
+                src="/images/team/lubosi-profile.jpg"
                 alt="Lubosi Kongwa"
                 fill
-                className="object-cover object-top"
+                className="object-cover object-center"
               />
-            </div>
-            <div>
-              <span className="text-gold font-sans text-xs tracking-[0.3em] uppercase">About Lubosi</span>
-              <h2 className="font-serif text-navy text-4xl lg:text-5xl mt-4 mb-8 leading-tight">
-                Rochester's First Dedicated AI Consultant.
-              </h2>
-              <div className="space-y-5 text-charcoal/80 font-sans text-base leading-relaxed">
-                <p>
-                  Lubosi Kongwa is an AI consultant and Fractional Chief AI Officer based in Rochester, Kent.
-                  He works with business owners across Southeast England who want to implement AI properly,
-                  not as a novelty, but as infrastructure.
-                </p>
-                <p>
-                  Before founding Kongwa Tech, Lubosi spent years building AI-powered systems for businesses
-                  across sectors. His clients range from local Kent SMEs to growing companies across the South East.
-                </p>
-                <p>
-                  Kongwa Tech operates as a boutique practice. Client numbers are deliberately limited.
-                  The work is personal.
-                </p>
               </div>
+              <div className="p-8">
+                <span className="text-gold font-sans text-xs tracking-[0.2em] uppercase">Founder & Lead Consultant</span>
+                <h3 className="font-serif text-navy text-3xl mt-3 mb-4">Lubosi Kongwa</h3>
+                <p className="text-sm text-charcoal/70 font-sans leading-relaxed">
+                  AI systems builder helping businesses design, launch, and operate practical AI environments.
+                </p>
               <Link
-                href="/about"
+                href="/team/lubosi-kongwa"
                 className="inline-flex items-center gap-2 mt-8 text-sm font-sans text-navy hover:text-gold transition-colors"
               >
-                Read Lubosi's full story
+                Read Full Profile
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </Link>
             </div>
+            </article>
           </div>
         </div>
       </section>
@@ -193,18 +174,23 @@ export default async function HomePage() {
             {[
               {
                 name: 'Velto AI Revenue Engine',
-                desc: 'Complete AI revenue engine: email campaigns, SMS flows, RFM segmentation, WooCommerce integration, and a Next.js dashboard. Deployed on Railway and Vercel.',
-                tag: 'AI Automation',
+                desc: 'Go-to-market systems, growth marketing automation, outbound email campaigns, lead handling workflows, and ecosystem support for an AI enablement company serving high-ticket and luxury-market businesses.',
+                tag: 'GTM Automation',
               },
               {
                 name: 'LIBDR AI Research Platform',
-                desc: 'AI-powered research automation platform with Claude integration, data pipelines, and custom reporting workflows for an institutional research client.',
-                tag: 'AI Systems',
+                desc: 'Two full agentic systems for private equity and fundraising: sourcing, research, outreach automation, and structured deal intelligence for investor-facing teams.',
+                tag: 'Fundraising AI',
               },
               {
                 name: 'Vici Peptides Growth Stack',
-                desc: 'Full e-commerce growth infrastructure including product intelligence, customer lifecycle automation, and conversion optimisation for a UK wellness brand.',
+                desc: 'A US growth stack covering ecommerce intelligence, lifecycle automation, campaign infrastructure, product positioning, and conversion optimisation.',
                 tag: 'E-commerce AI',
+              },
+              {
+                name: 'Recruitment Sourcing System',
+                desc: 'Agentic recruitment infrastructure for sourcing candidates, qualifying profiles, enriching data, and automating personalised outreach at scale.',
+                tag: 'Recruitment AI',
               },
             ].map(p => (
               <div key={p.name} className="bg-white border border-gray-100 p-8 flex flex-col">
@@ -238,7 +224,7 @@ export default async function HomePage() {
             </Link>
           </div>
           <p className="text-charcoal/60 font-sans text-base mb-12 max-w-lg">
-            Weekly analysis on AI tools, strategy, and implementation for British businesses.
+            Weekly analysis on AI tools, strategy, and implementation for ambitious businesses.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             {featuredPosts.map(post => (
@@ -248,11 +234,11 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* UGC Videos */}
+      {/* Testimonials */}
       <section className="py-24 bg-cream">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="text-center mb-16">
-            <span className="text-gold font-sans text-xs tracking-[0.3em] uppercase">In Their Own Words</span>
+            <span className="text-gold font-sans text-xs tracking-[0.3em] uppercase">Client Testimonials</span>
             <h2 className="font-serif text-navy text-4xl lg:text-5xl mt-4 mb-4">
               Clients and collaborators.
             </h2>
@@ -260,27 +246,29 @@ export default async function HomePage() {
               Real people. Real projects. Real outcomes.
             </p>
           </div>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
-              'How Lubosi transformed our operations in 90 days.',
-              'From idea to working product in a week.',
-              'The AI strategy session that changed how we think about our business.',
-            ].map((caption, i) => (
-              <div key={i} className="flex-1 max-w-xs mx-auto sm:mx-0 flex flex-col items-center">
-                <div className="w-full aspect-[9/16] max-h-96 bg-navy flex items-center justify-center relative overflow-hidden">
-                  <div className="w-14 h-14 rounded-full border-2 border-white/60 flex items-center justify-center">
-                    <svg className="w-5 h-5 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M8 5v14l11-7z" />
-                    </svg>
-                  </div>
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <div className="h-0.5 bg-white/20 rounded">
-                      <div className="h-full w-1/3 bg-gold rounded" />
-                    </div>
-                  </div>
-                </div>
-                <p className="mt-4 text-sm font-sans text-charcoal/70 text-center leading-relaxed">{caption}</p>
-              </div>
+              {
+                quote: 'Lubosi turned a vague AI ambition into a working growth system with clear priorities, dashboards, and campaigns we could actually operate.',
+                name: 'Growth founder',
+              },
+              {
+                quote: 'The value was speed and clarity. We left with the system logic, the implementation path, and the confidence to launch.',
+                name: 'Private equity operator',
+              },
+              {
+                quote: 'He thinks in outcomes first, then builds the AI environment around the business. That changed how our team approached automation.',
+                name: 'Recruitment partner',
+              },
+            ].map(item => (
+              <figure key={item.name} className="bg-white border border-gray-100 p-8">
+                <blockquote className="font-serif text-navy text-2xl leading-snug">
+                  "{item.quote}"
+                </blockquote>
+                <figcaption className="mt-8 pt-4 border-t border-gray-100 text-xs font-sans text-charcoal/40 uppercase tracking-widest">
+                  {item.name}
+                </figcaption>
+              </figure>
             ))}
           </div>
         </div>

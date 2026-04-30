@@ -24,12 +24,12 @@ export const metadata: Metadata = {
     default: 'Kongwa Tech | Boutique AI Consultancy, Rochester Kent',
   },
   description:
-    'Kongwa Tech is a boutique AI consultancy based in Rochester, Kent. AI strategy, implementation, and Fractional Chief AI Officer services for Southeast England businesses.',
+    'Kongwa Tech is a boutique AI consultancy based in Rochester, Kent. AI strategy, implementation, and in-person AI ecosystem launches for ambitious businesses.',
   keywords: [
     'AI consultant Kent',
     'AI consultancy UK',
     'AI consultant Southeast England',
-    'fractional chief AI officer',
+    'AI ecosystem launch',
     'Claude Code',
     'AI automation',
     'Lubosi Kongwa',
@@ -71,15 +71,15 @@ const schemaOrg = {
         addressCountry: 'GB',
       },
       areaServed: ['Kent', 'Surrey', 'Southeast England', 'United Kingdom'],
-      priceRange: '£500 - £6,000',
+      priceRange: '£6,000',
       description:
-        'Boutique AI consultancy based in Rochester, Kent. Serving Southeast England businesses with AI strategy, implementation, and Fractional Chief AI Officer services.',
+        'Boutique AI consultancy based in Rochester, Kent. Serving ambitious businesses with AI strategy, implementation, and in-person AI ecosystem launches.',
     },
     {
       '@type': 'Person',
       '@id': 'https://kongwatech.com/#lubosi',
       name: 'Lubosi Kongwa',
-      jobTitle: 'AI Consultant and Fractional Chief AI Officer',
+      jobTitle: 'Founder and Lead Consultant',
       url: 'https://kongwatech.com',
       email: 'lubosi@kongwatech.com',
       sameAs: [

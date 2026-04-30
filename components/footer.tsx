@@ -60,7 +60,7 @@ export default function Footer() {
             <ul className="space-y-3">
               {[
                 ['Services', '/services'],
-                ['About', '/about'],
+                ['Team', '/team'],
                 ['Partners', '/partners'],
                 ['Blog', '/blog'],
                 ['Apply', '/apply'],

@@ -2,9 +2,9 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'AI Foundations | Monthly AI Advisory Retainer',
+  title: 'AI Foundations | Online AI Advisory',
   description:
-    'AI Foundations is a monthly AI advisory retainer for business owners. Lubosi Kongwa works with your team to define your AI strategy and implement the tools that matter. From £1,500/month.',
+    'AI Foundations is an online AI advisory engagement for business owners. Lubosi Kongwa works with your team to define your AI strategy and implement the tools that matter.',
 }
 
 const faqSchema = {
@@ -13,7 +13,7 @@ const faqSchema = {
   mainEntity: [
     {
       '@type': 'Question',
-      name: 'What does AI Foundations include each month?',
+      name: 'What does AI Foundations include?',
       acceptedAnswer: {
         '@type': 'Answer',
         text: 'Each month includes a strategy session with Lubosi, hands-on implementation support for the tools and workflows you are building, a written summary of progress and next steps, and access to Lubosi for questions between sessions. The exact focus each month is driven by your business priorities.',
@@ -29,10 +29,10 @@ const faqSchema = {
     },
     {
       '@type': 'Question',
-      name: 'Can I pause or cancel the retainer?',
+      name: 'How is the engagement scoped?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes. The retainer requires 30 days notice to cancel. There is no minimum term beyond the first month. Many clients continue for 6-12 months as their AI programme matures.',
+        text: 'Every AI Foundations engagement is scoped after application. Lubosi reviews your goals, current tools, and implementation needs, then recommends the right advisory structure before work begins.',
       },
     },
     {
@@ -40,7 +40,7 @@ const faqSchema = {
       name: 'Is this right for a business with fewer than 10 employees?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes. Some of the highest-impact AI implementations happen in small businesses where a single well-designed workflow can save 5-10 hours per week. The AI Foundations retainer is designed to be practical for businesses of any size.',
+        text: 'Yes. Some of the highest-impact AI implementations happen in small businesses where a single well-designed workflow can save 5-10 hours per week. AI Foundations is designed to be practical for businesses of any size.',
       },
     },
   ],
@@ -61,7 +61,7 @@ export default function AIFoundationsPage() {
             AI Foundations
           </h1>
           <p className="text-white/60 font-sans text-lg mt-6 max-w-xl leading-relaxed">
-            Monthly advisory retainer. From £1,500 per month.
+            Online advisory for building your AI operating foundation.
           </p>
         </div>
       </section>
@@ -71,19 +71,19 @@ export default function AIFoundationsPage() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
             <div className="lg:col-span-2 space-y-6 font-sans text-charcoal/80 text-base leading-relaxed">
               <p>
-                AI Foundations is a monthly advisory retainer for business owners who are serious about AI but
-                do not yet have the internal expertise to implement it correctly. Each month, Lubosi works
+                AI Foundations is an online advisory engagement for business owners who are serious about AI but
+                do not yet have the internal expertise to implement it correctly. Lubosi works
                 directly with you and your team to make real, measurable progress on your AI programme.
               </p>
               <p>
                 This is not a training course. It is not a workshop. It is ongoing, hands-on advisory work,
-                the equivalent of having an experienced AI practitioner available to your business every month,
+                the equivalent of having an experienced AI practitioner available to your business,
                 without the cost of a full-time hire.
               </p>
               <h2 className="font-serif text-navy text-3xl mt-10 mb-4">What Is Included Each Month</h2>
               <ul className="space-y-4">
                 {[
-                  'A focused strategy session to review progress and set priorities for the month',
+                  'A focused strategy session to review progress and set priorities',
                   'Hands-on implementation support for AI tools, workflows, and automations',
                   'A written summary of work completed and recommended next steps',
                   'Access to Lubosi for questions between sessions via email',
@@ -110,15 +110,15 @@ export default function AIFoundationsPage() {
             <div>
               <div className="bg-cream p-8 sticky top-24">
                 <p className="font-sans text-xs text-charcoal/40 uppercase tracking-widest mb-2">Investment</p>
-                <p className="font-serif text-navy text-3xl mb-1">From £1,500</p>
-                <p className="text-charcoal/50 font-sans text-sm mb-8">per month</p>
+                <p className="font-serif text-navy text-3xl mb-1">Online</p>
+                <p className="text-charcoal/50 font-sans text-sm mb-8">advisory engagement</p>
                 <Link
                   href="/apply"
                   className="block bg-gold text-white font-sans text-sm px-6 py-4 text-center hover:bg-gold-dark transition-colors mb-4"
                 >
                   Apply Now
                 </Link>
-                <p className="text-xs text-charcoal/40 font-sans text-center">30 days notice to cancel</p>
+                <p className="text-xs text-charcoal/40 font-sans text-center">Scoped after application</p>
               </div>
             </div>
           </div>

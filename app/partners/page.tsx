@@ -10,7 +10,7 @@ const partners = [
   {
     name: 'Velto',
     logo: '/images/partners/velto.jpeg',
-    description: 'AI-powered business intelligence and growth platform helping companies move faster with data.',
+    description: 'An AI-first enablement company for high-ticket and high-end businesses with heavy inbound demand. Velto builds an ecosystem of AI products serving premium and luxury-market operators.',
     url: 'https://velto.ai',
   },
   {

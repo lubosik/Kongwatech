@@ -34,7 +34,7 @@ export default function Nav() {
 
         <nav className="hidden md:flex items-center gap-10">
           <Link href="/services" className="text-sm font-sans text-charcoal hover:text-navy transition-colors">Services</Link>
-          <Link href="/about" className="text-sm font-sans text-charcoal hover:text-navy transition-colors">About</Link>
+          <Link href="/team" className="text-sm font-sans text-charcoal hover:text-navy transition-colors">Team</Link>
           <Link href="/partners" className="text-sm font-sans text-charcoal hover:text-navy transition-colors">Partners</Link>
           <Link href="/blog" className="text-sm font-sans text-charcoal hover:text-navy transition-colors">Blog</Link>
         </nav>
@@ -67,7 +67,7 @@ export default function Nav() {
       {open && (
         <div className="md:hidden bg-white border-t border-gray-100 px-6 py-8 flex flex-col gap-6">
           <Link href="/services" className="text-base font-sans text-charcoal" onClick={() => setOpen(false)}>Services</Link>
-          <Link href="/about" className="text-base font-sans text-charcoal" onClick={() => setOpen(false)}>About</Link>
+          <Link href="/team" className="text-base font-sans text-charcoal" onClick={() => setOpen(false)}>Team</Link>
           <Link href="/partners" className="text-base font-sans text-charcoal" onClick={() => setOpen(false)}>Partners</Link>
           <Link href="/blog" className="text-base font-sans text-charcoal" onClick={() => setOpen(false)}>Blog</Link>
           <Link href="/apply" className="bg-gold text-white text-sm font-sans px-6 py-3 text-center" onClick={() => setOpen(false)}>Apply Now</Link>

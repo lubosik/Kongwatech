@@ -20,7 +20,7 @@ const localBusinessSchema = {
     addressCountry: 'GB',
   },
   areaServed: ['Kent', 'Surrey', 'Sussex', 'Hampshire', 'Essex', 'Southeast England', 'London'],
-  description: 'AI consulting across Southeast England. AI strategy, automation, and Fractional CAiO services. Based in Rochester, Kent.',
+  description: 'AI consulting across Southeast England. AI strategy, automation, online advisory, and Echo Launch services. Based in Rochester, Kent.',
 }
 
 export default function AIConsultantSoutheastPage() {
@@ -99,16 +99,15 @@ export default function AIConsultantSoutheastPage() {
           </p>
           <p>
             Lubosi's base in Rochester gives Kongwa Tech a genuine local perspective. In-person
-            engagements are available across the entire Southeast, bringing the Kongwa Session (the
-            full-day AI intensive) directly to your premises wherever you are based.
+            engagements are available across the entire Southeast, bringing Echo Launch directly to
+            your premises wherever you are based.
           </p>
 
           <h2 className="font-serif text-navy text-3xl">Services Available Across Southeast England</h2>
           <p>
-            All four Kongwa Tech services are available to Southeast England businesses. Remote
-            advisory services (AI Foundations retainer, Fractional CAiO, The Network membership)
-            are available nationally. In-person services (The Kongwa Session) are available across
-            the full Southeast with travel included.
+            Kongwa Tech now works through two offers. AI Foundations is the online advisory path for
+            businesses that need structured implementation support. Echo Launch is the in-person path
+            for businesses ready to launch an AI environment inside their real operating context.
           </p>
 
           <div className="mt-8 pt-8 border-t border-gray-200">

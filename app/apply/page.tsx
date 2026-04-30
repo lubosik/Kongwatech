@@ -141,10 +141,8 @@ export default function ApplyPage({
                     className="w-full border border-gray-200 px-4 py-3 font-sans text-sm text-charcoal focus:outline-none focus:border-navy transition-colors bg-white"
                   >
                     <option value="">Select a service</option>
-                    <option value="AI Foundations">AI Foundations: £1,500/month</option>
-                    <option value="The Kongwa Session">The Kongwa Session: £6,000</option>
-                    <option value="Fractional CAiO">Fractional CAiO: £5,000/month</option>
-                    <option value="The Network">The Network: £500/year</option>
+                    <option value="AI Foundations">AI Foundations: online advisory</option>
+                    <option value="Echo Launch">Echo Launch: in-person AI ecosystem launch</option>
                     <option value="Not sure yet">Not sure yet, happy to advise</option>
                   </select>
                 </div>

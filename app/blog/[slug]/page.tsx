@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 import { fetchPostBySlug, fetchAllPosts, formatDate, categoryLabel } from '@/lib/blog-utils'
 
 export async function generateStaticParams() {
@@ -34,7 +35,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
     author: {
       '@type': 'Person',
       name: 'Lubosi Kongwa',
-      url: 'https://kongwatech.com/about',
+      url: 'https://kongwatech.com/team/lubosi-kongwa',
     },
     publisher: {
       '@type': 'Organization',
@@ -42,10 +43,12 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
       url: 'https://kongwatech.com',
     },
     datePublished: post.date,
+    image: post.coverImage,
     keywords: [post.category, 'AI consultancy', 'Claude Code', 'Southeast England'],
   }
 
   const paragraphs = post.content.split('\n').filter(Boolean)
+  const midpoint = Math.max(2, Math.floor(paragraphs.length / 2))
 
   return (
     <>
@@ -76,16 +79,62 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
         </div>
       </section>
 
+      {post.coverImage && (
+        <section className="bg-white">
+          <div className="max-w-5xl mx-auto px-6 lg:px-12 -mt-10 relative z-10">
+            <div className="relative aspect-[16/9] overflow-hidden border border-gray-100 bg-navy">
+              <Image
+                src={post.coverImage}
+                alt={post.title}
+                fill
+                className="object-cover"
+                priority
+              />
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Article body */}
       <section className="py-16 bg-white">
         <div className="max-w-3xl mx-auto px-6 lg:px-12">
           <div className="prose prose-lg max-w-none prose-headings:font-serif prose-headings:text-navy prose-a:text-gold prose-strong:text-navy">
             {paragraphs.map((para, i) => {
+              const midCta = i === midpoint ? (
+                <div key={`mid-cta-${i}`} className="not-prose my-12 bg-cream border-l-4 border-gold p-8">
+                  <p className="font-serif text-navy text-2xl mb-3">
+                    Want this applied to your business?
+                  </p>
+                  <p className="font-sans text-charcoal/70 text-sm mb-6">
+                    Book a short application call and we will identify the first AI workflow worth building.
+                  </p>
+                  <Link
+                    href="/apply"
+                    className="inline-block bg-gold text-white font-sans text-sm px-6 py-3 hover:bg-gold-dark transition-colors"
+                  >
+                    Apply to Work with Lubosi
+                  </Link>
+                </div>
+              ) : null
+
+              const rendered = (() => {
               if (para.startsWith('## ')) {
                 return <h2 key={i}>{para.slice(3)}</h2>
               }
               if (para.startsWith('### ')) {
                 return <h3 key={i}>{para.slice(4)}</h3>
+              }
+              if (para.startsWith('![')) {
+                const match = para.match(/^!\[(.*)]\((.*)\)$/)
+                if (match) {
+                  return (
+                    <figure key={i} className="not-prose my-10">
+                      <div className="relative aspect-[16/9] overflow-hidden bg-navy">
+                        <Image src={match[2]} alt={match[1]} fill className="object-cover" />
+                      </div>
+                    </figure>
+                  )
+                }
               }
               if (para.startsWith('| ')) {
                 return (
@@ -117,16 +166,24 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                 return <p key={i}><strong>{para.slice(2, -2)}</strong></p>
               }
               return <p key={i}>{para}</p>
+              })()
+
+              return (
+                <div key={`block-${i}`}>
+                  {midCta}
+                  {rendered}
+                </div>
+              )
             })}
           </div>
 
-          {/* Mid-article CTA */}
-          <div className="my-16 bg-cream border-l-4 border-gold p-8">
+          {/* End-article CTA */}
+          <div className="mt-16 bg-navy p-8">
             <p className="font-serif text-navy text-2xl mb-3">
-              Need help implementing AI in your business?
+              <span className="text-white">Build the AI environment your business actually needs.</span>
             </p>
-            <p className="font-sans text-charcoal/70 text-sm mb-6">
-              Lubosi works with business owners across Southeast England to turn AI knowledge into operational results.
+            <p className="font-sans text-white/60 text-sm mb-6">
+              Apply to work with Lubosi through AI Foundations online or Echo Launch in person.
             </p>
             <Link
               href="/apply"

@@ -28,22 +28,54 @@ interface StrapiAttributes {
   content: string
   category: string
   publishedAt: string
+  coverImage?: string | StrapiMedia
+  readTime?: number
 }
 
 interface StrapiItem {
   id: number
-  attributes: StrapiAttributes
+  attributes?: StrapiAttributes
+  title?: string
+  slug?: string
+  excerpt?: string
+  content?: string
+  category?: string
+  publishedAt?: string
+  coverImage?: string | StrapiMedia
+  readTime?: number
+}
+
+interface StrapiMedia {
+  url?: string
+  data?: {
+    attributes?: {
+      url?: string
+    }
+    url?: string
+  }
+}
+
+function resolveMediaUrl(media?: string | StrapiMedia): string | undefined {
+  if (!media) return undefined
+  if (typeof media === 'string') return media
+  const rawUrl = media.url || media.data?.attributes?.url || media.data?.url
+  if (!rawUrl) return undefined
+  if (rawUrl.startsWith('http') || rawUrl.startsWith('/')) return rawUrl
+  return STRAPI_URL ? `${STRAPI_URL}${rawUrl}` : rawUrl
 }
 
 function mapPost(item: StrapiItem): BlogPost {
+  const attrs = item.attributes || item
   return {
     id: String(item.id),
-    title: item.attributes.title,
-    slug: item.attributes.slug,
-    excerpt: item.attributes.excerpt || '',
-    content: item.attributes.content || '',
-    category: item.attributes.category || 'insights',
-    date: item.attributes.publishedAt,
+    title: attrs.title || '',
+    slug: attrs.slug || '',
+    excerpt: attrs.excerpt || '',
+    content: attrs.content || '',
+    category: attrs.category || 'insights',
+    date: attrs.publishedAt || new Date().toISOString(),
+    coverImage: resolveMediaUrl(attrs.coverImage),
+    readTime: attrs.readTime,
   }
 }
 

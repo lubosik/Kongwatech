@@ -8,7 +8,7 @@ export const seedPosts: BlogPost[] = [
     category: 'claude-code',
     date: '2026-04-30',
     readTime: 7,
-    coverImage: '/images/cover-claude-code.svg',
+    coverImage: '/images/blog/claude-code-cover.jpg',
     excerpt:
       "Claude Code is Anthropic's AI coding assistant that works directly inside your terminal. Here is what it actually does, and whether a business owner should care.",
     content: `
@@ -88,7 +88,7 @@ It is not a replacement for a skilled developer on complex projects. It is an al
     category: 'claude-code',
     date: '2026-04-28',
     readTime: 6,
-    coverImage: '/images/cover-cursor-vs-claude.svg',
+    coverImage: '/images/blog/cursor-claude-cover.jpeg',
     excerpt:
       'Two of the most talked-about AI coding tools in 2026. One is a terminal-based assistant. The other is a full IDE replacement. Here is how to choose.',
     content: `
@@ -144,7 +144,7 @@ Get in touch to discuss which tool is the right starting point for your specific
     category: 'vibe-coding',
     date: '2026-04-25',
     readTime: 8,
-    coverImage: '/images/cover-vibe-coding.svg',
+    coverImage: '/images/blog/vibe-coding-cover.jpg',
     excerpt:
       'Vibe coding is building software by describing what you want in plain English, letting an AI write the code. Here is what it is, what people are building with it, and what it means for UK businesses.',
     content: `

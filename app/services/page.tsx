@@ -2,57 +2,35 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Services | AI Consulting, Fractional CAiO, Southeast England',
+  title: 'Services | AI Foundations and Echo Launch',
   description:
-    'Four ways to work with Kongwa Tech. AI Foundations retainer, The Kongwa Session intensive, Fractional CAiO advisory, and The Network membership.',
+    'Two ways to work with Kongwa Tech: AI Foundations online advisory and Echo Launch in-person AI ecosystem implementation.',
 }
 
 const services = [
   {
     number: '01',
     title: 'AI Foundations',
-    tagline: 'Build the foundation your business needs to operate with AI.',
-    description: `AI Foundations is a monthly advisory retainer designed for business owners who are serious about AI but do not yet have the internal expertise to implement it properly. Lubosi works directly with you and your team to define your AI strategy, identify the highest-impact use cases for your specific operations, and implement the foundational tools and workflows that will give you lasting capability.
+    tagline: 'Online AI advisory for founders and teams who need a practical operating layer.',
+    description: `AI Foundations is an online advisory engagement for business owners who are serious about AI but do not yet have the internal expertise to implement it properly. Lubosi works directly with you and your team to define your AI strategy, identify the highest-impact use cases for your specific operations, and implement the foundational tools and workflows that will give you lasting capability.
 
-This is not a training course or a workshop. It is ongoing, hands-on advisory support, the equivalent of having an experienced AI practitioner available to your business every month.`,
-    price: 'From £1,500 / month',
+This is not a passive training course. It is hands-on advisory support delivered online so your team can make decisions, build workflows, and move from AI curiosity to operational capability.`,
+    price: 'Online advisory',
     href: '/services/ai-foundations',
     ideal: 'Business owners who want to implement AI seriously and need expert guidance throughout.',
   },
   {
     number: '02',
-    title: 'The Kongwa Session',
-    tagline: 'One day. One expert. A 90-day roadmap you can act on immediately.',
-    description: `The Kongwa Session is a full-day engagement where Lubosi comes to your business, spends the day with you and your team, and delivers a bespoke 90-day AI implementation roadmap by the end of the day.
+    title: 'Echo Launch',
+    tagline: 'In-person launch of your AI environment, ecosystem, and first working systems.',
+    description: `Echo Launch is an in-person product engagement where Lubosi comes into your environment and helps launch the AI ecosystem your business needs to operate differently.
 
-The morning is spent in discovery: mapping your operations, identifying where time and money are being lost, understanding your current tools and processes. The afternoon is spent building. Lubosi walks you through exactly what AI can do for your specific business, which tools to use, how to implement them, and what to expect.
+The day is spent mapping the real business environment, identifying where AI should sit, selecting the tools and automations that matter, and launching the first working version of the system with your team. This is not a theoretical roadmap exercise. It is the beginning of your AI operating environment.
 
-You leave with a written document: a clear, prioritised, actionable 90-day plan. Not a slide deck. A plan you can execute.`,
-    price: '£6,000 (+ optional £2,500 / month retainer)',
-    href: '/services/the-kongwa-session',
-    ideal: 'Founders and MDs who want clarity on AI fast, without months of discovery.',
-  },
-  {
-    number: '03',
-    title: 'Fractional CAiO',
-    tagline: 'C-suite AI leadership without the full-time salary.',
-    description: `The Fractional Chief AI Officer service positions Lubosi as a part-time member of your leadership team. He attends relevant meetings, participates in strategic planning, evaluates AI investments, oversees implementation projects, and ensures your business is building AI capability correctly over time.
-
-This is the right engagement for businesses that are past the "exploring AI" stage and are actively building AI into their operations. The work is continuous, strategic, and deeply integrated. Not periodic advisory calls.`,
-    price: 'From £5,000 / month',
-    href: '/services/fractional-caio',
-    ideal: 'Growing businesses that need ongoing AI leadership but are not yet ready for a full-time hire.',
-  },
-  {
-    number: '04',
-    title: 'The Network',
-    tagline: 'Stay ahead without the noise.',
-    description: `The Kongwa Intelligence Network is a curated membership for executives and business owners who want to understand AI's impact on their industry without sifting through an endless stream of hype and speculation.
-
-Members receive monthly briefings on the AI developments that actually matter for business, written in plain English, with practical implications and specific tool recommendations. The Network also includes access to a private community of peers who are at similar stages of AI adoption, and priority access to Lubosi for questions and guidance.`,
-    price: '£500 / year',
-    href: '/services/the-network',
-    ideal: 'Executives and business owners who want curated AI intelligence delivered monthly.',
+You leave with clarity, live assets, and a practical launch path for the ecosystem you are building.`,
+    price: '£6,000',
+    href: '/services/echo-launch',
+    ideal: 'Founders and MDs who want in-person AI implementation, not another generic workshop.',
   },
 ]
 
@@ -64,7 +42,7 @@ export default function ServicesPage() {
         <div className="max-w-4xl mx-auto">
           <span className="text-gold font-sans text-xs tracking-[0.3em] uppercase">Services</span>
           <h1 className="font-serif text-white text-5xl lg:text-7xl mt-6 leading-tight">
-            Four Ways to Work Together
+            Two Ways to Work Together
           </h1>
           <p className="text-white/60 font-sans text-lg mt-6 max-w-xl leading-relaxed">
             Each engagement is tailored to the business. Every client is selected.

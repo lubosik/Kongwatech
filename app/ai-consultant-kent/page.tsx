@@ -4,7 +4,7 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'AI Consultant Kent | AI Strategy and Implementation, Southeast England',
   description:
-    'Looking for an AI consultant in Kent? Lubosi Kongwa at Kongwa Tech provides AI strategy, automation, and Fractional CAiO services across Rochester, Medway, Maidstone, Tunbridge Wells, Canterbury and all of Kent.',
+    'Looking for an AI consultant in Kent? Lubosi Kongwa at Kongwa Tech provides AI strategy, automation, online advisory, and in-person Echo Launch services across Rochester, Medway, Maidstone, Tunbridge Wells, Canterbury and all of Kent.',
 }
 
 const localBusinessSchema = {
@@ -23,8 +23,8 @@ const localBusinessSchema = {
     'Rochester', 'Medway', 'Maidstone', 'Tunbridge Wells',
     'Canterbury', 'Folkestone', 'Chatham', 'Gravesend', 'Kent',
   ],
-  description: 'AI consultant serving businesses across Kent. AI strategy, automation, and Fractional CAiO services based in Rochester, Kent.',
-  priceRange: '£500 - £6,000',
+  description: 'AI consultant serving businesses across Kent. AI strategy, automation, online advisory, and Echo Launch services based in Rochester, Kent.',
+  priceRange: '£6,000',
   serviceType: 'AI Consulting',
 }
 
@@ -117,10 +117,11 @@ export default function AIConsultantKentPage() {
 
             <h2 className="font-serif text-navy text-3xl mb-4">In-Person Services Across Kent</h2>
             <p className="font-sans text-charcoal/80 text-base leading-relaxed mb-6">
-              The Kongwa Session is an in-person full-day AI intensive where Lubosi comes to your business
-              premises in Kent, audits your operations, and delivers a bespoke 90-day AI implementation
-              roadmap by end of day. This service is particularly popular with Kent business owners who
-              want to move quickly and need clarity rather than another discovery process that takes months.
+              Echo Launch is an in-person AI ecosystem launch where Lubosi comes to your business
+              premises in Kent, maps your operating environment, and helps launch the first working
+              version of your AI workflows and systems. This service is particularly popular with Kent
+              business owners who want to move quickly and need implementation rather than another
+              discovery process that takes months.
             </p>
             <p className="font-sans text-charcoal/80 text-base leading-relaxed mb-8">
               Travel to all Kent locations is included in the service fee.
@@ -128,10 +129,9 @@ export default function AIConsultantKentPage() {
 
             <h2 className="font-serif text-navy text-3xl mb-4">How Much Does an AI Consultant Cost in Kent?</h2>
             <p className="font-sans text-charcoal/80 text-base leading-relaxed mb-6">
-              Kongwa Tech's services are structured for transparency. There are no hidden fees and no vague
-              day-rate proposals. Services start from £500 per year for The Network membership, through to
-              £6,000 for a full-day Kongwa Session intensive, and £1,500-£5,000 per month for ongoing
-              advisory retainers.
+              Kongwa Tech is now focused around two offers: AI Foundations for online advisory, and
+              Echo Launch for in-person implementation. Echo Launch is £6,000. AI Foundations is scoped
+              after application based on the advisory depth your business needs.
             </p>
             <p className="font-sans text-charcoal/80 text-base leading-relaxed mb-8">
               Every engagement begins with a free 15-minute discovery call. Submit an application and
