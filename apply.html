@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Apply to work with Kongwa and Co. We work with a small number of clients at any one time. Tell us about your business and what you are trying to solve.">
+  <title>Apply | Kongwa &amp; Co.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css">
+</head>
+<body>
+
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <a href="index.html" class="nav-wordmark">Kongwa &amp; Co.</a>
+  <div class="nav-links">
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="network.html">The Network</a>
+    <a href="partners.html">Partners</a>
+    <a href="apply.html" class="nav-apply">Apply</a>
+  </div>
+  <button class="nav-hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="nav-overlay" role="dialog" aria-label="Mobile menu">
+  <button class="nav-overlay-close" aria-label="Close menu">&times;</button>
+  <a href="about.html">About</a>
+  <a href="services.html">Services</a>
+  <a href="network.html">The Network</a>
+  <a href="partners.html">Partners</a>
+  <a href="apply.html">Apply</a>
+</div>
+
+<div class="nav-spacer"></div>
+
+<!-- Page Header -->
+<section class="section-sm bg-cream">
+  <div class="container">
+    <div class="page-hero">
+      <span class="label">Applications</span>
+      <h1 class="display-lg" style="margin-top: 16px;">Apply to work<br>with Kongwa &amp; Co.</h1>
+      <p class="body-text text-grey" style="margin-top: 24px; max-width: 560px;">We work with a small number of clients at any one time. Tell us about your business and what you are trying to solve. We will review your application and be in touch within five business days.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Form Section -->
+<section class="section bg-white">
+  <div class="container">
+    <div class="apply-form-wrap">
+
+      <!-- Success Message (hidden initially) -->
+      <div class="form-success" id="form-success" role="alert">
+        <h3>Application received.</h3>
+        <p>Thank you. Your application has been received. Lubosi will review it personally and be in touch within five business days.</p>
+      </div>
+
+      <!-- Application Form -->
+      <form id="apply-form" novalidate>
+        <input type="hidden" name="access_key" value="PLACEHOLDER_KEY">
+        <input type="hidden" name="subject" value="New Kongwa and Co. Application">
+        <input type="hidden" name="redirect" value="false">
+        <input type="checkbox" name="botcheck" style="display:none;" tabindex="-1" autocomplete="off">
+
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" required placeholder="Your full name">
+        </div>
+
+        <div class="form-group">
+          <label for="business">Business Name</label>
+          <input type="text" id="business" name="business" required placeholder="The name of your company">
+        </div>
+
+        <div class="form-group">
+          <label for="website">Business Website</label>
+          <input type="url" id="website" name="website" required placeholder="https://yourbusiness.com">
+        </div>
+
+        <div class="form-group">
+          <label for="service">Which service are you interested in?</label>
+          <select id="service" name="service" required>
+            <option value="" disabled selected>Select a service</option>
+            <option value="AI Foundations">AI Foundations (from £1,500/month)</option>
+            <option value="The Kongwa Session">The Kongwa Session (from £6,000)</option>
+            <option value="Fractional CAiO">Fractional CAiO (from £5,000/month)</option>
+            <option value="The Network">The Network (from £500/year)</option>
+            <option value="Not sure yet">Not sure yet, I need guidance</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="problem">What are you trying to solve?</label>
+          <textarea id="problem" name="problem" required placeholder="Tell us about the problem you are facing, what you have already tried, and what success would look like."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="revenue">Current monthly revenue range</label>
+          <select id="revenue" name="revenue" required>
+            <option value="" disabled selected>Select a range</option>
+            <option value="Pre-revenue">Pre-revenue</option>
+            <option value="Under £10k/month">Under £10k per month</option>
+            <option value="£10k to £50k/month">£10k to £50k per month</option>
+            <option value="£50k to £200k/month">£50k to £200k per month</option>
+            <option value="£200k+/month">£200k or more per month</option>
+            <option value="Prefer not to say">Prefer not to say</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="source">How did you hear about us?</label>
+          <select id="source" name="source" required>
+            <option value="" disabled selected>Select an option</option>
+            <option value="Google">Google</option>
+            <option value="LinkedIn">LinkedIn</option>
+            <option value="Referral">Referral from someone I know</option>
+            <option value="Social media">Social media (TikTok, X, Instagram)</option>
+            <option value="Partner referral">Partner company referral</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <button type="submit" class="form-submit">Submit Application</button>
+        <p class="form-note">Your application is reviewed personally by Lubosi. We do not use automated responses.</p>
+      </form>
+
+    </div>
+  </div>
+</section>
+
+<!-- What happens next -->
+<section class="section bg-cream">
+  <div class="container">
+    <div style="max-width: 720px; margin: 0 auto;">
+      <span class="label" style="text-align: center; display: block; margin-bottom: 48px;">What happens next</span>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--cream);">
+        <div style="background: var(--white); padding: 40px 32px; text-align: center;">
+          <div style="font-family: var(--font-serif); font-size: 48px; color: var(--gold); opacity: 0.4; line-height: 1; margin-bottom: 16px;">01</div>
+          <h4 style="font-family: var(--font-serif); font-size: 20px; font-weight: 600; margin-bottom: 12px;">We review</h4>
+          <p class="body-xs">Lubosi reads every application personally within five business days.</p>
+        </div>
+        <div style="background: var(--white); padding: 40px 32px; text-align: center;">
+          <div style="font-family: var(--font-serif); font-size: 48px; color: var(--gold); opacity: 0.4; line-height: 1; margin-bottom: 16px;">02</div>
+          <h4 style="font-family: var(--font-serif); font-size: 20px; font-weight: 600; margin-bottom: 12px;">We respond</h4>
+          <p class="body-xs">If there is a strong fit, we will reach out to arrange a brief call.</p>
+        </div>
+        <div style="background: var(--white); padding: 40px 32px; text-align: center;">
+          <div style="font-family: var(--font-serif); font-size: 48px; color: var(--gold); opacity: 0.4; line-height: 1; margin-bottom: 16px;">03</div>
+          <h4 style="font-family: var(--font-serif); font-size: 20px; font-weight: 600; margin-bottom: 12px;">We begin</h4>
+          <p class="body-xs">If the fit is right, we agree terms and start the work.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <div class="footer-wordmark">Kongwa &amp; Co.</div>
+        <p>Boutique AI consultancy. Translating AI into real business results since 2024.</p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="session.html">The Session</a>
+        <a href="network.html">The Network</a>
+        <a href="partners.html">Partners</a>
+        <a href="apply.html">Apply</a>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Kongwa &amp; Co. All rights reserved.</p>
+      <p>All engagements are backed by a written contract.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

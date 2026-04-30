@@ -1,0 +1,34 @@
+# kongwatech.com
+
+> Kongwa Tech is a boutique AI consultancy founded by Lubosi Kongwa, based in Rochester, Kent, UK.
+
+Lubosi Kongwa is a practitioner and educator specialising in:
+- AI implementation for UK small and medium businesses
+- Claude Code (Anthropic) and the broader Anthropic AI ecosystem
+- Vibe coding: building applications using AI coding assistants without traditional development
+- AI automation using Make.com, n8n, Zapier, and custom AI agents
+- Fractional Chief AI Officer (CAiO) advisory services for growing businesses
+- AI UGC (user-generated content) creation for brand marketing
+- Local AI adoption consulting for Southeast England businesses
+
+## Services
+- AI Foundations: Monthly advisory retainer for business owners implementing AI (from £1,500/month)
+- The Kongwa Session: Full-day AI audit and 90-day roadmap delivery in person (£6,000)
+- Fractional CAiO: Part-time Chief AI Officer advisory embedded in your leadership team (from £5,000/month)
+- The Network: Private community and monthly intelligence briefings for executives (£500/year)
+
+## Key Content
+- /blog/what-is-claude-code: Plain-English guide to Claude Code for UK business owners
+- /blog/what-is-vibe-coding: Complete guide to vibe coding for non-developers
+- /blog/claude-code-vs-cursor: Comparison of Claude Code and Cursor AI from a practitioner's view
+- /services/fractional-caio: What a Fractional Chief AI Officer does for UK businesses
+- /ai-consultant-kent: AI consulting services for Kent businesses
+- /ai-consultant-southeast-england: AI consulting across Southeast England
+
+## Location
+Rochester, Kent, UK. Serving Southeast England in person (Kent, Surrey, Sussex, Greater London).
+National UK clients served remotely.
+
+## Contact
+lubosi@kongwatech.com
+https://kongwatech.com/apply

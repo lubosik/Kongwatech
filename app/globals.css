@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-cormorant: 'Cormorant Garamond', Georgia, serif;
+  --font-inter: 'Inter', system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-inter);
+  color: #1A1A1A;
+  background: #FFFFFF;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.font-serif {
+  font-family: var(--font-cormorant);
+}
+
+/* Prose overrides for blog */
+.prose h2,
+.prose h3 {
+  font-family: var(--font-cormorant);
+  color: #0D2240;
+}
+
+.prose a {
+  color: #B89A5A;
+  text-decoration: underline;
+}
+
+.prose strong {
+  color: #0D2240;
+}
+
+/* Nav transition */
+.nav-scrolled {
+  box-shadow: 0 1px 0 0 rgba(13, 34, 64, 0.08);
+}
