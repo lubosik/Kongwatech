@@ -4,7 +4,7 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'AI Consultant Southeast England | AI Strategy and Implementation',
   description:
-    'Kongwa Tech provides AI consulting services across Southeast England — Kent, Surrey, Sussex, Hampshire, and Greater London. Based in Rochester, Kent. Led by Lubosi Kongwa.',
+    'Kongwa Tech provides AI consulting services across Southeast England: Kent, Surrey, Sussex, Hampshire, and Greater London. Based in Rochester, Kent. Led by Lubosi Kongwa.',
 }
 
 const localBusinessSchema = {
@@ -48,13 +48,13 @@ export default function AIConsultantSoutheastPage() {
           <p>
             Kongwa Tech is Southeast England's specialist AI consultancy for small and medium businesses.
             Founded by Lubosi Kongwa and based in Rochester, Kent, the practice operates across the entire
-            Southeast — from Essex and Kent in the east to Hampshire and Surrey in the west, and into
+            Southeast, from Essex and Kent in the east to Hampshire and Surrey in the west, and into
             Greater London for businesses that require in-person engagement.
           </p>
 
           <h2 className="font-serif text-navy text-3xl">Southeast England AI Adoption: The Current Picture</h2>
           <p>
-            The Southeast of England is home to a significant concentration of SMEs — businesses with
+            The Southeast of England is home to a significant concentration of SMEs, businesses with
             5-250 employees operating in sectors ranging from professional services and property to
             manufacturing, technology, and hospitality. These businesses are exactly where AI has the
             highest untapped ROI potential.
@@ -66,7 +66,7 @@ export default function AIConsultantSoutheastPage() {
             and the business context, most of them are stuck at the experimentation stage.
           </p>
           <p>
-            Kongwa Tech exists to close that gap — providing the same quality of strategic AI thinking
+            Kongwa Tech exists to close that gap, providing the same quality of strategic AI thinking
             that large businesses access through major consultancies, at a scale and price point designed
             for the Southeast's business community.
           </p>
@@ -99,8 +99,8 @@ export default function AIConsultantSoutheastPage() {
           </p>
           <p>
             Lubosi's base in Rochester gives Kongwa Tech a genuine local perspective. In-person
-            engagements are available across the entire Southeast, bringing the Kongwa Session — the
-            full-day AI intensive — directly to your premises wherever you are based.
+            engagements are available across the entire Southeast, bringing the Kongwa Session (the
+            full-day AI intensive) directly to your premises wherever you are based.
           </p>
 
           <h2 className="font-serif text-navy text-3xl">Services Available Across Southeast England</h2>

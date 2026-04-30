@@ -55,7 +55,7 @@ export default function AIConsultantKentPage() {
             <p className="font-sans text-charcoal/80 text-base leading-relaxed mb-8">
               Kongwa Tech is Kent's dedicated boutique AI consultancy, founded by Lubosi Kongwa and based
               in Rochester, Medway. We provide AI strategy, implementation, and advisory services to
-              businesses across Kent — from Gravesend and Chatham in the north to Tunbridge Wells
+              businesses across Kent, from Gravesend and Chatham in the north to Tunbridge Wells
               and Folkestone in the south.
             </p>
 
@@ -69,7 +69,7 @@ export default function AIConsultantKentPage() {
             <p className="font-sans text-charcoal/80 text-base leading-relaxed mb-8">
               The challenge is knowing where to start, which tools to use, and how to implement them
               without wasting money on solutions that do not fit your operations. That is where an
-              experienced AI consultant adds genuine value — not by selling software, but by helping
+              experienced AI consultant adds genuine value, not by selling software, but by helping
               you make better decisions.
             </p>
 

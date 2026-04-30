@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
 export default function Nav() {
@@ -20,23 +21,22 @@ export default function Nav() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-16">
-        <Link
-          href="/"
-          className="font-serif text-navy tracking-[0.2em] uppercase text-lg font-semibold"
-        >
-          Kongwa Tech
+        <Link href="/" className="flex items-center">
+          <Image
+            src="/images/kt-logo.png"
+            alt="Kongwa Tech"
+            width={44}
+            height={44}
+            className="object-contain"
+            priority
+          />
         </Link>
 
         <nav className="hidden md:flex items-center gap-10">
-          <Link href="/services" className="text-sm font-sans text-charcoal hover:text-navy transition-colors">
-            Services
-          </Link>
-          <Link href="/about" className="text-sm font-sans text-charcoal hover:text-navy transition-colors">
-            About
-          </Link>
-          <Link href="/blog" className="text-sm font-sans text-charcoal hover:text-navy transition-colors">
-            Blog
-          </Link>
+          <Link href="/services" className="text-sm font-sans text-charcoal hover:text-navy transition-colors">Services</Link>
+          <Link href="/about" className="text-sm font-sans text-charcoal hover:text-navy transition-colors">About</Link>
+          <Link href="/partners" className="text-sm font-sans text-charcoal hover:text-navy transition-colors">Partners</Link>
+          <Link href="/blog" className="text-sm font-sans text-charcoal hover:text-navy transition-colors">Blog</Link>
         </nav>
 
         <div className="flex items-center gap-4">
@@ -68,6 +68,7 @@ export default function Nav() {
         <div className="md:hidden bg-white border-t border-gray-100 px-6 py-8 flex flex-col gap-6">
           <Link href="/services" className="text-base font-sans text-charcoal" onClick={() => setOpen(false)}>Services</Link>
           <Link href="/about" className="text-base font-sans text-charcoal" onClick={() => setOpen(false)}>About</Link>
+          <Link href="/partners" className="text-base font-sans text-charcoal" onClick={() => setOpen(false)}>Partners</Link>
           <Link href="/blog" className="text-base font-sans text-charcoal" onClick={() => setOpen(false)}>Blog</Link>
           <Link href="/apply" className="bg-gold text-white text-sm font-sans px-6 py-3 text-center" onClick={() => setOpen(false)}>Apply Now</Link>
         </div>

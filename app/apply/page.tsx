@@ -69,7 +69,7 @@ export default function ApplyPage({
                 <h3 className="font-serif text-navy text-2xl mb-3">Application received.</h3>
                 <p className="font-sans text-charcoal/70">
                   Lubosi will review your application and respond within 48 hours.
-                  Check your inbox — including your spam folder.
+                  Check your inbox, including your spam folder.
                 </p>
               </div>
             ) : (
@@ -79,7 +79,7 @@ export default function ApplyPage({
                 className="max-w-2xl space-y-6"
               >
                 <input type="hidden" name="access_key" value="e8144041-9073-44fa-bba9-3b9089fc8511" />
-                <input type="hidden" name="subject" value="New Application — Kongwa Tech" />
+                <input type="hidden" name="subject" value="New Application: Kongwa Tech" />
                 <input type="hidden" name="redirect" value="https://kongwatech.com/apply?success=true" />
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -141,11 +141,11 @@ export default function ApplyPage({
                     className="w-full border border-gray-200 px-4 py-3 font-sans text-sm text-charcoal focus:outline-none focus:border-navy transition-colors bg-white"
                   >
                     <option value="">Select a service</option>
-                    <option value="AI Foundations">AI Foundations — £1,500/month</option>
-                    <option value="The Kongwa Session">The Kongwa Session — £6,000</option>
-                    <option value="Fractional CAiO">Fractional CAiO — £5,000/month</option>
-                    <option value="The Network">The Network — £500/year</option>
-                    <option value="Not sure yet">Not sure yet — happy to advise</option>
+                    <option value="AI Foundations">AI Foundations: £1,500/month</option>
+                    <option value="The Kongwa Session">The Kongwa Session: £6,000</option>
+                    <option value="Fractional CAiO">Fractional CAiO: £5,000/month</option>
+                    <option value="The Network">The Network: £500/year</option>
+                    <option value="Not sure yet">Not sure yet, happy to advise</option>
                   </select>
                 </div>
 
@@ -206,7 +206,7 @@ export default function ApplyPage({
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Kongwa Tech location — Rochester, Kent"
+                title="Kongwa Tech location, Rochester, Kent"
               />
             </div>
           </div>

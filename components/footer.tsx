@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 const socials = [
   {
@@ -45,9 +46,9 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 lg:px-12 py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
           <div>
-            <p className="font-serif tracking-[0.2em] uppercase text-lg font-semibold text-white mb-3">
-              Kongwa Tech
-            </p>
+            <div className="mb-3">
+              <Image src="/images/kt-logo.png" alt="Kongwa Tech" width={40} height={40} className="object-contain brightness-0 invert" />
+            </div>
             <p className="text-sm text-white/60 leading-relaxed">
               Boutique AI consultancy. Rochester, Kent.<br />
               Serving Southeast England.
@@ -60,6 +61,7 @@ export default function Footer() {
               {[
                 ['Services', '/services'],
                 ['About', '/about'],
+                ['Partners', '/partners'],
                 ['Blog', '/blog'],
                 ['Apply', '/apply'],
                 ['AI Consultant Kent', '/ai-consultant-kent'],

@@ -86,20 +86,20 @@ export default function AboutPage() {
               </p>
               <p>
                 Lubosi's approach to AI consulting starts with operations, not tools. Before recommending any
-                technology, he maps what a business actually does — how work moves through the organisation,
+                technology, he maps what a business actually does: how work moves through the organisation,
                 where time is lost, where decisions are made without sufficient information. The AI strategy
                 follows from that analysis. Tools are selected to solve specific problems, not because they are
                 fashionable.
               </p>
               <p>
                 His technical background spans AI system development, automation architecture, and hands-on
-                work with the full Anthropic ecosystem including Claude Code — one of the most powerful AI
+                work with the full Anthropic ecosystem including Claude Code, one of the most powerful AI
                 coding tools available to businesses today. He uses these tools in his own practice daily,
                 which means the advice he gives comes from direct experience rather than theoretical frameworks.
               </p>
               <p>
                 Geographically, Kongwa Tech is rooted in Southeast England. Rochester, Kent is home base.
-                The Kongwa Session — his in-person intensive service — is available across Kent, Surrey,
+                The Kongwa Session (his in-person intensive service) is available across Kent, Surrey,
                 Sussex, and Greater London. Remote advisory work extends nationally.
               </p>
               <p>

@@ -1,32 +1,58 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { categoryLabel, formatDate } from '@/lib/blog-utils'
 import type { BlogPost } from '@/lib/blog-utils'
 
 export default function BlogCard({ post }: { post: BlogPost }) {
   return (
-    <article className="flex flex-col border-t border-gray-200 pt-6">
-      <span className="text-xs font-sans text-gold uppercase tracking-widest mb-3">
-        {categoryLabel(post.category)}
-      </span>
-      <Link href={`/blog/${post.slug}`}>
-        <h3 className="font-serif text-navy text-2xl leading-snug hover:text-gold transition-colors mb-3">
-          {post.title}
-        </h3>
-      </Link>
-      <p className="text-sm text-charcoal/70 leading-relaxed mb-4 flex-1">
-        {post.excerpt}
-      </p>
-      <div className="flex items-center justify-between">
-        <span className="text-xs text-charcoal/40 font-sans">{formatDate(post.date)}</span>
-        <Link
-          href={`/blog/${post.slug}`}
-          className="text-xs font-sans text-navy hover:text-gold transition-colors flex items-center gap-1"
-        >
-          Read more
-          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-          </svg>
+    <article className="group flex flex-col bg-white border border-gray-100 hover:border-gray-200 hover:shadow-md transition-all duration-200">
+      {/* Cover image */}
+      <div className="relative h-48 overflow-hidden bg-navy">
+        {post.coverImage ? (
+          <Image
+            src={post.coverImage}
+            alt={post.title}
+            fill
+            className="object-cover group-hover:scale-105 transition-transform duration-500"
+          />
+        ) : (
+          <div className="absolute inset-0 bg-gradient-to-br from-navy to-[#1a3a5c]" />
+        )}
+        <div className="absolute top-4 left-4">
+          <span className="bg-gold text-white font-sans text-xs px-3 py-1 uppercase tracking-wider">
+            {categoryLabel(post.category)}
+          </span>
+        </div>
+      </div>
+
+      {/* Card body */}
+      <div className="flex flex-col flex-1 p-6">
+        <Link href={`/blog/${post.slug}`}>
+          <h3 className="font-serif text-navy text-xl leading-snug hover:text-gold transition-colors mb-3 line-clamp-3">
+            {post.title}
+          </h3>
         </Link>
+        <p className="text-sm text-charcoal/70 font-sans leading-relaxed mb-4 flex-1 line-clamp-2">
+          {post.excerpt}
+        </p>
+
+        <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+          <div className="flex items-center gap-3">
+            <div className="w-6 h-6 rounded-full bg-navy flex items-center justify-center">
+              <span className="text-white text-xs font-serif">L</span>
+            </div>
+            <span className="text-xs font-sans text-charcoal/50">Lubosi Kongwa</span>
+          </div>
+          <div className="flex items-center gap-3 text-xs font-sans text-charcoal/40">
+            <span>{formatDate(post.date)}</span>
+            {post.readTime && (
+              <>
+                <span>·</span>
+                <span>{post.readTime} min read</span>
+              </>
+            )}
+          </div>
+        </div>
       </div>
     </article>
   )

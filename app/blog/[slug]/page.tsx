@@ -70,7 +70,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
           <p className="text-white/60 font-sans text-base leading-relaxed">{post.excerpt}</p>
           <div className="mt-8 pt-8 border-t border-white/10">
             <p className="text-white/40 font-sans text-sm">
-              By <span className="text-white/70">Lubosi Kongwa</span> — Kongwa Tech, Rochester, Kent
+              By <span className="text-white/70">Lubosi Kongwa</span>. Kongwa Tech, Rochester, Kent
             </p>
           </div>
         </div>

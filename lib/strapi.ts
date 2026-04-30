@@ -6,6 +6,8 @@ export interface BlogPost {
   content: string
   category: string
   date: string
+  coverImage?: string
+  readTime?: number
 }
 
 const STRAPI_URL = process.env.STRAPI_URL || ''

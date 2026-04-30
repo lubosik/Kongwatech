@@ -78,7 +78,7 @@ export default function FractionalCAiOPage() {
               </p>
               <p>
                 This is not advisory from the outside. It is leadership from within. Lubosi becomes
-                accountable for your AI programme's outcomes — not just for the recommendations he makes.
+                accountable for your AI programme's outcomes, not just for the recommendations he makes.
               </p>
 
               <h2 className="font-serif text-navy text-3xl mt-10 mb-4">What This Looks Like in Practice</h2>

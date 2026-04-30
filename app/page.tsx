@@ -88,10 +88,10 @@ export default async function HomePage() {
         </div>
         <div className="hidden lg:block flex-1 relative">
           <Image
-            src="/images/lubosi-hero.jpg"
+            src="/images/lubosi-kongwa.jpeg"
             alt="Lubosi Kongwa, AI Consultant and Fractional CAiO"
             fill
-            className="object-cover object-center"
+            className="object-cover object-top"
             priority
           />
         </div>
@@ -137,7 +137,7 @@ export default async function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="relative h-[500px] lg:h-[600px] overflow-hidden">
               <Image
-                src="/images/lubosi-hero.jpg"
+                src="/images/lubosi-kongwa.jpeg"
                 alt="Lubosi Kongwa"
                 fill
                 className="object-cover object-top"
@@ -151,7 +151,7 @@ export default async function HomePage() {
               <div className="space-y-5 text-charcoal/80 font-sans text-base leading-relaxed">
                 <p>
                   Lubosi Kongwa is an AI consultant and Fractional Chief AI Officer based in Rochester, Kent.
-                  He works with business owners across Southeast England who want to implement AI properly —
+                  He works with business owners across Southeast England who want to implement AI properly,
                   not as a novelty, but as infrastructure.
                 </p>
                 <p>
@@ -173,6 +173,49 @@ export default async function HomePage() {
                 </svg>
               </Link>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Portfolio */}
+      <section className="py-24 bg-cream">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <div className="text-center mb-16">
+            <span className="text-gold font-sans text-xs tracking-[0.3em] uppercase">Selected Work</span>
+            <h2 className="font-serif text-navy text-4xl lg:text-5xl mt-4 mb-4">
+              Work That Ships.
+            </h2>
+            <p className="text-charcoal/60 font-sans text-base max-w-md mx-auto">
+              AI systems built from the ground up. Real businesses. Real results.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              {
+                name: 'Velto AI Revenue Engine',
+                desc: 'Complete AI revenue engine: email campaigns, SMS flows, RFM segmentation, WooCommerce integration, and a Next.js dashboard. Deployed on Railway and Vercel.',
+                tag: 'AI Automation',
+              },
+              {
+                name: 'LIBDR AI Research Platform',
+                desc: 'AI-powered research automation platform with Claude integration, data pipelines, and custom reporting workflows for an institutional research client.',
+                tag: 'AI Systems',
+              },
+              {
+                name: 'Vici Peptides Growth Stack',
+                desc: 'Full e-commerce growth infrastructure including product intelligence, customer lifecycle automation, and conversion optimisation for a UK wellness brand.',
+                tag: 'E-commerce AI',
+              },
+            ].map(p => (
+              <div key={p.name} className="bg-white border border-gray-100 p-8 flex flex-col">
+                <span className="text-xs font-sans text-gold uppercase tracking-widest mb-4">{p.tag}</span>
+                <h3 className="font-serif text-navy text-xl mb-3">{p.name}</h3>
+                <p className="text-sm text-charcoal/70 font-sans leading-relaxed flex-1">{p.desc}</p>
+                <div className="mt-6 pt-4 border-t border-gray-100">
+                  <span className="text-xs font-sans text-charcoal/30 uppercase tracking-wider">Confidential</span>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -200,6 +243,100 @@ export default async function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             {featuredPosts.map(post => (
               <BlogCard key={post.id} post={post} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* UGC Videos */}
+      <section className="py-24 bg-cream">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <div className="text-center mb-16">
+            <span className="text-gold font-sans text-xs tracking-[0.3em] uppercase">In Their Own Words</span>
+            <h2 className="font-serif text-navy text-4xl lg:text-5xl mt-4 mb-4">
+              Clients and collaborators.
+            </h2>
+            <p className="text-charcoal/60 font-sans text-base max-w-md mx-auto">
+              Real people. Real projects. Real outcomes.
+            </p>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-6 justify-center">
+            {[
+              'How Lubosi transformed our operations in 90 days.',
+              'From idea to working product in a week.',
+              'The AI strategy session that changed how we think about our business.',
+            ].map((caption, i) => (
+              <div key={i} className="flex-1 max-w-xs mx-auto sm:mx-0 flex flex-col items-center">
+                <div className="w-full aspect-[9/16] max-h-96 bg-navy flex items-center justify-center relative overflow-hidden">
+                  <div className="w-14 h-14 rounded-full border-2 border-white/60 flex items-center justify-center">
+                    <svg className="w-5 h-5 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                  </div>
+                  <div className="absolute bottom-4 left-4 right-4">
+                    <div className="h-0.5 bg-white/20 rounded">
+                      <div className="h-full w-1/3 bg-gold rounded" />
+                    </div>
+                  </div>
+                </div>
+                <p className="mt-4 text-sm font-sans text-charcoal/70 text-center leading-relaxed">{caption}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Free Resources */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <div className="text-center mb-16">
+            <span className="text-gold font-sans text-xs tracking-[0.3em] uppercase">Free Resources</span>
+            <h2 className="font-serif text-navy text-4xl lg:text-5xl mt-4 mb-4">
+              Practical AI intelligence.
+            </h2>
+            <p className="text-charcoal/60 font-sans text-base max-w-md mx-auto">
+              Tools and frameworks you can use today, no strings attached.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              {
+                title: 'The AI Foundations Checklist',
+                desc: 'A step-by-step checklist for business owners starting their AI journey. Identify where to start and what to skip.',
+                icon: (
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                ),
+              },
+              {
+                title: 'The Kongwa Method',
+                desc: 'How Lubosi assesses AI readiness and prioritises implementation across operations, sales, and product.',
+                icon: (
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                ),
+              },
+              {
+                title: 'Weekly AI Briefing',
+                desc: 'Curated insights on what matters in AI this week. Direct to your inbox. No noise, no hype.',
+                icon: (
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                ),
+              },
+            ].map(r => (
+              <a
+                key={r.title}
+                href="/apply"
+                className="group border border-gray-100 p-8 hover:border-gold hover:shadow-sm transition-all duration-200 flex flex-col"
+              >
+                <div className="text-gold mb-5">{r.icon}</div>
+                <h3 className="font-serif text-navy text-xl mb-3 group-hover:text-gold transition-colors">{r.title}</h3>
+                <p className="text-sm text-charcoal/70 font-sans leading-relaxed">{r.desc}</p>
+              </a>
             ))}
           </div>
         </div>

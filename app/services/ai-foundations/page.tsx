@@ -76,7 +76,7 @@ export default function AIFoundationsPage() {
                 directly with you and your team to make real, measurable progress on your AI programme.
               </p>
               <p>
-                This is not a training course. It is not a workshop. It is ongoing, hands-on advisory work —
+                This is not a training course. It is not a workshop. It is ongoing, hands-on advisory work,
                 the equivalent of having an experienced AI practitioner available to your business every month,
                 without the cost of a full-time hire.
               </p>

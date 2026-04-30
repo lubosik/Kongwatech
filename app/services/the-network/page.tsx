@@ -39,7 +39,7 @@ export default function TheNetworkPage() {
               <h2 className="font-serif text-navy text-3xl mt-10 mb-4">What Members Receive</h2>
               <ul className="space-y-4">
                 {[
-                  'Monthly AI intelligence briefing — written by Lubosi, focused on business implications',
+                  'Monthly AI intelligence briefing, written by Lubosi and focused on business implications',
                   'Tool and platform recommendations based on real usage, not vendor relationships',
                   'Access to a private peer community of business owners at similar stages of AI adoption',
                   'Priority access to Lubosi for questions via the community channel',
@@ -61,7 +61,7 @@ export default function TheNetworkPage() {
               <p>
                 The Network is for executives and business owners who want to be informed without being
                 overwhelmed. You are not trying to become an AI expert. You are trying to make better
-                decisions about AI — for your business, your team, and your sector.
+                decisions about AI, for your business, your team, and your sector.
               </p>
               <p>
                 At £500 per year, it is deliberately priced to be accessible. The value is in the quality

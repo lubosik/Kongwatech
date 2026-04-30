@@ -48,7 +48,7 @@ const faqSchema = {
 
 const timeline = [
   { time: '09:00', title: 'Discovery', desc: 'Operations audit. How does work actually move through your business? Where is time lost? Where are decisions made without sufficient information?' },
-  { time: '11:00', title: 'Opportunity Mapping', desc: 'Identifying the highest-value AI opportunities specific to your business. Not generic AI use cases — your specific operations, your specific problems.' },
+  { time: '11:00', title: 'Opportunity Mapping', desc: 'Identifying the highest-value AI opportunities specific to your business. Not generic AI use cases. Your specific operations, your specific problems.' },
   { time: '13:00', title: 'Working Lunch', desc: 'Informal discussion. This is where many of the best insights emerge.' },
   { time: '14:00', title: 'Tool Selection and Planning', desc: 'Selecting the exact tools for each opportunity. Building the implementation sequence. Addressing technical and organisational obstacles.' },
   { time: '16:00', title: 'Roadmap Delivery', desc: 'The completed 90-day AI roadmap is reviewed together. Questions answered. Next steps clear.' },
@@ -84,7 +84,7 @@ export default function KongwaSessionPage() {
               </p>
               <p>
                 It is designed for founders, MDs, and senior leaders who want definitive clarity on what AI
-                can do for their specific business — and a concrete plan to act on — without months of
+                can do for their specific business, with a concrete plan to act on, without months of
                 discovery and preliminary work.
               </p>
 

@@ -49,6 +49,10 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  icons: {
+    icon: '/images/kt-logo.png',
+    apple: '/images/kt-logo.png',
+  },
 }
 
 const schemaOrg = {
