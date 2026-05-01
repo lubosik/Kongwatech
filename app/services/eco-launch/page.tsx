@@ -137,6 +137,9 @@ export default function EcoLaunchPage() {
               Apply for Eco Launch
             </Link>
           </div>
+          <p className="text-white/30 font-sans text-xs mt-6 uppercase tracking-widest">
+            Lubosi takes on 2 Eco Launch clients per month. Dates book out in advance.
+          </p>
         </div>
       </section>
 
@@ -200,7 +203,10 @@ export default function EcoLaunchPage() {
                 <p className="font-sans text-xs text-charcoal/40 uppercase tracking-widest mb-2">Investment</p>
                 <p className="font-serif text-navy text-3xl mb-1">From £3,000</p>
                 <p className="text-charcoal/50 font-sans text-sm mb-2">in-person, full day</p>
-                <p className="text-charcoal/40 font-sans text-xs mb-8">varies by location</p>
+                <p className="text-charcoal/40 font-sans text-xs mb-6">varies by location</p>
+                <p className="text-charcoal/50 font-sans text-xs mb-6 border-l-2 border-gold pl-3 leading-relaxed">
+                  2 clients per month only. Current availability is limited.
+                </p>
                 <Link
                   href="/apply"
                   className="block bg-gold text-white font-sans text-sm px-6 py-4 text-center hover:bg-gold-dark transition-colors"

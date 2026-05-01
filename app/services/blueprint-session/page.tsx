@@ -91,6 +91,9 @@ export default function BlueprintSessionPage() {
               Book the Blueprint Session
             </Link>
           </div>
+          <p className="text-white/30 font-sans text-xs mt-6 uppercase tracking-widest">
+            Limited to 4 sessions per month. Spots fill quickly.
+          </p>
         </div>
       </section>
 
@@ -217,7 +220,8 @@ export default function BlueprintSessionPage() {
           <h2 className="font-serif text-white text-4xl lg:text-5xl mt-6 mb-4 leading-tight">
             Book the Blueprint Session
           </h2>
-          <p className="text-white/60 font-sans text-base mb-10">£997. Online. One session. A working system.</p>
+          <p className="text-white/60 font-sans text-base mb-2">£997. Online. One session. A working system.</p>
+          <p className="text-white/30 font-sans text-xs mb-10 uppercase tracking-widest">4 sessions available per month</p>
           <Link
             href="/apply"
             className="inline-block bg-gold text-white font-sans text-sm px-10 py-4 hover:bg-gold-dark transition-colors"

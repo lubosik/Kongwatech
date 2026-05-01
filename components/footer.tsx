@@ -103,7 +103,7 @@ export default function Footer() {
 
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-xs text-white/40">
-            &copy; {new Date().getFullYear()} Kongwa Tech. All rights reserved.
+            &copy; 2024 Kongwa Tech. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
             <p className="text-xs text-white/40">

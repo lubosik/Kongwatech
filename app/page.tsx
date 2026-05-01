@@ -110,6 +110,9 @@ export default async function HomePage() {
             <p className="text-charcoal/60 font-sans text-base max-w-md mx-auto">
               Each engagement is tailored. Every client is selected.
             </p>
+            <p className="text-charcoal/40 font-sans text-xs mt-3 uppercase tracking-widest">
+              Limited availability each month
+            </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {services.map(s => (

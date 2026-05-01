@@ -71,6 +71,9 @@ export default function ApplyPage({
                 A free 15-minute call to understand your business and confirm the right path forward.
                 Choose a time that suits you below.
               </p>
+              <p className="text-charcoal/40 font-sans text-xs mt-3 uppercase tracking-widest">
+                Lubosi takes on a limited number of clients each month. Availability is allocated on a first-come basis.
+              </p>
             </div>
             <div
               id="cal-inline-embed"
