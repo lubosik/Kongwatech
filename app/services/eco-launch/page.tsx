@@ -74,31 +74,26 @@ const faqSchema = {
   ],
 }
 
-const timeline = [
+const phases = [
   {
-    time: '09:00',
-    title: 'Environment Mapping',
-    desc: 'Map the business ecosystem, tools, workflows, and the points where AI can create real impact.',
+    step: '01',
+    title: 'We start by understanding your business',
+    desc: 'Before anything gets built, Lubosi gets to know how your business actually operates. Tools, workflows, team responsibilities, and where the real bottlenecks are. This is not a tick-box exercise. It is the foundation everything else is built on.',
   },
   {
-    time: '11:00',
-    title: 'System Design',
-    desc: 'Define the AI operating layer: what should be automated, what should be assisted, and what should remain human-led.',
+    step: '02',
+    title: 'We map what gets built and why',
+    desc: 'Once the picture is clear, the focus shifts to deciding where AI fits. What to automate, what to connect, what to leave alone. The goal is a practical plan that makes sense for your specific situation, not a generic template.',
   },
   {
-    time: '13:00',
-    title: 'Working Lunch',
-    desc: 'Pressure-test the plan against commercial priorities, team capacity, and the real constraints inside the business.',
+    step: '03',
+    title: 'We build it together',
+    desc: 'This is the hands-on part. Claude Code gets installed and configured in your environment. APIs get connected. The first working system gets built. The exact scope depends on your business, but by this point you will have something real and operational.',
   },
   {
-    time: '14:00',
-    title: 'Launch Build',
-    desc: 'Claude Code installed and configured. API keys connected. CRM and database plugged in. Memory layer set up. First live system running before the day ends.',
-  },
-  {
-    time: '16:00',
-    title: 'Handover',
-    desc: 'Walk through what has been launched, what comes next, and how the system should be operated and improved.',
+    step: '04',
+    title: 'You leave with something that works',
+    desc: 'The day ends with a walkthrough of everything that has been set up, how to use it, and what to build next. You also have the option to continue on a monthly basis, with Lubosi adding to your environment over time.',
   },
 ]
 
@@ -156,16 +151,16 @@ export default function EcoLaunchPage() {
                 This is not a consultation. This is an installation day.
               </p>
 
-              <h2 className="font-serif text-navy text-3xl mt-10 mb-8">How the Day Runs</h2>
+              <h2 className="font-serif text-navy text-3xl mt-10 mb-8">How the Day Flows</h2>
               <div className="space-y-8">
-                {timeline.map(item => (
-                  <div key={item.time} className="flex gap-6">
-                    <div className="w-16 shrink-0">
-                      <span className="text-gold font-sans text-sm font-medium">{item.time}</span>
+                {phases.map(phase => (
+                  <div key={phase.step} className="flex gap-6">
+                    <div className="w-8 shrink-0 pt-0.5">
+                      <span className="text-gold font-sans text-sm font-medium">{phase.step}</span>
                     </div>
                     <div>
-                      <p className="font-sans text-navy font-medium mb-1">{item.title}</p>
-                      <p className="text-charcoal/60 text-sm">{item.desc}</p>
+                      <p className="font-sans text-navy font-medium mb-2">{phase.title}</p>
+                      <p className="text-charcoal/60 text-sm leading-relaxed">{phase.desc}</p>
                     </div>
                   </div>
                 ))}
