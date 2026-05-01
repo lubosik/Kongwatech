@@ -1,0 +1,18 @@
+{
+  "free-consultation": {
+    "id": 5561050,
+    "slug": "free-consultation",
+    "url": "https://cal.com/kongwatech/free-consultation",
+    "title": "Free AI Consultation",
+    "duration": 15,
+    "requiresConfirmation": true
+  },
+  "eco-launch-consultation": {
+    "id": 5561052,
+    "slug": "eco-launch-consultation",
+    "url": "https://cal.com/kongwatech/eco-launch-consultation",
+    "title": "Eco Launch Setup Consultation",
+    "duration": 30,
+    "requiresConfirmation": true
+  }
+}

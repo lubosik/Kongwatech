@@ -2,35 +2,41 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Services | AI Foundations and Eco Launch',
+  title: 'Services | The Blueprint Session and Eco Launch | Kongwa Tech',
   description:
-    'Two ways to work with Kongwa Tech: AI Foundations online advisory and Eco Launch in-person AI ecosystem implementation.',
+    'Two ways to work with Kongwa Tech: The Blueprint Session online from £997, and Eco Launch in-person from £3,000.',
 }
 
 const services = [
   {
     number: '01',
-    title: 'AI Foundations',
-    tagline: 'Online AI advisory for founders and teams who need a practical operating layer.',
-    description: `AI Foundations is an online advisory engagement for business owners who are serious about AI but do not yet have the internal expertise to implement it properly. Lubosi works directly with you and your team to define your AI strategy, identify the highest-impact use cases for your specific operations, and implement the foundational tools and workflows that will give you lasting capability.
+    title: 'The Blueprint Session',
+    tagline: 'Two hours. A working system. Yours to keep building.',
+    price: '£997',
+    format: 'Online',
+    description: `This is a live, hands-on working session with Lubosi. Not a course. Not a recording. A real two to three hour session where you sit alongside him and build something that works before the call ends.
 
-This is not a passive training course. It is hands-on advisory support delivered online so your team can make decisions, build workflows, and move from AI curiosity to operational capability.`,
-    price: 'Online advisory',
-    href: '/services/ai-foundations',
-    ideal: 'Business owners who want to implement AI seriously and need expert guidance throughout.',
+You pick a starting point: a lead generator, an SEO content machine, an automated social media pipeline, an ads intelligence system, or a workflow that connects your tools. Lubosi shows you how it works, walks you through it step by step, and you build it together in real time.
+
+By the end of the session you have a working system, the knowledge to keep expanding it, and a clear picture of what to build next.`,
+    href: '/services/blueprint-session',
+    cta: 'Book the Blueprint Session',
+    ideal: 'Founders and business owners who want to understand what AI can actually do in their business, not just read about it.',
   },
   {
     number: '02',
     title: 'Eco Launch',
-    tagline: 'In-person launch of your AI environment, ecosystem, and first working systems.',
-    description: `Eco Launch is an in-person product engagement where Lubosi comes into your environment and helps launch the AI ecosystem your business needs to operate differently.
+    tagline: 'Lubosi comes to you. By the end of the day, your AI environment is live.',
+    price: 'From £3,000',
+    format: 'In Person',
+    description: `This is the in-person package. Lubosi travels to your home, your office, or a private setting of your choice. You spend the full day together. By the time he leaves, your AI environment is set up, connected, and working.
 
-The day is spent mapping the real business environment, identifying where AI should sit, selecting the tools and automations that matter, and launching the first working version of the system with your team. This is not a theoretical roadmap exercise. It is the beginning of your AI operating environment.
+This is not a consultation. This is an installation day.
 
-You leave with clarity, live assets, and a practical launch path for the ecosystem you are building.`,
-    price: '£6,000',
+Claude Code installed and configured. API keys connected across your stack. Your CRM and database plugged in. Memory layer live. At least one working system running before Lubosi leaves.`,
     href: '/services/eco-launch',
-    ideal: 'Founders and MDs who want in-person AI implementation, not another generic workshop.',
+    cta: 'Apply for Eco Launch',
+    ideal: 'Business owners who want a hands-on, done-with-you AI setup that actually works on day one.',
   },
 ]
 
@@ -45,7 +51,7 @@ export default function ServicesPage() {
             Two Ways to Work Together
           </h1>
           <p className="text-white/60 font-sans text-lg mt-6 max-w-xl leading-relaxed">
-            Each engagement is tailored to the business. Every client is selected.
+            Select the format that fits your situation. Both start with a conversation.
           </p>
         </div>
       </section>
@@ -58,13 +64,14 @@ export default function ServicesPage() {
               <div className={`bg-cream p-12 flex flex-col justify-between min-h-64 ${i % 2 === 1 ? 'lg:ml-8' : ''}`}>
                 <span className="text-gold font-sans text-4xl font-light">{s.number}</span>
                 <div>
-                  <p className="font-sans text-xs text-charcoal/40 uppercase tracking-widest mb-2">Investment</p>
-                  <p className="font-serif text-navy text-xl">{s.price}</p>
+                  <p className="font-sans text-xs text-charcoal/40 uppercase tracking-widest mb-1">Investment</p>
+                  <p className="font-serif text-navy text-xl mb-1">{s.price}</p>
+                  <p className="font-sans text-xs text-charcoal/40 uppercase tracking-widest">{s.format}</p>
                 </div>
               </div>
               <div>
                 <span className="text-gold font-sans text-xs tracking-[0.3em] uppercase">{s.number}</span>
-                <h2 className="font-serif text-navy text-4xl mt-3 mb-4">{s.title}</h2>
+                <h2 className="font-serif text-navy text-4xl mt-3 mb-2">{s.title}</h2>
                 <p className="text-charcoal/60 font-sans text-base italic mb-6">{s.tagline}</p>
                 <div className="space-y-4 text-charcoal/80 font-sans text-sm leading-relaxed">
                   {s.description.split('\n\n').map((para, j) => (
@@ -78,7 +85,7 @@ export default function ServicesPage() {
                   href={s.href}
                   className="inline-flex items-center gap-2 mt-6 text-sm font-sans text-navy border border-navy px-6 py-3 hover:bg-navy hover:text-white transition-colors"
                 >
-                  Full details
+                  {s.cta}
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
@@ -93,10 +100,10 @@ export default function ServicesPage() {
       <section className="py-24 bg-navy text-center">
         <div className="max-w-2xl mx-auto px-6">
           <h2 className="font-serif text-white text-4xl lg:text-5xl mb-6">
-            Not sure which service is right for you?
+            Not sure which is right for you?
           </h2>
           <p className="text-white/60 font-sans mb-10">
-            Every engagement starts with a 15-minute discovery call. Apply and Lubosi will help you identify the right starting point.
+            Every engagement starts with a conversation. Apply and Lubosi will help you identify the right starting point.
           </p>
           <Link
             href="/apply"

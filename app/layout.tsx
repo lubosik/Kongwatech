@@ -3,6 +3,7 @@ import { Cormorant_Garamond, Inter } from 'next/font/google'
 import './globals.css'
 import Nav from '@/components/nav'
 import Footer from '@/components/footer'
+import PopupWrapper from '@/app/popup-wrapper'
 
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
@@ -125,6 +126,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Nav />
         <main className="pt-16">{children}</main>
         <Footer />
+        <PopupWrapper />
       </body>
     </html>
   )

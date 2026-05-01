@@ -6,34 +6,38 @@ import BlogCard from '@/components/blog-card'
 import { fetchAllPosts } from '@/lib/blog-utils'
 
 export const metadata: Metadata = {
-  title: 'Kongwa Tech | Boutique AI Consultancy, Rochester Kent',
+  title: 'Kongwa Tech | Boutique AI Consultancy | Rochester, Kent',
   description:
-    'Kongwa Tech is a boutique AI consultancy. AI strategy, implementation, and in-person AI ecosystem launches. Based in Rochester, Kent.',
+    'Hands-on AI systems for ambitious business owners. The Blueprint Session from £997 online. Eco Launch in-person from £3,000. Book or apply today.',
 }
 
 const services = [
   {
     number: '01',
-    title: 'AI Foundations',
+    title: 'The Blueprint Session',
     description:
-      'Online advisory sessions for founders and teams who need a practical AI operating layer: strategy, tools, workflows, and implementation priorities.',
-    price: 'Online',
-    href: '/services/ai-foundations',
+      'A live two to three hour working session where you build a real AI system alongside Lubosi. Lead generators, content engines, ad intelligence agents, social pipelines. You leave with something working.',
+    price: '£997',
+    format: 'Online',
+    href: '/services/blueprint-session',
+    cta: 'Book Now',
   },
   {
     number: '02',
     title: 'Eco Launch',
     description:
-      'An in-person product launch for your AI environment. Lubosi comes to your business, maps the ecosystem, and launches the first working systems with you.',
-    price: '£6,000',
+      'Lubosi comes to you. Full day on site. Claude Code installed, APIs connected, CRM plugged in, memory layer live. Your AI environment built from the ground up, in one day.',
+    price: 'From £3,000',
+    format: 'In Person',
     href: '/services/eco-launch',
+    cta: 'Apply Now',
   },
 ]
 
 const stats = [
-  { value: 'SE England', label: 'Primary Market' },
-  { value: '2', label: 'Core Offers' },
-  { value: 'Online', label: 'AI Foundations' },
+  { value: '2 Packages', label: 'Ways to Work Together' },
+  { value: '£997', label: 'Blueprint Session' },
+  { value: '1 Day', label: 'Eco Launch Delivery' },
   { value: '48 hrs', label: 'Application Response' },
 ]
 
@@ -50,23 +54,23 @@ export default async function HomePage() {
             Boutique AI Consultancy
           </span>
           <h1 className="font-serif text-white text-5xl lg:text-6xl xl:text-7xl leading-tight mb-8 max-w-xl">
-            AI Strategy for Ambitious Businesses.
+            Your AI environment, built and running. In one session.
           </h1>
           <p className="text-white/60 font-sans text-base mb-12 max-w-md leading-relaxed">
-            Lubosi Kongwa. Rochester, Kent. Serving Southeast England and beyond.
+            Lubosi Kongwa. Rochester, Kent. Helping ambitious business owners build practical AI systems that actually work.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <Link
-              href="/apply"
+              href="/services/blueprint-session"
               className="bg-gold text-white font-sans text-sm px-8 py-4 hover:bg-gold-dark transition-colors text-center"
             >
-              Apply to Work Together
+              Book the Blueprint Session
             </Link>
             <Link
-              href="/services"
+              href="/services/eco-launch"
               className="border border-white/40 text-white font-sans text-sm px-8 py-4 hover:border-white transition-colors text-center"
             >
-              Explore Services
+              Apply for Eco Launch
             </Link>
           </div>
         </div>
@@ -290,47 +294,63 @@ export default async function HomePage() {
               Practical AI intelligence.
             </h2>
             <p className="text-charcoal/60 font-sans text-base max-w-md mx-auto">
-              Tools and frameworks you can use today, no strings attached.
+              Frameworks, playbooks, and systems. Free on Notion. No strings attached.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {[
               {
-                title: 'The AI Foundations Checklist',
-                desc: 'A step-by-step checklist for business owners starting their AI journey. Identify where to start and what to skip.',
-                icon: (
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                ),
+                emoji: '🎬',
+                title: 'Viral TikTok Clip Formula',
+                desc: 'The exact framework I use to identify, cut, and position clips for maximum views.',
+                cta: 'Open Formula',
+                href: 'https://www.notion.so/Lubosi-s-Personal-Viral-Clip-Identification-Formula-3304cf7f59e680af9d0af431469a9477?source=copy_link',
               },
               {
-                title: 'The Kongwa Method',
-                desc: 'How Lubosi assesses AI readiness and prioritises implementation across operations, sales, and product.',
-                icon: (
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                  </svg>
-                ),
+                emoji: '🔍',
+                title: 'SEO Strategy Playbook',
+                desc: 'How I generated 130K impressions across 3 sites in months. Site structure, content, and indexing.',
+                cta: 'Open Strategy',
+                href: 'https://www.notion.so/Lubosi-s-SEO-Content-Strategy-3304cf7f59e680aebd55c6d2ccc35700?source=copy_link',
               },
               {
-                title: 'Weekly AI Briefing',
-                desc: 'Curated insights on what matters in AI this week. Direct to your inbox. No noise, no hype.',
-                icon: (
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
-                ),
+                emoji: '🤖',
+                title: 'Prompt Engineering Guide',
+                desc: 'My personal prompt system for building AI agents that actually work in production.',
+                cta: 'Open Playbook',
+                href: 'https://www.notion.so/The-Prompt-Engineering-Playbook-2216d05e192c8064b3a5fa3d79a8fd1c?source=copy_link',
+              },
+              {
+                emoji: '🖼️',
+                title: 'Hyper-Realistic AI Image Guide',
+                desc: 'My complete system for generating photorealistic AI images. Models, prompts, settings, and workflows.',
+                cta: 'Open Guide',
+                href: 'https://www.notion.so/COMPLETE-GUIDE-GENERATING-HYPER-REALISTIC-AI-IMAGES-2fd4cf7f59e680f7ba33c5d130dc951a?source=copy_link',
+              },
+              {
+                emoji: '🎥',
+                title: 'Hyper-Realistic AI Video Guide',
+                desc: 'The full playbook for creating AI video content that looks and feels real. Tools, pipelines, and prompts.',
+                cta: 'Open Guide',
+                href: 'https://www.notion.so/COMPLETE-GUIDE-GENERATING-HYPER-REALISTIC-AI-VIDEOS-2fd4cf7f59e6807b9284cdfb6405ad34?source=copy_link',
               },
             ].map(r => (
               <a
                 key={r.title}
-                href="/apply"
-                className="group border border-gray-100 p-8 hover:border-gold hover:shadow-sm transition-all duration-200 flex flex-col"
+                href={r.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group border border-gray-100 p-7 hover:border-gold hover:shadow-sm transition-all duration-200 flex flex-col bg-white"
               >
-                <div className="text-gold mb-5">{r.icon}</div>
-                <h3 className="font-serif text-navy text-xl mb-3 group-hover:text-gold transition-colors">{r.title}</h3>
-                <p className="text-sm text-charcoal/70 font-sans leading-relaxed">{r.desc}</p>
+                <span className="text-2xl mb-4" aria-hidden="true">{r.emoji}</span>
+                <h3 className="font-serif text-navy text-lg mb-2 group-hover:text-gold transition-colors leading-snug">{r.title}</h3>
+                <p className="text-sm text-charcoal/60 font-sans leading-relaxed mb-6 flex-1">{r.desc}</p>
+                <span className="inline-flex items-center gap-2 text-xs font-sans text-gold uppercase tracking-widest group-hover:gap-3 transition-all">
+                  {r.cta}
+                  <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </span>
               </a>
             ))}
           </div>
