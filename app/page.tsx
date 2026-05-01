@@ -238,6 +238,26 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* Trustpilot */}
+      <section className="py-12 bg-white border-t border-gray-100">
+        <div className="max-w-3xl mx-auto px-6 lg:px-12 text-center">
+          <p className="font-sans text-xs text-charcoal/40 uppercase tracking-widest mb-6">Reviews</p>
+          <div
+            className="trustpilot-widget"
+            data-locale="en-US"
+            data-template-id="56278e9abfbbba0bdcd568bc"
+            data-businessunit-id="69f51b3705be17cd998c9830"
+            data-style-height="52px"
+            data-style-width="100%"
+            data-token="df893063-dd86-4536-b58f-6aa0c569162f"
+          >
+            <a href="https://www.trustpilot.com/review/kongwatech.com" target="_blank" rel="noopener">
+              Trustpilot
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* Testimonials */}
       <section className="py-24 bg-cream">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
