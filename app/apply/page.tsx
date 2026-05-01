@@ -142,7 +142,7 @@ export default function ApplyPage({
                   >
                     <option value="">Select a service</option>
                     <option value="AI Foundations">AI Foundations: online advisory</option>
-                    <option value="Echo Launch">Echo Launch: in-person AI ecosystem launch</option>
+                    <option value="Eco Launch">Eco Launch: in-person AI ecosystem launch</option>
                     <option value="Not sure yet">Not sure yet, happy to advise</option>
                   </select>
                 </div>

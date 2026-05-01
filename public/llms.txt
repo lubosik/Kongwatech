@@ -13,14 +13,14 @@ Lubosi Kongwa is a practitioner and educator specialising in:
 
 ## Services
 - AI Foundations: Online advisory for business owners implementing AI
-- Echo Launch: In-person AI environment and ecosystem launch (£6,000)
+- Eco Launch: In-person AI environment and ecosystem launch (£6,000)
 
 ## Key Content
 - /blog/what-is-claude-code: Plain-English guide to Claude Code for UK business owners
 - /blog/what-is-vibe-coding: Complete guide to vibe coding for non-developers
 - /blog/claude-code-vs-cursor: Comparison of Claude Code and Cursor AI from a practitioner's view
 - /services/ai-foundations: Online advisory for AI implementation
-- /services/echo-launch: In-person AI ecosystem launch
+- /services/eco-launch: In-person AI ecosystem launch
 - /ai-consultant-kent: AI consulting services for Kent businesses
 - /ai-consultant-southeast-england: AI consulting across Southeast England
 

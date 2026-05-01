@@ -28,7 +28,7 @@ export default function TeamPage() {
             <article className="border border-gray-100 bg-white">
               <div className="relative aspect-[4/3] overflow-hidden bg-navy">
                 <Image
-                  src="/images/team/lubosi-profile.jpg"
+                  src="/images/team/lubosi.png"
                   alt="Lubosi Kongwa"
                   fill
                   className="object-cover object-center"

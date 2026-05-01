@@ -183,7 +183,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
               <span className="text-white">Build the AI environment your business actually needs.</span>
             </p>
             <p className="font-sans text-white/60 text-sm mb-6">
-              Apply to work with Lubosi through AI Foundations online or Echo Launch in person.
+              Apply to work with Lubosi through AI Foundations online or Eco Launch in person.
             </p>
             <Link
               href="/apply"

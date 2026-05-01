@@ -22,11 +22,11 @@ const services = [
   },
   {
     number: '02',
-    title: 'Echo Launch',
+    title: 'Eco Launch',
     description:
       'An in-person product launch for your AI environment. Lubosi comes to your business, maps the ecosystem, and launches the first working systems with you.',
     price: '£6,000',
-    href: '/services/echo-launch',
+    href: '/services/eco-launch',
   },
 ]
 
@@ -72,7 +72,7 @@ export default async function HomePage() {
         </div>
         <div className="hidden lg:block flex-1 relative">
           <Image
-            src="/images/team/lubosi-profile.jpg"
+            src="/images/team/lubosi.png"
             alt="Lubosi Kongwa, founder and lead consultant"
             fill
             className="object-cover object-center"
@@ -131,7 +131,7 @@ export default async function HomePage() {
             <article className="bg-white border border-gray-100">
               <div className="relative aspect-[4/3] overflow-hidden bg-navy">
               <Image
-                src="/images/team/lubosi-profile.jpg"
+                src="/images/team/lubosi.png"
                 alt="Lubosi Kongwa"
                 fill
                 className="object-cover object-center"
@@ -262,6 +262,13 @@ export default async function HomePage() {
               },
             ].map(item => (
               <figure key={item.name} className="bg-white border border-gray-100 p-8">
+                <div className="mb-5 flex gap-1 text-gold" aria-label="5 out of 5 star review">
+                  {Array.from({ length: 5 }).map((_, index) => (
+                    <span key={index} aria-hidden="true" className="text-lg leading-none">
+                      ★
+                    </span>
+                  ))}
+                </div>
                 <blockquote className="font-serif text-navy text-2xl leading-snug">
                   "{item.quote}"
                 </blockquote>

@@ -4,7 +4,7 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'AI Consultant Kent | AI Strategy and Implementation, Southeast England',
   description:
-    'Looking for an AI consultant in Kent? Lubosi Kongwa at Kongwa Tech provides AI strategy, automation, online advisory, and in-person Echo Launch services across Rochester, Medway, Maidstone, Tunbridge Wells, Canterbury and all of Kent.',
+    'Looking for an AI consultant in Kent? Lubosi Kongwa at Kongwa Tech provides AI strategy, automation, online advisory, and in-person Eco Launch services across Rochester, Medway, Maidstone, Tunbridge Wells, Canterbury and all of Kent.',
 }
 
 const localBusinessSchema = {
@@ -23,7 +23,7 @@ const localBusinessSchema = {
     'Rochester', 'Medway', 'Maidstone', 'Tunbridge Wells',
     'Canterbury', 'Folkestone', 'Chatham', 'Gravesend', 'Kent',
   ],
-  description: 'AI consultant serving businesses across Kent. AI strategy, automation, online advisory, and Echo Launch services based in Rochester, Kent.',
+  description: 'AI consultant serving businesses across Kent. AI strategy, automation, online advisory, and Eco Launch services based in Rochester, Kent.',
   priceRange: '£6,000',
   serviceType: 'AI Consulting',
 }
@@ -117,7 +117,7 @@ export default function AIConsultantKentPage() {
 
             <h2 className="font-serif text-navy text-3xl mb-4">In-Person Services Across Kent</h2>
             <p className="font-sans text-charcoal/80 text-base leading-relaxed mb-6">
-              Echo Launch is an in-person AI ecosystem launch where Lubosi comes to your business
+              Eco Launch is an in-person AI ecosystem launch where Lubosi comes to your business
               premises in Kent, maps your operating environment, and helps launch the first working
               version of your AI workflows and systems. This service is particularly popular with Kent
               business owners who want to move quickly and need implementation rather than another
@@ -130,7 +130,7 @@ export default function AIConsultantKentPage() {
             <h2 className="font-serif text-navy text-3xl mb-4">How Much Does an AI Consultant Cost in Kent?</h2>
             <p className="font-sans text-charcoal/80 text-base leading-relaxed mb-6">
               Kongwa Tech is now focused around two offers: AI Foundations for online advisory, and
-              Echo Launch for in-person implementation. Echo Launch is £6,000. AI Foundations is scoped
+              Eco Launch for in-person implementation. Eco Launch is £6,000. AI Foundations is scoped
               after application based on the advisory depth your business needs.
             </p>
             <p className="font-sans text-charcoal/80 text-base leading-relaxed mb-8">

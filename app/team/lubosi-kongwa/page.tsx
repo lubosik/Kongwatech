@@ -63,8 +63,8 @@ export default function LubosiProfilePage() {
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
             <div className="relative h-[560px] lg:sticky lg:top-24 overflow-hidden bg-navy">
-              <Image
-                src="/images/team/lubosi-profile.jpg"
+                <Image
+                src="/images/team/lubosi.png"
                 alt="Lubosi Kongwa"
                 fill
                 className="object-cover object-center"
@@ -88,7 +88,7 @@ export default function LubosiProfilePage() {
                 training. The goal is to launch useful systems in the context of the real business.
               </p>
               <p>
-                Echo Launch is the in-person expression of that work: Lubosi enters the client environment,
+                Eco Launch is the in-person expression of that work: Lubosi enters the client environment,
                 maps the ecosystem, identifies the automation layer, and helps launch the first working
                 version of the AI operating environment.
               </p>

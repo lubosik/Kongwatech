@@ -2,9 +2,9 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Services | AI Foundations and Echo Launch',
+  title: 'Services | AI Foundations and Eco Launch',
   description:
-    'Two ways to work with Kongwa Tech: AI Foundations online advisory and Echo Launch in-person AI ecosystem implementation.',
+    'Two ways to work with Kongwa Tech: AI Foundations online advisory and Eco Launch in-person AI ecosystem implementation.',
 }
 
 const services = [
@@ -21,15 +21,15 @@ This is not a passive training course. It is hands-on advisory support delivered
   },
   {
     number: '02',
-    title: 'Echo Launch',
+    title: 'Eco Launch',
     tagline: 'In-person launch of your AI environment, ecosystem, and first working systems.',
-    description: `Echo Launch is an in-person product engagement where Lubosi comes into your environment and helps launch the AI ecosystem your business needs to operate differently.
+    description: `Eco Launch is an in-person product engagement where Lubosi comes into your environment and helps launch the AI ecosystem your business needs to operate differently.
 
 The day is spent mapping the real business environment, identifying where AI should sit, selecting the tools and automations that matter, and launching the first working version of the system with your team. This is not a theoretical roadmap exercise. It is the beginning of your AI operating environment.
 
 You leave with clarity, live assets, and a practical launch path for the ecosystem you are building.`,
     price: '£6,000',
-    href: '/services/echo-launch',
+    href: '/services/eco-launch',
     ideal: 'Founders and MDs who want in-person AI implementation, not another generic workshop.',
   },
 ]
