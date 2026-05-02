@@ -106,29 +106,25 @@ const schemaOrg = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en-GB" className={`${cormorant.variable} ${inter.variable}`}>
-      <head>
+      <body>
+        {/* Google Analytics */}
         <Script
-          src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js"
+          src="https://www.googletagmanager.com/gtag/js?id=G-NF7L5E1BKQ"
           strategy="afterInteractive"
         />
-      </head>
-      <body>
-        {/* Google tag (gtag.js) */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-NF7L5E1BKQ"></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-NF7L5E1BKQ');
-    `,
-          }}
-        />
+        <Script id="gtag-init" strategy="afterInteractive">{`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-NF7L5E1BKQ');
+        `}</Script>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaOrg) }}
+        />
+        <Script
+          src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js"
+          strategy="afterInteractive"
         />
         <Nav />
         <main className="pt-16">{children}</main>
