@@ -7,60 +7,71 @@ interface CalEmbedProps {
   namespace: string
 }
 
-type CalInstance = {
-  (...args: unknown[]): void
-  ns: Record<string, (...args: unknown[]) => void>
-}
-
 export default function CalEmbed({ calLink, namespace }: CalEmbedProps) {
-  const initialized = useRef(false)
-  const embedId = `cal-embed-${namespace}`
+  const elementId = `my-cal-inline-${namespace}`
+  const injected = useRef(false)
 
   useEffect(() => {
-    if (initialized.current) return
-    initialized.current = true
+    if (injected.current) return
+    injected.current = true
 
-    function init(Cal: CalInstance) {
-      Cal('init', namespace, { origin: 'https://app.cal.com' })
-      Cal.ns[namespace]('inline', {
-        elementOrSelector: `#${embedId}`,
-        config: { layout: 'month_view' },
-        calLink,
-      })
-      Cal.ns[namespace]('ui', {
-        hideEventTypeDetails: false,
-        layout: 'month_view',
-        styles: { branding: { brandColor: '#B89A5A' } },
-      })
-    }
-
-    const w = window as typeof window & { Cal?: CalInstance }
-
-    if (w.Cal) {
-      init(w.Cal)
-      return
-    }
-
+    // Use Cal.com's exact self-contained boilerplate, injected as a script tag.
+    // The boilerplate queues calls internally and loads embed.js itself,
+    // so there is no race condition.
     const script = document.createElement('script')
-    script.src = 'https://app.cal.com/embed/embed.js'
-    script.async = true
-    script.onload = () => {
-      const ww = window as typeof window & { Cal?: CalInstance }
-      if (ww.Cal) init(ww.Cal)
-    }
-    document.head.appendChild(script)
+    script.type = 'text/javascript'
+    script.innerHTML = `
+      (function (C, A, L) {
+        let p = function (a, ar) { a.q.push(ar); };
+        let d = C.document;
+        C.Cal = C.Cal || function () {
+          let cal = C.Cal; let ar = arguments;
+          if (!cal.loaded) {
+            cal.ns = {}; cal.q = cal.q || [];
+            d.head.appendChild(d.createElement("script")).src = A;
+            cal.loaded = true;
+          }
+          if (ar[0] === L) {
+            const api = function () { p(api, arguments); };
+            const namespace = ar[1];
+            api.q = api.q || [];
+            if (typeof namespace === "string") {
+              cal.ns[namespace] = cal.ns[namespace] || api;
+              p(cal.ns[namespace], ar);
+              p(cal, ["initNamespace", namespace]);
+            } else p(cal, ar);
+            return;
+          }
+          p(cal, ar);
+        };
+      })(window, "https://app.cal.com/embed/embed.js", "init");
+
+      Cal("init", "${namespace}", { origin: "https://app.cal.com" });
+
+      Cal.ns["${namespace}"]("inline", {
+        elementOrSelector: "#${elementId}",
+        config: { layout: "month_view", useSlotsViewOnSmallScreen: "true" },
+        calLink: "${calLink}",
+      });
+
+      Cal.ns["${namespace}"]("ui", {
+        hideEventTypeDetails: false,
+        layout: "month_view",
+      });
+    `
+    document.body.appendChild(script)
 
     return () => {
       try { script.remove() } catch {}
-      initialized.current = false
+      injected.current = false
     }
-  }, [calLink, namespace, embedId])
+  }, [calLink, namespace, elementId])
 
   return (
     <div
-      id={embedId}
-      className="w-full border border-gray-100 rounded-sm overflow-hidden"
-      style={{ minHeight: '700px' }}
+      id={elementId}
+      className="w-full border border-gray-100"
+      style={{ width: '100%', height: '100%', minHeight: '700px', overflow: 'scroll' }}
     />
   )
 }

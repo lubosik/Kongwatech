@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
-import Script from 'next/script'
 import CalEmbed from '@/components/cal-embed'
+import ApplyForm from '@/components/apply-form'
 
 export const metadata: Metadata = {
   title: 'Apply to Work with Lubosi | Kongwa Tech',
@@ -8,34 +8,9 @@ export const metadata: Metadata = {
     'Submit an application to work with Lubosi Kongwa. Book a 15-minute discovery call or send your application directly. Applications reviewed within 48 hours.',
 }
 
-export default function ApplyPage({
-  searchParams,
-}: {
-  searchParams: { success?: string }
-}) {
-  const success = searchParams.success === 'true'
-
+export default function ApplyPage() {
   return (
     <>
-      {/* Pre-fill form from URL params (runs client-side after hydration) */}
-      <Script id="prefill-form" strategy="afterInteractive">{`
-        (function() {
-          var params = new URLSearchParams(window.location.search);
-          var nameEl = document.querySelector('[name="name"]');
-          var emailEl = document.querySelector('[name="email"]');
-          var companyEl = document.querySelector('[name="company"]');
-          var serviceEl = document.querySelector('[name="service_interest"]');
-          if (nameEl && params.get('name')) nameEl.value = params.get('name');
-          if (emailEl && params.get('email')) emailEl.value = params.get('email');
-          if (companyEl && params.get('company')) companyEl.value = params.get('company');
-          if (serviceEl && params.get('service')) {
-            var val = params.get('service');
-            if (val === 'blueprint') serviceEl.value = 'The Blueprint Session (£997)';
-            if (val === 'eco-launch') serviceEl.value = 'Eco Launch (From £3,000)';
-          }
-        })();
-      `}</Script>
-
       {/* Hero */}
       <section className="bg-navy py-28 px-6 lg:px-12">
         <div className="max-w-4xl mx-auto">
@@ -80,126 +55,7 @@ export default function ApplyPage({
                 Submit your application below. Every field helps Lubosi understand your situation before the call.
               </p>
             </div>
-
-            {success ? (
-              <div className="bg-cream border-l-4 border-gold p-8 max-w-2xl">
-                <h3 className="font-serif text-navy text-2xl mb-3">Application received.</h3>
-                <p className="font-sans text-charcoal/70">
-                  Lubosi will review your application and respond within 48 hours.
-                  Check your inbox, including your spam folder.
-                </p>
-              </div>
-            ) : (
-              <form
-                action="https://api.web3forms.com/submit"
-                method="POST"
-                className="max-w-2xl space-y-6"
-              >
-                <input type="hidden" name="access_key" value="e8144041-9073-44fa-bba9-3b9089fc8511" />
-                <input type="hidden" name="subject" value="New Application: Kongwa Tech" />
-                <input type="hidden" name="redirect" value="https://kongwatech.com/apply?success=true" />
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-xs font-sans text-charcoal/50 uppercase tracking-widest mb-2">
-                      Full Name *
-                    </label>
-                    <input
-                      type="text"
-                      name="name"
-                      required
-                      className="w-full border border-gray-200 px-4 py-3 font-sans text-sm text-charcoal focus:outline-none focus:border-navy transition-colors"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-sans text-charcoal/50 uppercase tracking-widest mb-2">
-                      Email Address *
-                    </label>
-                    <input
-                      type="email"
-                      name="email"
-                      required
-                      className="w-full border border-gray-200 px-4 py-3 font-sans text-sm text-charcoal focus:outline-none focus:border-navy transition-colors"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-xs font-sans text-charcoal/50 uppercase tracking-widest mb-2">
-                      Company / Organisation *
-                    </label>
-                    <input
-                      type="text"
-                      name="company"
-                      required
-                      className="w-full border border-gray-200 px-4 py-3 font-sans text-sm text-charcoal focus:outline-none focus:border-navy transition-colors"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-sans text-charcoal/50 uppercase tracking-widest mb-2">
-                      Your Role / Title
-                    </label>
-                    <input
-                      type="text"
-                      name="role"
-                      className="w-full border border-gray-200 px-4 py-3 font-sans text-sm text-charcoal focus:outline-none focus:border-navy transition-colors"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-sans text-charcoal/50 uppercase tracking-widest mb-2">
-                    Which package are you interested in? *
-                  </label>
-                  <select
-                    name="service_interest"
-                    required
-                    className="w-full border border-gray-200 px-4 py-3 font-sans text-sm text-charcoal focus:outline-none focus:border-navy transition-colors bg-white"
-                  >
-                    <option value="">Select a package</option>
-                    <option value="The Blueprint Session (£997)">The Blueprint Session (£997)</option>
-                    <option value="Eco Launch (From £3,000)">Eco Launch: in-person AI environment setup (From £3,000)</option>
-                    <option value="Not sure yet">Not sure yet, happy to advise</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-sans text-charcoal/50 uppercase tracking-widest mb-2">
-                    Tell us about your business and what you want to achieve *
-                  </label>
-                  <textarea
-                    name="message"
-                    required
-                    rows={6}
-                    placeholder="Describe your business, your current AI situation, and what you are hoping to achieve through working with Kongwa Tech."
-                    className="w-full border border-gray-200 px-4 py-3 font-sans text-sm text-charcoal focus:outline-none focus:border-navy transition-colors resize-none"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-sans text-charcoal/50 uppercase tracking-widest mb-2">
-                    How did you hear about Kongwa Tech?
-                  </label>
-                  <input
-                    type="text"
-                    name="referral"
-                    className="w-full border border-gray-200 px-4 py-3 font-sans text-sm text-charcoal focus:outline-none focus:border-navy transition-colors"
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="bg-gold text-white font-sans text-sm px-10 py-4 hover:bg-gold-dark transition-colors w-full sm:w-auto"
-                >
-                  Submit Application
-                </button>
-
-                <p className="text-xs text-charcoal/40 font-sans">
-                  Applications are reviewed personally by Lubosi. You will receive a response within 48 hours.
-                </p>
-              </form>
-            )}
+            <ApplyForm />
           </div>
 
           {/* Location */}
