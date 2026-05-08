@@ -2,6 +2,26 @@ import type { BlogPost } from './strapi'
 
 export const seedPosts: BlogPost[] = [
   {
+    id: '4',
+    title: 'The Pre-Meeting Intelligence System: Research Any Prospect in 10 Minutes',
+    slug: 'the-pre-meeting-intelligence-system',
+    category: 'ai-automation',
+    date: '2026-05-08',
+    readTime: 9,
+    coverImage: '/images/blog/pre-meeting-hero.png',
+    excerpt:
+      'A 4-layer Claude prompt system that builds a complete intelligence briefing on any prospect before you walk into a meeting. Used by sales teams closing £50k+ deals.',
+    content: `
+## The Pre-Meeting Intelligence System
+
+Most salespeople spend 20 minutes Googling a prospect before a meeting. This system replaces that with a structured 4-layer intelligence briefing generated in under 10 minutes using Claude.
+
+The system covers company intelligence, decision-maker profiling, pain point mapping, and a tailored meeting strategy. Each layer feeds the next, producing a briefing that surfaces non-obvious insights that casual research misses.
+
+This is the system used by AIRO to research prospects before high-value commercial meetings.
+    `.trim(),
+  },
+  {
     id: '1',
     title: 'What Is Claude Code? A Plain-English Guide for Business Owners',
     slug: 'what-is-claude-code',
