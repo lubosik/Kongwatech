@@ -1,10 +1,9 @@
 'use client'
 
 import { useState } from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
 
-function PromptBox({ id, label, prompt }: { id: string; label: string; prompt: string }) {
+function PromptBox({ label, prompt }: { label: string; prompt: string }) {
   const [copied, setCopied] = useState(false)
 
   function copy() {
@@ -24,9 +23,7 @@ function PromptBox({ id, label, prompt }: { id: string; label: string; prompt: s
         <button
           onClick={copy}
           className={`font-sans text-xs px-4 py-1.5 transition-all ${
-            copied
-              ? 'bg-green-600 text-white'
-              : 'bg-gold text-white hover:bg-gold-dark'
+            copied ? 'bg-green-600 text-white' : 'bg-gold text-white hover:bg-gold-dark'
           }`}
         >
           {copied ? 'Copied!' : 'Copy Prompt'}
@@ -39,15 +36,7 @@ function PromptBox({ id, label, prompt }: { id: string; label: string; prompt: s
   )
 }
 
-function StepCard({
-  number,
-  title,
-  children,
-}: {
-  number: number
-  title: string
-  children: React.ReactNode
-}) {
+function StepCard({ number, title, children }: { number: number; title: string; children: React.ReactNode }) {
   return (
     <div className="flex gap-6 mb-12">
       <div className="flex-shrink-0">
@@ -119,47 +108,142 @@ function InlineCode({ children }: { children: string }) {
   )
 }
 
-function TerminalBlock({ mac, windows }: { mac: string; windows: string }) {
+function MacTerminal({ lines }: { lines: { type: 'prompt' | 'output' | 'comment'; text: string }[] }) {
+  return (
+    <div className="my-6 overflow-hidden border border-[#3a3a3a] rounded-sm">
+      <div className="flex items-center gap-2 px-4 py-2.5 bg-[#2d2d2d] border-b border-[#3a3a3a]">
+        <span className="w-3 h-3 rounded-full bg-[#ff5f57]" />
+        <span className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
+        <span className="w-3 h-3 rounded-full bg-[#28ca41]" />
+        <span className="font-sans text-xs text-white/30 ml-2">zsh</span>
+      </div>
+      <div className="p-5 bg-[#1c1c1e] font-mono text-sm leading-relaxed">
+        {lines.map((line, i) => (
+          <div key={i} className={
+            line.type === 'prompt' ? 'text-white' :
+            line.type === 'comment' ? 'text-[#6b7280] italic' :
+            'text-[#a8b5c8] pl-2'
+          }>
+            {line.type === 'prompt' && (
+              <span className="text-[#9ca3af] select-none mr-2">~  %</span>
+            )}
+            {line.text}
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function WindowsTerminal({ lines }: { lines: { type: 'prompt' | 'output' | 'comment'; text: string }[] }) {
+  return (
+    <div className="my-6 overflow-hidden border border-[#3a3a3a] rounded-sm">
+      <div className="flex items-center gap-2 px-4 py-2.5 bg-[#012456] border-b border-[#1a3a6b]">
+        <span className="font-sans text-xs text-white/60">Windows PowerShell</span>
+      </div>
+      <div className="p-5 bg-[#012456] font-mono text-sm leading-relaxed">
+        {lines.map((line, i) => (
+          <div key={i} className={
+            line.type === 'prompt' ? 'text-white' :
+            line.type === 'comment' ? 'text-[#6b9ab8] italic' :
+            'text-[#a8c5e0] pl-2'
+          }>
+            {line.type === 'prompt' && (
+              <span className="text-[#6ba3be] select-none mr-2">PS C:\Users\YourName&gt;</span>
+            )}
+            {line.text}
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function OSTabs({
+  macContent,
+  windowsContent,
+}: {
+  macContent: React.ReactNode
+  windowsContent: React.ReactNode
+}) {
   const [os, setOs] = useState<'mac' | 'windows'>('mac')
   return (
-    <div className="my-8 border border-navy/20 overflow-hidden">
-      <div className="flex border-b border-navy/20">
+    <div className="my-8">
+      <div className="flex border-b border-navy/20 mb-0">
         <button
           onClick={() => setOs('mac')}
-          className={`font-sans text-xs px-5 py-2.5 tracking-wide transition-colors ${
-            os === 'mac' ? 'bg-navy text-white' : 'bg-white text-charcoal/50 hover:text-navy'
+          className={`font-sans text-xs px-6 py-2.5 tracking-wide transition-colors border-b-2 ${
+            os === 'mac' ? 'border-gold text-navy font-medium' : 'border-transparent text-charcoal/40 hover:text-navy'
           }`}
         >
-          Mac / Linux
+          Mac
         </button>
         <button
           onClick={() => setOs('windows')}
-          className={`font-sans text-xs px-5 py-2.5 tracking-wide transition-colors ${
-            os === 'windows' ? 'bg-navy text-white' : 'bg-white text-charcoal/50 hover:text-navy'
+          className={`font-sans text-xs px-6 py-2.5 tracking-wide transition-colors border-b-2 ${
+            os === 'windows' ? 'border-gold text-navy font-medium' : 'border-transparent text-charcoal/40 hover:text-navy'
           }`}
         >
           Windows
         </button>
       </div>
-      <pre className="p-6 bg-[#0A1628] text-green-400 font-mono text-sm leading-relaxed overflow-x-auto">
-        {os === 'mac' ? mac : windows}
-      </pre>
+      {os === 'mac' ? macContent : windowsContent}
     </div>
   )
 }
 
+const MASTER_PROMPT = `You are my pre-meeting intelligence assistant.
+
+When I give you a prospect below, research them thoroughly and produce a complete Pre-Meeting Intelligence Brief.
+
+Here is what the brief needs to cover:
+
+1. PROFESSIONAL SUMMARY
+   Their role, how long they have been there, career trajectory, and what they are actually responsible for day to day.
+
+2. COMPANY CONTEXT
+   Company size, recent news, growth signals, funding, new hires or layoffs, any major announcements in the last 6 months.
+
+3. PERSONAL SIGNALS
+   What they post about on LinkedIn, articles they share, causes they support, anything that tells you what they actually care about beyond their job title.
+
+4. BUYING TRIGGERS
+   Based on their company stage and recent signals, what problems are they most likely trying to solve right now? What would make them say yes quickly?
+
+5. LIKELY OBJECTIONS (write these in their voice, as if they are saying them)
+   The three most probable pushbacks. Be specific to this person, not generic to their industry.
+
+6. OBJECTION RESPONSES
+   For each objection: the underlying fear driving it, how to respond, and a one-line recovery if they push back again.
+
+7. CONVERSATION OPENERS (3 options)
+   Each opener should be tied to a specific signal from the research. Should sound natural, not scripted. Each one leads into a discovery question.
+
+8. POWER CLOSE LINE
+   One sentence, specific to this prospect, that moves them toward a decision without pressure.
+
+9. OVERALL READ
+   One paragraph. How ready are they to buy? What is the single most important thing to get right in this meeting?
+
+Format the output as a clean one-page brief. Every word earns its place.
+
+---
+
+PROSPECT: [Full name]
+COMPANY: [Company name]
+THEIR ROLE: [Job title]
+WHAT I SELL: [One sentence describing your product or service]
+MEETING TYPE: [Discovery / Demo / Close]
+DEAL SIZE: [Approximate value]`
+
 export default function ArticleContent({ company }: { company?: string }) {
   const isPersonalised = Boolean(company)
   const companyDisplay = company
-    ? company
-        .split('-')
-        .map(w => w.charAt(0).toUpperCase() + w.slice(1))
-        .join(' ')
+    ? company.split('-').map((w: string) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
     : ''
 
   return (
     <>
-      {/* Personalised banner */}
       {isPersonalised && (
         <div className="bg-gold text-white py-3 px-6 text-center">
           <p className="font-sans text-sm">
@@ -180,8 +264,8 @@ export default function ArticleContent({ company }: { company?: string }) {
             The Pre-Meeting Intelligence System
           </h1>
           <p className="text-white/70 font-sans text-lg leading-relaxed max-w-xl">
-            How to walk into every sales meeting already knowing your prospect&apos;s background, likely objections,
-            and the one thing to open with. Four prompts. Ten minutes. Done.
+            How to walk into every sales meeting already knowing your prospect, their likely objections,
+            and the one thing to open with. Four prompts. Ten minutes. No setup required.
           </p>
           <div className="mt-10 pt-8 border-t border-white/10 flex items-center gap-4 flex-wrap">
             <p className="text-white/40 font-sans text-sm">
@@ -190,28 +274,18 @@ export default function ArticleContent({ company }: { company?: string }) {
             <span className="text-white/20">|</span>
             <span className="font-sans text-xs text-white/40">10 min read</span>
             <span className="text-white/20">|</span>
-            <span className="font-sans text-xs text-white/40">Works with Claude.ai (free) or any AI assistant</span>
+            <span className="font-sans text-xs text-white/40">Works with free Claude.ai. No coding needed.</span>
           </div>
         </div>
       </section>
 
-      {/* Hero image */}
+      {/* Hero visual */}
       <section className="bg-white">
         <div className="max-w-5xl mx-auto px-6 lg:px-12 -mt-8 relative z-10">
-          <div className="relative aspect-[16/9] overflow-hidden bg-navy border border-navy/10">
-            <Image
-              src="/images/blog/pre-meeting-hero.jpg"
-              alt="Pre-Meeting Intelligence System"
-              fill
-              className="object-cover"
-              priority
-              onError={(e) => {
-                const target = e.target as HTMLImageElement
-                target.style.display = 'none'
-              }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-br from-navy via-navy-light to-[#1a3a5c] flex items-center justify-center">
-              <p className="font-serif text-white/20 text-4xl italic text-center px-12 leading-tight">
+          <div className="relative aspect-[16/9] overflow-hidden bg-navy border border-navy/10 flex items-center justify-center">
+            <div className="absolute inset-0 bg-gradient-to-br from-navy via-[#0f2d52] to-[#1a3a5c]" />
+            <div className="relative z-10 text-center px-12">
+              <p className="font-serif text-white/20 text-4xl lg:text-5xl italic leading-tight">
                 Know everything before you say hello.
               </p>
             </div>
@@ -226,11 +300,11 @@ export default function ArticleContent({ company }: { company?: string }) {
             <p className="font-sans text-xs tracking-[0.2em] uppercase text-gold mb-4">What you will learn</p>
             <ul className="space-y-2">
               {[
-                'The 4-layer intelligence framework top sales teams use before every meeting',
+                'The 4 layers of intelligence every top sales team researches before a meeting',
                 'Four complete Claude prompts you can copy and paste right now',
-                'How to set this up in your terminal so it runs in one command',
-                'What the final brief looks like (real example included)',
-                'How to delegate this to your team without adding complexity',
+                'A real example brief, built using these prompts, so you know exactly what to expect',
+                'How to make this a team system, not just a personal habit',
+                'How to go one step further and run the whole thing from your terminal in one command',
               ].map((item, i) => (
                 <li key={i} className="flex items-start gap-3 font-sans text-sm text-charcoal/80">
                   <span className="text-gold font-bold mt-0.5">+</span>
@@ -246,83 +320,69 @@ export default function ArticleContent({ company }: { company?: string }) {
       <section className="py-16 bg-white">
         <div className="max-w-3xl mx-auto px-6 lg:px-12">
 
-          {/* SECTION 1: The problem */}
           <h2 className="font-serif text-navy text-3xl lg:text-4xl mb-6 leading-tight">
             Most sales teams walk in blind. Here is what that costs.
           </h2>
 
           <p className="font-sans text-charcoal/80 text-base leading-relaxed mb-5">
-            A salesperson at a luxury residential firm in London once told me that his team spent an average of
-            four minutes on prospect research before a call. Four minutes of scanning a name, maybe pulling
-            up a LinkedIn, and declaring themselves ready.
+            A salesperson at a luxury residential firm once told me his team spent about four minutes on research before a call. Four minutes. Scan a name, pull up a LinkedIn, and they were ready.
           </p>
 
           <p className="font-sans text-charcoal/80 text-base leading-relaxed mb-5">
-            Their close rate was 18 percent. The firm down the road, who had systematised their pre-meeting
-            preparation, was closing at 34 percent. Same market. Same leads. Different preparation.
+            Their close rate was 18 percent. The firm down the road, who had a proper pre-meeting process, was closing at 34 percent. Same market. Same leads. Different preparation.
           </p>
 
-          {/* Stats grid */}
           <div className="grid grid-cols-3 gap-0 border border-navy/10 my-10">
             <StatBlock number="100x" label="More likely to connect if you respond within 5 minutes of an enquiry (Harvard Business Review)" />
-            <StatBlock number="28%" label="Higher conversion rate for reps who spend 6+ minutes researching before a call (Gong.io)" />
+            <StatBlock number="28%" label="Higher conversion rate for reps who spend 6 or more minutes researching before a call (Gong.io)" />
             <StatBlock number="57%" label="Of the buying decision is made before the first real conversation (Forrester)" />
           </div>
 
           <p className="font-sans text-charcoal/80 text-base leading-relaxed mb-5">
-            The problem is not that salespeople do not want to prepare. It is that good preparation used to take
-            45 minutes of unfocused searching. Digging through LinkedIn, Googling news, trying to piece together
-            who you are meeting and why they might buy.
+            The problem was never that salespeople did not want to prepare. It was that good preparation used to take 45 minutes of scattered searching. LinkedIn. Google. Company news. Trying to piece together who you are meeting and why they might buy.
           </p>
 
           <Callout>
-            With AI, the same preparation takes 10 minutes. And the output is better than anything a
-            human could compile in 45.
+            With AI, the same preparation takes 10 minutes. And the output is better than anything a human could compile in 45.
           </Callout>
 
           <p className="font-sans text-charcoal/80 text-base leading-relaxed mb-10">
-            This guide gives you the exact system. Four prompts. A process anyone on your team can follow.
-            And an optional terminal setup that automates the whole thing before every meeting.
+            This guide gives you the exact system. Four prompts. A process anyone on your team can follow in Claude.ai right now. And an optional terminal setup that runs the whole thing automatically before every meeting.
           </p>
 
-          {/* SECTION 2: The intelligence stack */}
+          {/* Intelligence layers */}
           <h2 className="font-serif text-navy text-3xl lg:text-4xl mb-6 leading-tight mt-16">
             What to actually research before a sales call
           </h2>
 
           <p className="font-sans text-charcoal/80 text-base leading-relaxed mb-8">
-            Most people research the wrong things. They find a job title and call it preparation.
-            Real pre-meeting intelligence has four layers. You need all four.
+            Most people research the wrong things. They find a job title and call it preparation. Real pre-meeting intelligence has four layers. You need all four.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-0 border border-navy/10 mb-10">
             {[
               {
-                num: '01',
-                name: 'Professional Identity',
+                num: '01', name: 'Professional Identity',
                 find: 'Role, tenure, company size, recent promotions, what they are responsible for',
                 why: 'Opens the conversation at their level. You do not explain what you do to someone who already knows the language.',
                 where: 'LinkedIn, company website, press releases',
               },
               {
-                num: '02',
-                name: 'Personal Signals',
+                num: '02', name: 'Personal Signals',
                 find: 'Recent posts, shared articles, causes they support, career history patterns',
                 why: 'Tells you what they actually care about, which is usually different from their job description.',
                 where: 'LinkedIn activity, Twitter/X, company blog bylines',
               },
               {
-                num: '03',
-                name: 'Buying Triggers',
+                num: '03', name: 'Buying Triggers',
                 find: 'Company growth signals, recent funding, expansion news, team changes, new initiatives',
                 why: 'Someone who just opened a new office is in buying mode. Someone whose team just shrank is not.',
                 where: 'Company news, LinkedIn company page, Crunchbase, press coverage',
               },
               {
-                num: '04',
-                name: 'Likely Objections',
+                num: '04', name: 'Likely Objections',
                 find: 'Previous tools they have used, public frustrations, industry-specific blockers',
-                why: 'You anticipate the no before it arrives. The rep who can name the objection first is the rep who controls the conversation.',
+                why: 'You anticipate the no before it arrives. The rep who names the objection first controls the conversation.',
                 where: 'LinkedIn posts, industry forums, previous outreach responses if any',
               },
             ].map((layer) => (
@@ -347,30 +407,35 @@ export default function ArticleContent({ company }: { company?: string }) {
             ))}
           </div>
 
-          {/* SECTION 3: The 4 prompts */}
-          <h2 className="font-serif text-navy text-3xl lg:text-4xl mb-6 leading-tight mt-16">
-            The system: 4 prompts, 10 minutes, one complete brief
+          {/* PHASE 1: Claude.ai */}
+          <div className="mt-20 mb-4 flex items-center gap-4">
+            <div className="h-px flex-1 bg-navy/10" />
+            <span className="font-sans text-xs tracking-[0.25em] uppercase text-gold">Phase 1</span>
+            <div className="h-px flex-1 bg-navy/10" />
+          </div>
+
+          <h2 className="font-serif text-navy text-3xl lg:text-4xl mb-6 leading-tight">
+            Start here. Just Claude.ai, nothing else.
           </h2>
 
           <p className="font-sans text-charcoal/80 text-base leading-relaxed mb-4">
-            Open Claude.ai (free). Have your prospect&apos;s name and company ready. Run these four prompts in order.
-            Each one feeds into the next. By the end, you have a complete intelligence brief.
+            You do not need to install anything. Open{' '}
+            <a href="https://claude.ai" target="_blank" rel="noopener noreferrer" className="text-navy underline underline-offset-2">claude.ai</a>{' '}
+            in your browser. The free plan works. Run these four prompts in order, filling in the details for your specific prospect.
           </p>
 
           <ClaudeChat
             userMessage="I need to research a prospect before a sales call tomorrow."
-            aiResponse="I can help you build a complete intelligence brief. Give me their name, company, and what you are selling to them, and I will walk you through everything you need to know before you say hello."
+            aiResponse="I can build a complete intelligence brief for you. Give me their name, company, what you are selling, and the meeting type, and I will cover everything you need to know before you say hello."
           />
 
           <div className="mt-10 space-y-16">
 
-            <StepCard number={1} title="The Search Prompt">
+            <StepCard number={1} title="The Research Brief">
               <p className="font-sans text-charcoal/70 text-sm mb-4 leading-relaxed">
-                Start here. Paste this into Claude.ai and fill in the placeholders.
-                This tells Claude exactly who to research and what angle you need.
+                Start with this. Fill in the placeholders with your prospect&apos;s details. This is the foundation everything else builds on.
               </p>
               <PromptBox
-                id="prompt-1"
                 label="Prompt 1 of 4 — Research Brief"
                 prompt={`Act as a world-class intelligence analyst preparing a briefing for a senior sales director going into a high-value meeting.
 
@@ -380,7 +445,7 @@ PROSPECT DETAILS:
 - Full name: [PROSPECT FULL NAME]
 - Company: [COMPANY NAME]
 - Their role: [JOB TITLE]
-- What I am selling: [YOUR PRODUCT OR SERVICE — one sentence]
+- What I am selling: [YOUR PRODUCT OR SERVICE, one sentence]
 - Deal size: [APPROXIMATE VALUE]
 - Meeting type: [DISCOVERY / DEMO / CLOSE]
 
@@ -394,31 +459,26 @@ Using publicly available information (LinkedIn, company website, news, press rel
 
 4. LIKELY BUYING TRIGGERS — Based on company stage and signals, what problems are they likely trying to solve right now? What would make them say yes quickly?
 
-5. POTENTIAL OBJECTIONS — Based on their background and company situation, what are the three most likely reasons they push back? Be specific, not generic.
+5. POTENTIAL OBJECTIONS — Based on their background and company situation, what are the three most likely reasons they push back? Write each in their voice, as if they are saying it.
 
 Be specific. Do not give me generic observations about their industry. Give me insights about this specific person and this specific company.`}
               />
               <div className="bg-cream px-5 py-4 text-sm">
                 <p className="font-sans text-charcoal/70 leading-relaxed">
-                  <strong className="text-navy">What you get:</strong> A structured brief covering their background,
-                  company situation, what they care about, and the objections you will face.
-                  Takes Claude about 60 seconds to produce.
+                  <strong className="text-navy">What you get:</strong> A structured brief covering their background, company situation, what they care about, and the objections you will likely face. Claude produces this in about 60 seconds.
                 </p>
                 <p className="font-sans text-gold text-xs mt-3 font-medium">
-                  PRO TIP: If Claude says it cannot find information, tell it to use what it knows about companies
-                  of that size and stage in that sector. It will still produce a useful profile.
+                  If Claude says it cannot find information, tell it to use what it knows about companies of that size and stage in that sector. It will still produce a useful profile.
                 </p>
               </div>
             </StepCard>
 
-            <StepCard number={2} title="The Research Synthesis Prompt">
+            <StepCard number={2} title="Format It as a One-Page Brief">
               <p className="font-sans text-charcoal/70 text-sm mb-4 leading-relaxed">
-                Paste the output from Prompt 1 directly into this one. This turns raw research
-                into a formatted brief you can print, share with your team, or read in the car.
+                Paste the output from Prompt 1 into this. It formats everything into a clean brief your team can read in under 2 minutes.
               </p>
               <PromptBox
-                id="prompt-2"
-                label="Prompt 2 of 4 — Synthesise the Brief"
+                label="Prompt 2 of 4 — Format the Brief"
                 prompt={`Take the research you just produced and format it as a clean one-page Pre-Meeting Intelligence Brief.
 
 Structure it as follows:
@@ -450,7 +510,7 @@ Each opener should feel natural and specific, not like a scripted pitch.
 
 ---
 
-THINGS TO AVOID (2-3 bullets)
+THINGS TO AVOID (2 to 3 bullets)
 Specific things not to say, ask, or assume based on what we know about this person.
 
 ---
@@ -465,23 +525,19 @@ Every word earns its place. Nothing generic.`}
               />
               <div className="bg-cream px-5 py-4 text-sm">
                 <p className="font-sans text-charcoal/70 leading-relaxed">
-                  <strong className="text-navy">What you get:</strong> A formatted one-page brief
-                  you can read in 2 minutes before the meeting. This is what you print or pull up on your phone.
+                  <strong className="text-navy">What you get:</strong> A formatted one-page brief. Print it. Pull it up on your phone before you go in. Share it with every closer on the meeting.
                 </p>
                 <p className="font-sans text-gold text-xs mt-3 font-medium">
-                  PRO TIP: Share this with every closer on your team who is involved in the meeting.
-                  One brief per meeting, shared in Slack or email 30 minutes before.
+                  Share this in Slack or email 30 minutes before the meeting. One message, no attachments.
                 </p>
               </div>
             </StepCard>
 
-            <StepCard number={3} title="The Objection Anticipation Prompt">
+            <StepCard number={3} title="Build the Objection Playbook">
               <p className="font-sans text-charcoal/70 text-sm mb-4 leading-relaxed">
-                Run this after Prompt 2. This gives you the full conversation map, including
-                how to respond to every objection before you have even heard it.
+                Run this after Prompt 2. You get a complete map of every likely objection with specific responses ready to go.
               </p>
               <PromptBox
-                id="prompt-3"
                 label="Prompt 3 of 4 — Objection Map"
                 prompt={`Based on the intelligence brief we have built, create a complete objection map for my meeting with [PROSPECT NAME].
 
@@ -489,7 +545,7 @@ For each of the three objections identified:
 
 OBJECTION: [Write the objection in their voice]
 UNDERLYING CONCERN: [What fear or priority is really driving this?]
-HOW TO RESPOND: [Specific response — not generic, tied to what we know about them]
+HOW TO RESPOND: [Specific response, tied to what we know about them, not generic]
 EVIDENCE TO USE: [What proof point, case study, or data point directly addresses this?]
 RECOVERY IF THEY PERSIST: [If they push back again, what do you say next?]
 
@@ -502,23 +558,19 @@ Write every response as if you are a seasoned enterprise sales coach preparing a
               />
               <div className="bg-cream px-5 py-4 text-sm">
                 <p className="font-sans text-charcoal/70 leading-relaxed">
-                  <strong className="text-navy">What you get:</strong> A complete objection playbook with
-                  specific responses tailored to this prospect. Most salespeople improvise. You will not.
+                  <strong className="text-navy">What you get:</strong> A full objection playbook with specific responses tailored to this prospect. Most salespeople improvise this in the moment. You will not.
                 </p>
                 <p className="font-sans text-gold text-xs mt-3 font-medium">
-                  PRO TIP: Read this out loud before the meeting. Saying the objections in their voice
-                  prepares you to recognise them when they come up.
+                  Read the objections out loud before the meeting. Saying them in their voice prepares you to recognise them when they come up.
                 </p>
               </div>
             </StepCard>
 
-            <StepCard number={4} title="The Conversation Opener Generator">
+            <StepCard number={4} title="Generate Your Openers">
               <p className="font-sans text-charcoal/70 text-sm mb-4 leading-relaxed">
-                The first 60 seconds of any meeting sets the tone for everything that follows.
-                This gives you five specific openers, each built from something real about this person.
+                The first 60 seconds sets the tone for everything. This gives you five specific openers, each built from something real about this person.
               </p>
               <PromptBox
-                id="prompt-4"
                 label="Prompt 4 of 4 — Conversation Openers"
                 prompt={`Based on everything you know about [PROSPECT NAME] from the research, generate five conversation openers for my meeting.
 
@@ -531,23 +583,21 @@ Each opener must:
 Format each as:
 
 OPENER [NUMBER]:
-What to say: [The actual line — write it exactly as you would say it]
+What to say: [The actual line, write it exactly as you would say it]
 Why this works: [What signal from the research makes this land]
 Follow-up question: [The natural next question after this opener]
 
 After the five openers, give me:
 
 THE POWER CLOSE LINE
-If the meeting goes well and I want to propose a next step, give me one sentence — specific to this prospect and what we know about their situation — that moves them toward a decision without pressure.`}
+If the meeting goes well and I want to propose a next step, give me one sentence, specific to this prospect and what we know about their situation, that moves them toward a decision without pressure.`}
               />
               <div className="bg-cream px-5 py-4 text-sm">
                 <p className="font-sans text-charcoal/70 leading-relaxed">
-                  <strong className="text-navy">What you get:</strong> Five openers, each tied to something
-                  real about the prospect. Plus a close line when you need it.
+                  <strong className="text-navy">What you get:</strong> Five openers, each tied to something real about the prospect. Plus a close line when you need it.
                 </p>
                 <p className="font-sans text-gold text-xs mt-3 font-medium">
-                  PRO TIP: Pick one opener and commit to it. Salespeople who go in with one clear opener
-                  are more confident than those holding five options.
+                  Pick one opener and commit to it. Salespeople who go in with one clear opener are more confident than those holding five options.
                 </p>
               </div>
             </StepCard>
@@ -574,13 +624,13 @@ If the meeting goes well and I want to propose a next step, give me one sentence
             </ul>
           </div>
 
-          {/* SECTION 4: Example brief */}
+          {/* Example brief */}
           <h2 className="font-serif text-navy text-3xl lg:text-4xl mb-6 leading-tight mt-20">
             What the output looks like
           </h2>
 
           <p className="font-sans text-charcoal/80 text-base leading-relaxed mb-8">
-            Here is a real example brief, built using these four prompts, for a fictional but realistic prospect.
+            Here is a real example brief, built using these four prompts, for a realistic prospect.
           </p>
 
           <div className="border border-navy/15 overflow-hidden mb-12">
@@ -599,16 +649,16 @@ If the meeting goes well and I want to propose a next step, give me one sentence
                 {[
                   {
                     label: 'Executive Summary',
-                    content: 'James has run sales at Carter Prime for 3 years after a decade in institutional brokerage. The firm has expanded aggressively into off-plan luxury, doubling team headcount in 18 months. He is under board pressure to improve speed-to-lead — they lost three deals last quarter to faster-responding competitors.',
+                    content: 'James has run sales at Carter Prime for 3 years after a decade in institutional brokerage. The firm has expanded aggressively into off-plan luxury, doubling team headcount in 18 months. He is under board pressure to improve speed-to-lead. They lost three deals last quarter to faster-responding competitors.',
                   },
                   {
                     label: 'Key Signals',
                     items: [
-                      'Posted on LinkedIn three weeks ago about losing a £4.8M off-plan lead to a competitor who "called them back in minutes"',
+                      'Posted on LinkedIn three weeks ago about losing a 4.8M off-plan lead to a competitor who called them back in minutes',
                       'Company opened a new Jumeirah office and hired 6 additional closers in Q1 2026',
                       'Reshared an article titled "Why CRM alone is not a sales strategy" with the comment "exactly this"',
-                      'Has been using HubSpot for 2 years — likely frustrated by its limitations at their current scale',
-                      'Attended Dubai property expo last month; company featured in Gulf News residential report',
+                      'Has been using HubSpot for 2 years. Likely frustrated by its limitations at their current scale',
+                      'Attended Dubai property expo last month. Company featured in Gulf News residential report',
                     ],
                   },
                   {
@@ -616,22 +666,22 @@ If the meeting goes well and I want to propose a next step, give me one sentence
                     items: [
                       '"We already tried a call automation tool and the leads hated it" — they likely tested a basic IVR, not a conversational AI',
                       '"My closers are protective of their pipeline and won\'t want AI involved" — real concern given how commission-driven the team is',
-                      '"We need to trial it before we can commit to anything" — standard enterprise delay tactic when budget is soft',
+                      '"We need to trial it before we can commit to anything" — standard delay tactic when budget is soft',
                     ],
                   },
                   {
                     label: 'Conversation Openers',
                     items: [
-                      '"I saw your post about the lead you lost last quarter. That is exactly the problem we built AIRO to solve. Can I tell you what happened with the firm?"',
-                      '"You have doubled your team size in 18 months. The challenge at that stage is usually that your closers spend too much time qualifying and not enough time closing."',
-                      '"You were at the expo last month. What was the mood like on the floor — are buyers moving, or is there more hesitation than six months ago?"',
+                      '"I saw your post about the lead you lost last quarter. That is exactly the problem we built AIRO to solve. Can I tell you what happened with another firm?"',
+                      '"You have doubled your team size in 18 months. The challenge at that stage is usually that closers spend too much time qualifying and not enough time closing."',
+                      '"You were at the expo last month. What was the mood on the floor — are buyers moving, or is there more hesitation than 6 months ago?"',
                     ],
                   },
                   {
                     label: 'Things to Avoid',
                     items: [
                       'Do not lead with technology. James is commercial, not technical. Lead with the business problem.',
-                      'Do not mention HubSpot as a weakness — he chose it and has his team on it.',
+                      'Do not mention HubSpot as a weakness. He chose it and has his team on it.',
                       'Do not ask generic qualifying questions. He will disengage immediately.',
                     ],
                   },
@@ -659,23 +709,21 @@ If the meeting goes well and I want to propose a next step, give me one sentence
             </div>
           </div>
 
-          {/* SECTION 5: Team system */}
+          {/* Team system */}
           <h2 className="font-serif text-navy text-3xl lg:text-4xl mb-6 leading-tight mt-16">
             Making this a team system, not a personal habit
           </h2>
 
           <p className="font-sans text-charcoal/80 text-base leading-relaxed mb-5">
-            The most common mistake is running this personally and forgetting to systematise it.
-            A brief you run for yourself is useful. A brief that lands in every closer&apos;s inbox
-            30 minutes before every meeting is a competitive weapon.
+            The most common mistake is running this yourself and never systemising it. A brief you run for yourself is useful. A brief that lands in every closer&apos;s inbox 30 minutes before every meeting is a competitive weapon.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-0 border border-navy/10 mb-10">
             {[
               { label: 'Who runs it', content: 'A PA, sales coordinator, or SDR. Not the closer. The closer should receive the brief, not build it. This takes 10 minutes and any organised person can learn it in one session.' },
               { label: 'When to run it', content: '24 hours before every meeting above a set deal size. For anything under your threshold, run Prompts 1 and 2 only. For high-value meetings, run all four.' },
-              { label: 'How to share it', content: 'Paste the formatted brief into Slack DM or email. No attachments. No folders. The closer gets one message, reads it in 2 minutes, and goes in prepared.' },
-              { label: 'What to do with it', content: 'Print it, or pull it up on your phone 5 minutes before the meeting. Read the conversation openers out loud in the car or lift. Pick one and use it exactly as written.' },
+              { label: 'How to share it', content: 'Paste the formatted brief into a Slack DM or email. No attachments. No folders. The closer gets one message, reads it in 2 minutes, and goes in prepared.' },
+              { label: 'What to do with it', content: 'Print it, or pull it up on your phone 5 minutes before the meeting. Read the conversation openers out loud in the car. Pick one and use it exactly as written.' },
             ].map((item) => (
               <div key={item.label} className="p-7 border-b border-r border-navy/10 last:border-0 [&:nth-child(even)]:border-r-0">
                 <span className="font-sans text-xs uppercase tracking-widest text-gold block mb-2">{item.label}</span>
@@ -684,95 +732,136 @@ If the meeting goes well and I want to propose a next step, give me one sentence
             ))}
           </div>
 
-          {/* SECTION 5b: Terminal setup */}
-          <h2 className="font-serif text-navy text-3xl lg:text-4xl mb-6 leading-tight mt-16">
-            Run it from your terminal in one command
+          {/* PHASE 2: Claude Code */}
+          <div className="mt-20 mb-4 flex items-center gap-4">
+            <div className="h-px flex-1 bg-navy/10" />
+            <span className="font-sans text-xs tracking-[0.25em] uppercase text-gold">Phase 2</span>
+            <div className="h-px flex-1 bg-navy/10" />
+          </div>
+
+          <h2 className="font-serif text-navy text-3xl lg:text-4xl mb-4 leading-tight">
+            Want to run this in one command? Use Claude Code.
           </h2>
 
-          <p className="font-sans text-charcoal/80 text-base leading-relaxed mb-4">
-            If you want to fully automate this — so anyone on your team types a name and gets a
-            complete brief without touching Claude.ai — here is the setup.
-            You only do this once. After that, it is one command before every meeting.
+          <p className="font-sans text-charcoal/80 text-base leading-relaxed mb-5">
+            Claude Code is Anthropic&apos;s terminal tool. Instead of pasting prompts one by one into a browser, you paste a single master prompt and it runs the full brief automatically. Takes about 90 seconds. You type the prospect name and get back a complete formatted document.
           </p>
 
-          <div className="relative mb-8 border border-navy/10">
-            <Image
-              src="/images/blog/airo-terminal.png"
-              alt="The Pre-Meeting Intelligence pipeline running in terminal"
-              width={900}
-              height={480}
-              className="w-full"
-            />
-            <p className="font-sans text-xs text-charcoal/40 px-4 py-2 bg-cream border-t border-navy/10">
-              The intelligence pipeline running in terminal. Each stage produces a structured JSON output, then renders a formatted brief.
-            </p>
-          </div>
+          <p className="font-sans text-charcoal/80 text-base leading-relaxed mb-10">
+            This is not about coding. You will not write a single line of code. It is just Claude running in your terminal instead of a browser tab.
+          </p>
 
-          <div className="space-y-8">
+          <div className="space-y-10">
 
             <div>
-              <p className="font-sans text-sm font-semibold text-navy mb-2">Step 1 — Install Python (if you don&apos;t have it)</p>
-              <p className="font-sans text-sm text-charcoal/70 mb-3">
-                On Mac, open <InlineCode>Terminal</InlineCode>. On Windows, open <InlineCode>Command Prompt</InlineCode> or <InlineCode>PowerShell</InlineCode>.
-                Run this to check if Python is already installed:
+              <p className="font-sans text-sm font-semibold text-navy mb-1">Step 1 — Install Claude Code</p>
+              <p className="font-sans text-sm text-charcoal/60 mb-3">One command. Copy, paste, hit Enter. That is it.</p>
+              <OSTabs
+                macContent={
+                  <MacTerminal lines={[
+                    { type: 'prompt', text: 'curl -fsSL https://claude.ai/install.sh | bash' },
+                    { type: 'output', text: 'Installing Claude Code...' },
+                    { type: 'output', text: 'Claude Code installed successfully.' },
+                    { type: 'comment', text: '# Done. Claude Code is now on your machine.' },
+                  ]} />
+                }
+                windowsContent={
+                  <WindowsTerminal lines={[
+                    { type: 'prompt', text: 'irm https://claude.ai/install.ps1 | iex' },
+                    { type: 'output', text: 'Installing Claude Code...' },
+                    { type: 'output', text: 'Claude Code installed successfully.' },
+                    { type: 'comment', text: '# Done. Open a new PowerShell window and type: claude' },
+                  ]} />
+                }
+              />
+            </div>
+
+            <div>
+              <p className="font-sans text-sm font-semibold text-navy mb-1">Step 2 — Log in with your Claude account</p>
+              <p className="font-sans text-sm text-charcoal/60 mb-3">
+                Run <InlineCode>claude</InlineCode> in your terminal. It opens a browser window to log in with your existing Claude.ai account. Takes 30 seconds. You only do this once.
               </p>
-              <TerminalBlock
-                mac={`python3 --version
-# If you see "Python 3.x.x" you are ready.
-# If not, go to python.org/downloads and install Python 3`}
-                windows={`python --version
-# If you see "Python 3.x.x" you are ready.
-# If not, go to python.org/downloads and install Python 3`}
-              />
-            </div>
-
-            <div>
-              <p className="font-sans text-sm font-semibold text-navy mb-2">Step 2 — Install the one dependency</p>
-              <TerminalBlock
-                mac={`pip3 install requests`}
-                windows={`pip install requests`}
-              />
-            </div>
-
-            <div>
-              <p className="font-sans text-sm font-semibold text-navy mb-2">Step 3 — Set your API key</p>
-              <p className="font-sans text-sm text-charcoal/70 mb-3">
-                Get a free API key at <span className="text-navy font-medium">openrouter.ai</span>.
-                Free tier is enough for 10-20 briefs per month.
-              </p>
-              <TerminalBlock
-                mac={`export OPENROUTER_API_KEY="your-key-here"
-# Add this to your ~/.zshrc file to make it permanent`}
-                windows={`set OPENROUTER_API_KEY=your-key-here
-# Or add it as a System Environment Variable in Control Panel`}
-              />
-            </div>
-
-            <div>
-              <p className="font-sans text-sm font-semibold text-navy mb-2">Step 4 — Run the pipeline before any meeting</p>
-              <TerminalBlock
-                mac={`python3 ~/Downloads/airo_pipeline/run_pipeline.py
-# Or from within the folder:
-cd ~/Downloads/airo_pipeline
-python3 run_pipeline.py`}
-                windows={`python %USERPROFILE%\Downloads\airo_pipeline\run_pipeline.py`}
+              <OSTabs
+                macContent={
+                  <MacTerminal lines={[
+                    { type: 'prompt', text: 'claude' },
+                    { type: 'output', text: 'Opening browser for authentication...' },
+                    { type: 'output', text: 'Logged in as you@yourmail.com' },
+                    { type: 'output', text: 'Claude Code is ready.' },
+                  ]} />
+                }
+                windowsContent={
+                  <WindowsTerminal lines={[
+                    { type: 'prompt', text: 'claude' },
+                    { type: 'output', text: 'Opening browser for authentication...' },
+                    { type: 'output', text: 'Logged in as you@yourmail.com' },
+                    { type: 'output', text: 'Claude Code is ready.' },
+                  ]} />
+                }
               />
               <p className="font-sans text-xs text-charcoal/50 mt-2">
-                The pipeline scrapes research, synthesises it with Claude, generates the full brief, and saves it to your Downloads folder. Typically takes 60-90 seconds.
+                Claude Code requires a Claude.ai Pro or Max account (from $20/month). If you already use Claude, you likely qualify.
+              </p>
+            </div>
+
+            <div>
+              <p className="font-sans text-sm font-semibold text-navy mb-1">Step 3 — Paste the master prompt</p>
+              <p className="font-sans text-sm text-charcoal/60 mb-4">
+                Once Claude Code is open, paste this prompt. Fill in your prospect&apos;s details at the bottom. Claude runs all four research phases in one go and produces a formatted brief.
+              </p>
+              <PromptBox
+                label="Master Prompt — Paste into Claude Code"
+                prompt={MASTER_PROMPT}
+              />
+              <div className="bg-cream px-5 py-4 text-sm">
+                <p className="font-sans text-charcoal/70 leading-relaxed">
+                  <strong className="text-navy">What happens:</strong> Claude Code runs the full 4-layer intelligence pipeline, synthesises the output, and formats a complete brief in your terminal. About 90 seconds start to finish.
+                </p>
+                <p className="font-sans text-gold text-xs mt-3 font-medium">
+                  Save this prompt as a note or text file on your desktop. Before every meeting, open it, fill in the prospect details, paste into Claude Code.
+                </p>
+              </div>
+            </div>
+
+            <div>
+              <p className="font-sans text-sm font-semibold text-navy mb-1">Optional — Use your own API key instead of a Pro account</p>
+              <p className="font-sans text-sm text-charcoal/60 mb-3">
+                If you want to run this without a Claude Pro subscription, you can use a direct Anthropic API key instead. Get one at{' '}
+                <a href="https://console.anthropic.com" target="_blank" rel="noopener noreferrer" className="text-navy underline underline-offset-2">console.anthropic.com</a>.
+                Then set it in your terminal like this:
+              </p>
+              <OSTabs
+                macContent={
+                  <MacTerminal lines={[
+                    { type: 'comment', text: '# Add this to your ~/.zshrc file to make it permanent:' },
+                    { type: 'prompt', text: 'echo \'export ANTHROPIC_API_KEY="sk-ant-your-key-here"\' >> ~/.zshrc' },
+                    { type: 'prompt', text: 'source ~/.zshrc' },
+                    { type: 'comment', text: '# Now claude will use your API key automatically.' },
+                  ]} />
+                }
+                windowsContent={
+                  <WindowsTerminal lines={[
+                    { type: 'comment', text: '# Set your API key as a system environment variable:' },
+                    { type: 'prompt', text: '[System.Environment]::SetEnvironmentVariable("ANTHROPIC_API_KEY","sk-ant-your-key","User")' },
+                    { type: 'comment', text: '# Restart PowerShell after running this.' },
+                  ]} />
+                }
+              />
+              <p className="font-sans text-xs text-charcoal/50 mt-2">
+                Pay-as-you-go pricing is typically under $0.10 per brief. A hundred briefs a month costs less than a coffee.
               </p>
             </div>
 
           </div>
 
-          {/* Mid-article CTA — bridge to AIRO */}
+          {/* AIRO bridge */}
           <div className="my-16 border-t border-navy/10 pt-16">
             <h2 className="font-serif text-navy text-3xl lg:text-4xl mb-6 leading-tight">
               The one problem this system cannot solve
             </h2>
 
             <p className="font-sans text-charcoal/80 text-base leading-relaxed mb-5">
-              You can now walk into every meeting knowing more about your prospect than they expect.
-              That is a real edge, and most teams will never have it.
+              You can now walk into every meeting knowing more about your prospect than they expect. That is a real edge. Most teams will never have it.
             </p>
 
             <p className="font-sans text-charcoal/80 text-base leading-relaxed mb-5">
@@ -780,40 +869,30 @@ python3 run_pipeline.py`}
             </p>
 
             <p className="font-sans text-charcoal/80 text-base leading-relaxed mb-5">
-              The intelligence system assumes you get the meeting. It assumes the lead was called quickly
-              enough, qualified properly, and handed to your closer with context. For most sales teams,
-              that is not what happens. Leads come in. They sit in a CRM. Someone calls them when they
-              get around to it. By then, the prospect has already spoken to someone else.
+              The intelligence system assumes you get the meeting. It assumes the lead was called quickly enough, qualified properly, and handed to your closer with context. For most sales teams, that is not what happens. Leads come in. They sit in a CRM. Someone calls them when they get around to it. By then, the prospect has spoken to someone else.
             </p>
 
             <div className="border border-navy/15 bg-cream p-8 mb-8">
               <p className="font-serif text-navy text-xl leading-snug mb-3">
-                Companies that respond to an inbound lead within 5 minutes are 100 times more likely
-                to connect than those who respond in 30 minutes.
+                Companies that respond to an inbound lead within 5 minutes are 100 times more likely to connect than those who respond in 30 minutes.
               </p>
               <p className="font-sans text-xs text-charcoal/50">Harvard Business Review, Lead Response Management Study</p>
             </div>
 
             <p className="font-sans text-charcoal/80 text-base leading-relaxed mb-5">
-              The Pre-Meeting Intelligence System makes you better in the room. But if you are not in the
-              room fast enough, the intelligence does not matter.
+              The Pre-Meeting Intelligence System makes you better in the room. But if you are not in the room fast enough, the intelligence does not matter.
             </p>
 
             <Callout>
-              The firms that are winning in luxury real estate right now are not just better prepared.
-              They are faster. And they have removed the human bottleneck from the first conversation entirely.
+              The firms winning in luxury real estate right now are not just better prepared. They are faster. They have removed the human bottleneck from the first conversation entirely.
             </Callout>
 
             <p className="font-sans text-charcoal/80 text-base leading-relaxed mb-5">
-              That is the problem AIRO was built to solve. AIRO is a voice AI that contacts every
-              inbound lead within 60 seconds of their enquiry. It has a real conversation, qualifies them,
-              and hands your team a warm, ready-to-close prospect. Your closers only speak to people
-              with genuine buying intent.
+              That is what AIRO was built to solve. AIRO is a voice AI that contacts every inbound lead within 60 seconds of their enquiry. It has a real conversation, qualifies them properly, and hands your team a warm prospect who is ready to close. Your salespeople only speak to people with genuine buying intent.
             </p>
 
             <p className="font-sans text-charcoal/80 text-base leading-relaxed mb-8">
-              The intelligence system you just learned is for the meeting. AIRO is for getting to the meeting.
-              Together, they are the most complete sales preparation stack in the market.
+              The intelligence system you just learned is for the meeting. AIRO is for getting to the meeting. Together, they are the most complete sales preparation stack in the market.
             </p>
           </div>
 
@@ -825,31 +904,29 @@ python3 run_pipeline.py`}
                 Listen to two minutes of AIRO in action
               </h3>
               <p className="font-sans text-white/60 text-sm leading-relaxed mb-8 max-w-lg">
-                These are real calls handled entirely by AIRO. No human agent. No script reading.
-                The prospect does not know they are speaking to an AI until they ask directly.
-                What happens next is worth hearing.
+                These are real calls handled entirely by AIRO. No human agent. No script reading. The prospect does not know they are speaking to an AI until they ask directly. What happens next is worth two minutes of your time.
               </p>
 
               <div className="space-y-6">
-                <div className="border border-white/10 p-6 bg-navy-dark">
+                <div className="border border-white/10 p-6">
                   <span className="font-sans text-xs uppercase tracking-widest text-gold/70 block mb-2">Recording 01</span>
                   <p className="font-serif text-white text-lg mb-4">A buyer qualifies themselves. No closer required.</p>
                   <audio controls className="w-full" style={{ accentColor: '#B89A5A' }}>
                     <source src="https://airo.velto.ai/audio/wire-transfer.mp3" type="audio/mpeg" />
                   </audio>
                   <p className="font-sans text-xs text-white/40 mt-3">
-                    Listen for the moment the prospect begins describing their own buying timeline without being prompted.
+                    Listen for the moment the prospect starts describing their own buying timeline without being prompted.
                   </p>
                 </div>
 
-                <div className="border border-white/10 p-6 bg-navy-dark">
+                <div className="border border-white/10 p-6">
                   <span className="font-sans text-xs uppercase tracking-widest text-gold/70 block mb-2">Recording 02</span>
                   <p className="font-serif text-white text-lg mb-4">&ldquo;You&apos;re not AI, are you?&rdquo;</p>
                   <audio controls className="w-full" style={{ accentColor: '#B89A5A' }}>
                     <source src="https://airo.velto.ai/audio/not-ai.mp3" type="audio/mpeg" />
                   </audio>
                   <p className="font-sans text-xs text-white/40 mt-3">
-                    If you have doubts about whether AI voice works in luxury sales, play this first.
+                    If you have doubts about whether AI voice works in luxury sales, play this one first.
                   </p>
                 </div>
               </div>
@@ -863,14 +940,14 @@ python3 run_pipeline.py`}
               {[
                 {
                   result: '576 qualified buyers recovered',
-                  context: 'From a dead pipeline at a UK high-end residential firm. Over 14 months. Average deal size: GBP 2.5 million per transaction.',
+                  context: 'From a dead pipeline at a UK high-end residential firm. Over 14 months. Average deal size: 2.5 million per transaction. These were leads nobody planned to follow up.',
                 },
                 {
-                  result: 'GBP 2 million in qualified pipeline in 24 hours',
-                  context: 'From leads nobody planned to call. These were written off. AIRO called them overnight and recovered serious buyers by morning.',
+                  result: '2 million in qualified pipeline in 24 hours',
+                  context: 'From leads that had been written off. AIRO called them overnight and recovered serious buyers by morning. No human involved until handover.',
                 },
                 {
-                  result: 'Works with Idris Elba\'s media team',
+                  result: "Works with Idris Elba's media team",
                   context: 'Handling inbound enquiries and qualifying leads for high-volume, high-value entertainment and brand partnership conversations.',
                 },
               ].map((item, i) => (
@@ -891,9 +968,7 @@ python3 run_pipeline.py`}
               See what happens when speed meets intelligence.
             </h2>
             <p className="font-sans text-white/60 text-base leading-relaxed mb-6 max-w-lg">
-              The intelligence system is yours. If you want to add the speed layer, book a 20-minute
-              call with the AIRO team. No pitch. No slide deck. We will run the numbers on your pipeline
-              and you will leave knowing exactly what AIRO would recover.
+              The intelligence system is yours. If you want to add the speed layer, book a 20-minute call with the AIRO team. No pitch. No slide deck. We will run the numbers on your pipeline and you will leave knowing exactly what AIRO would recover.
             </p>
             <a
               href="https://airo.velto.ai"
@@ -903,23 +978,18 @@ python3 run_pipeline.py`}
             >
               Book a Call with the AIRO Team
             </a>
-            <p className="font-sans text-xs text-white/30">
-              No commitment. Just the numbers.
-            </p>
+            <p className="font-sans text-xs text-white/30">No commitment. Just the numbers.</p>
           </div>
 
           {/* Author note */}
           <div className="mt-16 pt-10 border-t border-navy/10">
             <p className="font-sans text-xs text-charcoal/40 uppercase tracking-widest mb-3">A note from the author</p>
             <p className="font-serif text-navy text-lg leading-relaxed max-w-2xl italic">
-              &ldquo;I built this guide because most sales teams are one good process away from a meaningful improvement
-              in their close rate. The intelligence system is that process. AIRO is the layer that makes it possible
-              to run at scale, without adding headcount.&rdquo;
+              &ldquo;I built this guide because most sales teams are one good process away from a real improvement in their close rate. The intelligence system is that process. AIRO is the layer that lets you run it at scale, without adding headcount.&rdquo;
             </p>
             <p className="font-sans text-sm text-charcoal/60 mt-4">Lubosi, Founder of AIRO by Velto</p>
           </div>
 
-          {/* Back link */}
           <div className="mt-12">
             <Link
               href="/blog"
