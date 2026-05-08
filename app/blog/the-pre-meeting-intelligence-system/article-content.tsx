@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 
 function PromptBox({ label, prompt }: { label: string; prompt: string }) {
@@ -282,10 +283,17 @@ export default function ArticleContent({ company }: { company?: string }) {
       {/* Hero visual */}
       <section className="bg-white">
         <div className="max-w-5xl mx-auto px-6 lg:px-12 -mt-8 relative z-10">
-          <div className="relative aspect-[16/9] overflow-hidden bg-navy border border-navy/10 flex items-center justify-center">
-            <div className="absolute inset-0 bg-gradient-to-br from-navy via-[#0f2d52] to-[#1a3a5c]" />
-            <div className="relative z-10 text-center px-12">
-              <p className="font-serif text-white/20 text-4xl lg:text-5xl italic leading-tight">
+          <div className="relative aspect-[16/9] overflow-hidden bg-navy border border-navy/10">
+            <Image
+              src="/images/blog/pre-meeting-hero.jpg"
+              alt="Pre-Meeting Intelligence System — boardroom intelligence"
+              fill
+              className="object-cover"
+              priority
+            />
+            <div className="absolute inset-0 bg-navy/40" />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <p className="font-serif text-white/50 text-3xl lg:text-5xl italic text-center px-12 leading-tight">
                 Know everything before you say hello.
               </p>
             </div>
@@ -854,22 +862,21 @@ If the meeting goes well and I want to propose a next step, give me one sentence
 
           </div>
 
-          {/* AIRO bridge */}
+          {/* AIRO full product section */}
           <div className="my-16 border-t border-navy/10 pt-16">
+
+            <span className="font-sans text-xs tracking-[0.25em] uppercase text-gold block mb-6">Introducing AIRO by Velto</span>
+
             <h2 className="font-serif text-navy text-3xl lg:text-4xl mb-6 leading-tight">
-              The one problem this system cannot solve
+              The intelligence system gets you ready for the meeting. AIRO gets you to it.
             </h2>
 
             <p className="font-sans text-charcoal/80 text-base leading-relaxed mb-5">
-              You can now walk into every meeting knowing more about your prospect than they expect. That is a real edge. Most teams will never have it.
+              There is one problem this guide does not solve. It assumes you got the meeting. It assumes the lead came in, someone called them quickly, qualified them properly, and handed them to your closer with context.
             </p>
 
             <p className="font-sans text-charcoal/80 text-base leading-relaxed mb-5">
-              But there is a layer of the problem this guide does not touch.
-            </p>
-
-            <p className="font-sans text-charcoal/80 text-base leading-relaxed mb-5">
-              The intelligence system assumes you get the meeting. It assumes the lead was called quickly enough, qualified properly, and handed to your closer with context. For most sales teams, that is not what happens. Leads come in. They sit in a CRM. Someone calls them when they get around to it. By then, the prospect has spoken to someone else.
+              For most sales teams, that is not what happens. Leads come in. They sit in a CRM. Someone calls them when they get around to it. By then, the prospect has already spoken to someone else.
             </p>
 
             <div className="border border-navy/15 bg-cream p-8 mb-8">
@@ -879,76 +886,82 @@ If the meeting goes well and I want to propose a next step, give me one sentence
               <p className="font-sans text-xs text-charcoal/50">Harvard Business Review, Lead Response Management Study</p>
             </div>
 
-            <p className="font-sans text-charcoal/80 text-base leading-relaxed mb-5">
-              The Pre-Meeting Intelligence System makes you better in the room. But if you are not in the room fast enough, the intelligence does not matter.
-            </p>
-
             <Callout>
               The firms winning in luxury real estate right now are not just better prepared. They are faster. They have removed the human bottleneck from the first conversation entirely.
             </Callout>
 
-            <p className="font-sans text-charcoal/80 text-base leading-relaxed mb-5">
-              That is what AIRO was built to solve. AIRO is a voice AI that contacts every inbound lead within 60 seconds of their enquiry. It has a real conversation, qualifies them properly, and hands your team a warm prospect who is ready to close. Your salespeople only speak to people with genuine buying intent.
-            </p>
-
-            <p className="font-sans text-charcoal/80 text-base leading-relaxed mb-8">
-              The intelligence system you just learned is for the meeting. AIRO is for getting to the meeting. Together, they are the most complete sales preparation stack in the market.
-            </p>
-          </div>
-
-          {/* Audio section */}
-          <div className="border border-navy/15 bg-navy mb-12">
-            <div className="p-8">
-              <span className="font-sans text-xs tracking-widest uppercase text-gold block mb-4">Before you book a call with the AIRO team</span>
-              <h3 className="font-serif text-white text-2xl mb-4 leading-tight">
-                Listen to two minutes of AIRO in action
-              </h3>
-              <p className="font-sans text-white/60 text-sm leading-relaxed mb-8 max-w-lg">
-                These are real calls handled entirely by AIRO. No human agent. No script reading. The prospect does not know they are speaking to an AI until they ask directly. What happens next is worth two minutes of your time.
-              </p>
-
-              <div className="space-y-6">
-                <div className="border border-white/10 p-6">
-                  <span className="font-sans text-xs uppercase tracking-widest text-gold/70 block mb-2">Recording 01</span>
-                  <p className="font-serif text-white text-lg mb-4">A buyer qualifies themselves. No closer required.</p>
-                  <audio controls className="w-full" style={{ accentColor: '#B89A5A' }}>
-                    <source src="https://airo.velto.ai/audio/wire-transfer.mp3" type="audio/mpeg" />
-                  </audio>
-                  <p className="font-sans text-xs text-white/40 mt-3">
-                    Listen for the moment the prospect starts describing their own buying timeline without being prompted.
-                  </p>
-                </div>
-
-                <div className="border border-white/10 p-6">
-                  <span className="font-sans text-xs uppercase tracking-widest text-gold/70 block mb-2">Recording 02</span>
-                  <p className="font-serif text-white text-lg mb-4">&ldquo;You&apos;re not AI, are you?&rdquo;</p>
-                  <audio controls className="w-full" style={{ accentColor: '#B89A5A' }}>
-                    <source src="https://airo.velto.ai/audio/not-ai.mp3" type="audio/mpeg" />
-                  </audio>
-                  <p className="font-sans text-xs text-white/40 mt-3">
-                    If you have doubts about whether AI voice works in luxury sales, play this one first.
+            {/* What AIRO is */}
+            <div className="border border-navy/15 overflow-hidden my-10">
+              <div className="bg-navy px-8 py-6">
+                <div className="flex items-start justify-between gap-4 flex-wrap">
+                  <div>
+                    <p className="font-serif text-white text-3xl mb-1">AIRO</p>
+                    <p className="font-sans text-gold text-xs tracking-widest uppercase">By Velto</p>
+                  </div>
+                  <p className="font-sans text-white/50 text-sm max-w-sm leading-relaxed pt-1">
+                    A voice AI built for high-value sales environments. Developed by Velto, a UK AI product company, and brought to market through Kongwa Tech.
                   </p>
                 </div>
               </div>
-            </div>
-          </div>
+              <div className="p-8 bg-white">
+                <p className="font-sans text-charcoal/80 text-base leading-relaxed mb-6">
+                  AIRO contacts every inbound lead within 60 seconds of their enquiry. It has a real, natural conversation — not a phone tree, not a script. It listens, qualifies, handles early objections, and identifies buying intent. When the conversation is done, your closer receives a warm handover with everything they need to close.
+                </p>
+                <p className="font-sans text-charcoal/80 text-base leading-relaxed mb-8">
+                  Your salespeople only speak to people who are ready to buy. No more chasing cold leads. No more losing deals because nobody called back in time.
+                </p>
 
-          {/* Case studies */}
-          <div className="mb-12">
-            <h3 className="font-serif text-navy text-2xl mb-6">What AIRO has actually done</h3>
-            <div className="space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-0 border border-navy/10">
+                  {[
+                    {
+                      cap: 'Responds in 60 seconds',
+                      detail: 'Every inbound lead gets a call within 60 seconds, day or night. No human bottleneck. No missed enquiries.',
+                    },
+                    {
+                      cap: 'Natural voice conversation',
+                      detail: 'AIRO sounds like a person. It handles questions, pauses, and interruptions. Prospects do not know they are speaking to an AI until they ask.',
+                    },
+                    {
+                      cap: 'Qualifies on your criteria',
+                      detail: 'You define what a qualified lead looks like. AIRO asks the right questions, captures the answers, and scores the lead before handover.',
+                    },
+                    {
+                      cap: 'Warm handover to your closer',
+                      detail: 'When the lead is qualified, your closer gets a full summary: what was said, what they want, and the best next step.',
+                    },
+                    {
+                      cap: 'Runs 24 / 7',
+                      detail: 'AIRO handles leads at 2am on a Sunday with the same quality as a Monday morning. Your pipeline never sleeps.',
+                    },
+                    {
+                      cap: 'Built for luxury and high-value sales',
+                      detail: 'Real estate, financial services, high-ticket services. AIRO is calibrated for environments where deal size and tone both matter.',
+                    },
+                  ].map((item) => (
+                    <div key={item.cap} className="p-6 border-b border-r border-navy/10 [&:nth-child(even)]:border-r-0 last:border-b-0 [&:nth-last-child(2)]:border-b-0">
+                      <p className="font-sans text-xs uppercase tracking-widest text-gold mb-2">{item.cap}</p>
+                      <p className="font-sans text-sm text-charcoal/70 leading-relaxed">{item.detail}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Results */}
+            <h3 className="font-serif text-navy text-2xl mb-6 mt-12">What AIRO has done for real clients</h3>
+            <div className="space-y-4 mb-12">
               {[
                 {
                   result: '576 qualified buyers recovered',
-                  context: 'From a dead pipeline at a UK high-end residential firm. Over 14 months. Average deal size: 2.5 million per transaction. These were leads nobody planned to follow up.',
+                  context: 'From a dead pipeline at a UK high-end residential firm over 14 months. Average deal size: 2.5 million per transaction. These were leads nobody planned to follow up on.',
                 },
                 {
                   result: '2 million in qualified pipeline in 24 hours',
-                  context: 'From leads that had been written off. AIRO called them overnight and recovered serious buyers by morning. No human involved until handover.',
+                  context: 'From leads that had been written off completely. AIRO called them overnight and recovered serious buyers by morning. No human was involved until handover.',
                 },
                 {
-                  result: "Works with Idris Elba's media team",
-                  context: 'Handling inbound enquiries and qualifying leads for high-volume, high-value entertainment and brand partnership conversations.',
+                  result: "Working with Idris Elba's media team",
+                  context: 'Handling inbound enquiries and qualifying leads for high-volume entertainment and brand partnership conversations. AIRO manages the volume so the team stays focused on the right conversations.',
                 },
               ].map((item, i) => (
                 <div key={i} className="flex gap-5 border-l-4 border-gold pl-6 py-4">
@@ -959,16 +972,57 @@ If the meeting goes well and I want to propose a next step, give me one sentence
                 </div>
               ))}
             </div>
+
+            {/* Audio */}
+            <div className="border border-navy/15 bg-navy mb-10">
+              <div className="p-8">
+                <span className="font-sans text-xs tracking-widest uppercase text-gold block mb-4">Hear it before you judge it</span>
+                <h3 className="font-serif text-white text-2xl mb-3 leading-tight">
+                  Two real calls. Handled entirely by AIRO.
+                </h3>
+                <p className="font-sans text-white/60 text-sm leading-relaxed mb-8 max-w-lg">
+                  No human agent. No script reading. These are inbound enquiries handled start to finish by AIRO. The first call shows a prospect qualifying themselves without any pressure. The second answers the question most people ask when they first hear about this product.
+                </p>
+
+                <div className="space-y-6">
+                  <div className="border border-white/10 p-6">
+                    <span className="font-sans text-xs uppercase tracking-widest text-gold/70 block mb-2">Recording 01</span>
+                    <p className="font-serif text-white text-lg mb-1">A buyer qualifies themselves. No closer required.</p>
+                    <p className="font-sans text-white/40 text-xs mb-4">Listen for the moment the prospect starts describing their own buying timeline without being asked.</p>
+                    <audio controls className="w-full" style={{ accentColor: '#B89A5A' }}>
+                      <source src="https://airo.velto.ai/audio/wire-transfer.mp3" type="audio/mpeg" />
+                    </audio>
+                  </div>
+
+                  <div className="border border-white/10 p-6">
+                    <span className="font-sans text-xs uppercase tracking-widest text-gold/70 block mb-2">Recording 02</span>
+                    <p className="font-serif text-white text-lg mb-1">&ldquo;You&apos;re not AI, are you?&rdquo;</p>
+                    <p className="font-sans text-white/40 text-xs mb-4">The question every sceptic asks. This is what AIRO says back.</p>
+                    <audio controls className="w-full" style={{ accentColor: '#B89A5A' }}>
+                      <source src="https://airo.velto.ai/audio/not-ai.mp3" type="audio/mpeg" />
+                    </audio>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
 
           {/* Final CTA */}
           <div className="bg-navy p-10 mt-8">
-            <span className="font-sans text-xs tracking-widest uppercase text-gold block mb-4">Take this further</span>
+            <div className="flex items-center gap-3 mb-6">
+              <span className="font-sans text-xs tracking-widest uppercase text-gold">AIRO by Velto</span>
+              <span className="text-white/20 text-xs">|</span>
+              <span className="font-sans text-xs text-white/40">In partnership with Kongwa Tech</span>
+            </div>
             <h2 className="font-serif text-white text-3xl lg:text-4xl leading-tight mb-4">
               See what happens when speed meets intelligence.
             </h2>
-            <p className="font-sans text-white/60 text-base leading-relaxed mb-6 max-w-lg">
-              The intelligence system is yours. If you want to add the speed layer, book a 20-minute call with the AIRO team. No pitch. No slide deck. We will run the numbers on your pipeline and you will leave knowing exactly what AIRO would recover.
+            <p className="font-sans text-white/60 text-base leading-relaxed mb-3 max-w-lg">
+              The intelligence system in this guide is yours to use today. If you want to add the speed layer — so your team is always first to the lead and fully prepared when they get there — book a 20-minute call with us.
+            </p>
+            <p className="font-sans text-white/60 text-base leading-relaxed mb-8 max-w-lg">
+              No pitch. No slide deck. We will run the numbers on your pipeline and show you exactly what AIRO would recover. You leave with clarity on whether it makes sense for your business.
             </p>
             <a
               href="https://airo.velto.ai"
@@ -976,9 +1030,9 @@ If the meeting goes well and I want to propose a next step, give me one sentence
               rel="noopener noreferrer"
               className="inline-block bg-gold text-white font-sans text-sm px-8 py-4 hover:bg-gold-dark transition-colors mb-4"
             >
-              Book a Call with the AIRO Team
+              Book a Call at airo.velto.ai
             </a>
-            <p className="font-sans text-xs text-white/30">No commitment. Just the numbers.</p>
+            <p className="font-sans text-xs text-white/30">No commitment. Just the numbers on your pipeline.</p>
           </div>
 
           {/* Author note */}

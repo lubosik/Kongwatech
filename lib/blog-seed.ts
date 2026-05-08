@@ -8,7 +8,7 @@ export const seedPosts: BlogPost[] = [
     category: 'ai-automation',
     date: '2026-05-08',
     readTime: 9,
-    coverImage: '/images/blog/pre-meeting-hero.png',
+    coverImage: '/images/blog/pre-meeting-hero.jpg',
     excerpt:
       'A 4-layer Claude prompt system that builds a complete intelligence briefing on any prospect before you walk into a meeting. Used by sales teams closing £50k+ deals.',
     content: `

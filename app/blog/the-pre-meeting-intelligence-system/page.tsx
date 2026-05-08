@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     description:
       'How to build a 4-layer intelligence briefing on any prospect in under 10 minutes using Claude.',
     type: 'article',
-    images: ['/images/blog/pre-meeting-hero.png'],
+    images: ['/images/blog/pre-meeting-hero.jpg'],
   },
 }
 

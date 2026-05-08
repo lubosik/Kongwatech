@@ -18,7 +18,7 @@ export async function generateMetadata({
       title: `Pre-Meeting Intelligence System — ${companyName}`,
       description: `Personalised for ${companyName}. Build a 4-layer prospect briefing in under 10 minutes with Claude.`,
       type: 'article',
-      images: ['/images/blog/pre-meeting-hero.png'],
+      images: ['/images/blog/pre-meeting-hero.jpg'],
     },
   }
 }
