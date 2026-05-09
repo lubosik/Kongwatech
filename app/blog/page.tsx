@@ -5,9 +5,9 @@ import BlogCard from '@/components/blog-card'
 import { fetchAllPosts, categoryLabel, formatDate } from '@/lib/blog-utils'
 
 export const metadata: Metadata = {
-  title: 'Kongwa Tech News | AI Insights for Businesses',
+  title: 'Some Free Game | AI Insights That Make Businesses Money | Kongwa Tech',
   description:
-    'Weekly analysis on Claude Code, vibe coding, AI automation, and AI strategy for UK business owners. From Kongwa Tech, Rochester, Kent.',
+    'High-quality guides on Claude Code, Anthropic AI, vibe coding, and AI strategy for ambitious businesses. Real tactics, real results. From Lubosi Kongwa at Kongwa Tech.',
 }
 
 const categories = [
@@ -38,12 +38,12 @@ export default async function BlogPage({
     <>
       <section className="bg-navy py-20 px-6 lg:px-12">
         <div className="max-w-4xl mx-auto">
-          <span className="text-gold font-sans text-xs tracking-[0.3em] uppercase">Kongwa Tech News</span>
+          <span className="text-gold font-sans text-xs tracking-[0.3em] uppercase">Kongwa Tech</span>
           <h1 className="font-serif text-white text-5xl lg:text-6xl mt-6 leading-tight">
-            Insights from the frontier.
+            Some Free Game.
           </h1>
           <p className="text-white/60 font-sans text-lg mt-6 max-w-xl leading-relaxed">
-            Weekly intelligence on AI tools, strategy, and implementation for ambitious businesses.
+            High-quality guides on Claude Code, Anthropic AI, and AI strategy. Written for businesses that want to actually make money from AI.
           </p>
         </div>
       </section>

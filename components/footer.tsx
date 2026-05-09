@@ -63,7 +63,7 @@ export default function Footer() {
                 ['Services', '/services'],
                 ['Team', '/team'],
                 ['Partners', '/partners'],
-                ['Blog', '/blog'],
+                ['Some Free Game', '/blog'],
                 ['Apply', '/apply'],
                 ['AI Consultant Kent', '/ai-consultant-kent'],
               ].map(([label, href]) => (

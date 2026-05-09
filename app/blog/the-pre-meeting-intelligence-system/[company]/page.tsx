@@ -12,10 +12,10 @@ export async function generateMetadata({
     .join(' ')
 
   return {
-    title: `The Pre-Meeting Intelligence System — Prepared for ${companyName} | Kongwa Tech`,
+    title: `The Pre-Meeting Intelligence System |Prepared for ${companyName} | Kongwa Tech`,
     description: `A personalised intelligence briefing system built for ${companyName}. How to research any prospect in under 10 minutes using Claude.`,
     openGraph: {
-      title: `Pre-Meeting Intelligence System — ${companyName}`,
+      title: `Pre-Meeting Intelligence System |${companyName}`,
       description: `Personalised for ${companyName}. Build a 4-layer prospect briefing in under 10 minutes with Claude.`,
       type: 'article',
       images: ['/images/blog/pre-meeting-hero.jpg'],

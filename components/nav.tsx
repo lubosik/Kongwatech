@@ -36,7 +36,7 @@ export default function Nav() {
           <Link href="/services" className="text-sm font-sans text-charcoal hover:text-navy transition-colors">Services</Link>
           <Link href="/team" className="text-sm font-sans text-charcoal hover:text-navy transition-colors">Team</Link>
           <Link href="/partners" className="text-sm font-sans text-charcoal hover:text-navy transition-colors">Partners</Link>
-          <Link href="/blog" className="text-sm font-sans text-charcoal hover:text-navy transition-colors">Blog</Link>
+          <Link href="/blog" className="text-sm font-sans text-charcoal hover:text-navy transition-colors">Some Free Game</Link>
         </nav>
 
         <div className="flex items-center gap-4">
@@ -69,7 +69,7 @@ export default function Nav() {
           <Link href="/services" className="text-base font-sans text-charcoal" onClick={() => setOpen(false)}>Services</Link>
           <Link href="/team" className="text-base font-sans text-charcoal" onClick={() => setOpen(false)}>Team</Link>
           <Link href="/partners" className="text-base font-sans text-charcoal" onClick={() => setOpen(false)}>Partners</Link>
-          <Link href="/blog" className="text-base font-sans text-charcoal" onClick={() => setOpen(false)}>Blog</Link>
+          <Link href="/blog" className="text-base font-sans text-charcoal" onClick={() => setOpen(false)}>Some Free Game</Link>
           <Link href="/apply" className="bg-gold text-white text-sm font-sans px-6 py-3 text-center" onClick={() => setOpen(false)}>Apply Now</Link>
         </div>
       )}

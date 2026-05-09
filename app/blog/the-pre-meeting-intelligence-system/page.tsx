@@ -2,13 +2,23 @@ import type { Metadata } from 'next'
 import ArticleContent from './article-content'
 
 export const metadata: Metadata = {
-  title: 'The Pre-Meeting Intelligence System | Kongwa Tech',
+  title: 'How to Research Any Sales Prospect Using Claude AI in 10 Minutes | Kongwa Tech',
   description:
-    'How to build a 4-layer intelligence briefing on any prospect in under 10 minutes using Claude. Used by sales teams closing £50k+ deals.',
+    'Use Claude AI and Claude Code to build a complete sales prospect intelligence brief in under 10 minutes. Four Anthropic prompts covering background, buying triggers, objections, and conversation openers. Used by sales teams closing high-ticket deals.',
+  keywords: [
+    'Claude AI sales research',
+    'Claude Code sales tool',
+    'Anthropic Claude prompts',
+    'AI prospect research',
+    'pre-meeting intelligence',
+    'sales preparation AI',
+    'Claude AI for business',
+    'AI sales assistant',
+  ],
   openGraph: {
-    title: 'The Pre-Meeting Intelligence System',
+    title: 'How to Research Any Sales Prospect Using Claude AI in 10 Minutes',
     description:
-      'How to build a 4-layer intelligence briefing on any prospect in under 10 minutes using Claude.',
+      'Four Claude AI prompts that build a complete prospect brief in under 10 minutes. Background, buying triggers, objections, conversation openers.',
     type: 'article',
     images: ['/images/blog/pre-meeting-hero.jpg'],
   },
