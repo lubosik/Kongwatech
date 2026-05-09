@@ -333,7 +333,7 @@ export default function ArticleContent({ company }: { company?: string }) {
           </h2>
 
           <p className="font-sans text-charcoal/80 text-base leading-relaxed mb-5">
-            A salesperson at a luxury residential firm once told me his team spent about four minutes on research before a call. Four minutes. Scan a name, pull up a LinkedIn, and they were ready.
+            A sales director at a high-ticket B2B firm once told me his team spent about four minutes on research before a call. Four minutes. Scan a name, pull up a LinkedIn, and they were ready.
           </p>
 
           <p className="font-sans text-charcoal/80 text-base leading-relaxed mb-5">
@@ -651,51 +651,51 @@ If the meeting goes well and I want to propose a next step, give me one sentence
             <div className="p-8 space-y-6">
               <div>
                 <p className="font-serif text-navy text-2xl mb-1">James Carter</p>
-                <p className="font-sans text-xs text-charcoal/50">Director of Sales | Carter Prime Properties, Dubai | Meeting: Friday 10am | Discovery Call</p>
+                <p className="font-sans text-xs text-charcoal/50">Director of Sales | Meridian Advisory Group, London | Meeting: Friday 10am | Discovery Call</p>
               </div>
               <div className="border-t border-navy/10 pt-6 space-y-5">
                 {[
                   {
                     label: 'Executive Summary',
-                    content: 'James has run sales at Carter Prime for 3 years after a decade in institutional brokerage. The firm has expanded aggressively into off-plan luxury, doubling team headcount in 18 months. He is under board pressure to improve speed-to-lead. They lost three deals last quarter to faster-responding competitors.',
+                    content: 'James has led sales at Meridian for 3 years after a decade in enterprise SaaS. The firm has grown from 40 to 90 consultants in 18 months, expanding into two new practice areas. He is under board pressure to improve pipeline quality and close velocity. They lost two major contracts last quarter to competitors who moved faster on proposals.',
                   },
                   {
                     label: 'Key Signals',
                     items: [
-                      'Posted on LinkedIn three weeks ago about losing a 4.8M off-plan lead to a competitor who called them back in minutes',
-                      'Company opened a new Jumeirah office and hired 6 additional closers in Q1 2026',
+                      'Posted on LinkedIn three weeks ago about losing a high-value contract to a competitor who responded to the brief two days faster',
+                      'Company opened a new Manchester office and added 8 senior consultants in Q1 2026',
                       'Reshared an article titled "Why CRM alone is not a sales strategy" with the comment "exactly this"',
-                      'Has been using HubSpot for 2 years. Likely frustrated by its limitations at their current scale',
-                      'Attended Dubai property expo last month. Company featured in Gulf News residential report',
+                      'Has been using HubSpot for 2 years. Likely frustrated by its limitations at their current headcount and deal complexity',
+                      'Spoke at a B2B growth summit last month. Referenced "inbound at scale" as the firm\'s biggest challenge for 2026',
                     ],
                   },
                   {
                     label: 'Likely Objections',
                     items: [
                       '"We already tried a call automation tool and the leads hated it." They likely tested a basic IVR, not a conversational AI.',
-                      '"My closers are protective of their pipeline and won\'t want AI involved." Real concern given how commission-driven the team is.',
-                      '"We need to trial it before we can commit to anything." Standard delay tactic when budget is soft.',
+                      '"My closers are protective of their pipeline and won\'t want AI involved." Real concern given how relationship-driven consulting sales tends to be.',
+                      '"We need to trial it before we can commit to anything." Standard delay tactic when budget approval requires a business case.',
                     ],
                   },
                   {
                     label: 'Conversation Openers',
                     items: [
-                      '"I saw your post about the lead you lost last quarter. That is exactly the problem we built AIRO to solve. Can I tell you what happened with another firm?"',
-                      '"You have doubled your team size in 18 months. The challenge at that stage is usually that closers spend too much time qualifying and not enough time closing."',
-                      '"You were at the expo last month. What was the mood on the floor? Are buyers moving, or is there more hesitation than 6 months ago?"',
+                      '"I saw your post about the contract you lost last quarter. That exact problem is what we built AIRO to solve. Can I tell you what happened with another firm in a similar position?"',
+                      '"You have nearly doubled headcount in 18 months. The challenge at that growth stage is usually that senior people spend too much time qualifying inbound rather than closing it."',
+                      '"You mentioned inbound at scale at the summit last month. What does your current process look like from the moment a lead comes in to the moment a closer picks it up?"',
                     ],
                   },
                   {
                     label: 'Things to Avoid',
                     items: [
-                      'Do not lead with technology. James is commercial, not technical. Lead with the business problem.',
-                      'Do not mention HubSpot as a weakness. He chose it and has his team on it.',
-                      'Do not ask generic qualifying questions. He will disengage immediately.',
+                      'Do not lead with technology. James is commercial, not technical. Lead with the business problem and the revenue impact.',
+                      'Do not mention HubSpot as a weakness. He chose it and has his team on it. Position AIRO as additive, not a replacement.',
+                      'Do not ask generic qualifying questions. He has been in enterprise sales for over a decade. He will disengage immediately.',
                     ],
                   },
                   {
                     label: 'Overall Assessment',
-                    content: 'James is a serious buyer. His public post signals active frustration with a specific, known problem. The team expansion means budget exists. His caution will be about disruption to his closers, not cost. Lead with the outcome and use the 576-buyer recovery case study early. He will respond to proof, not features.',
+                    content: 'James is a serious buyer. His public post signals active frustration with a specific, known problem. The firm\'s growth means budget exists and the problem is only getting bigger. His caution will be about disruption to his team, not cost. Lead with the outcome and get to proof early. He will respond to numbers, not features.',
                   },
                 ].map((sec) => (
                   <div key={sec.label} className="pb-5 border-b border-navy/8 last:border-b-0">
@@ -992,7 +992,7 @@ If the meeting goes well and I want to propose a next step, give me one sentence
             </div>
 
             <Callout>
-              The firms winning in luxury real estate right now are not just better prepared. They are faster. They have removed the human bottleneck from the first conversation entirely.
+              The teams winning high-ticket deals right now are not just better prepared. They are faster. They have removed the human bottleneck from the first conversation entirely.
             </Callout>
 
             {/* What AIRO is */}
@@ -1039,8 +1039,8 @@ If the meeting goes well and I want to propose a next step, give me one sentence
                       detail: 'AIRO handles leads at 2am on a Sunday with the same quality as a Monday morning. Your pipeline never sleeps.',
                     },
                     {
-                      cap: 'Built for luxury and high-value sales',
-                      detail: 'Real estate, financial services, high-ticket services. AIRO is calibrated for environments where deal size and tone both matter.',
+                      cap: 'Built for high-ticket, high-inbound sales',
+                      detail: 'Consulting, financial services, SaaS, recruitment, agencies. Any environment where deal size is significant and inbound volume creates a bottleneck.',
                     },
                     {
                       cap: 'Custom sales dashboard',
@@ -1066,7 +1066,7 @@ If the meeting goes well and I want to propose a next step, give me one sentence
               {[
                 {
                   result: '576 qualified buyers recovered',
-                  context: 'From a dead pipeline at a UK high-end residential firm over 14 months. Average deal size: 2.5 million per transaction. These were leads nobody planned to follow up on.',
+                  context: 'From a dead pipeline at a UK high-ticket sales firm over 14 months. Average deal size: 2.5 million per transaction. These were leads nobody planned to follow up on.',
                 },
                 {
                   result: '2 million in qualified pipeline in 24 hours',
