@@ -762,30 +762,56 @@ If the meeting goes well and I want to propose a next step, give me one sentence
           <div className="space-y-10">
 
             <div>
-              <p className="font-sans text-sm font-semibold text-navy mb-1">Step 1 — Install Claude Code</p>
-              <p className="font-sans text-sm text-charcoal/60 mb-3">One command. Copy, paste, hit Enter. That is it.</p>
+              <p className="font-sans text-sm font-semibold text-navy mb-1">Step 1 — Open your terminal</p>
+              <p className="font-sans text-sm text-charcoal/60 mb-3">Your terminal is a text window where you type commands. Here is how to open it.</p>
               <OSTabs
                 macContent={
-                  <MacTerminal lines={[
-                    { type: 'prompt', text: 'curl -fsSL https://claude.ai/install.sh | bash' },
-                    { type: 'output', text: 'Installing Claude Code...' },
-                    { type: 'output', text: 'Claude Code installed successfully.' },
-                    { type: 'comment', text: '# Done. Claude Code is now on your machine.' },
-                  ]} />
+                  <div className="my-0 border border-navy/10 bg-cream px-6 py-5 text-sm space-y-2">
+                    <p className="font-sans text-charcoal/80 leading-relaxed">
+                      Press <strong className="text-navy">Cmd + Space</strong> to open Spotlight Search. Type <strong className="text-navy">Terminal</strong> and press <strong className="text-navy">Enter</strong>. A window with a blinking cursor will appear. That is your terminal.
+                    </p>
+                  </div>
                 }
                 windowsContent={
-                  <WindowsTerminal lines={[
-                    { type: 'prompt', text: 'irm https://claude.ai/install.ps1 | iex' },
-                    { type: 'output', text: 'Installing Claude Code...' },
-                    { type: 'output', text: 'Claude Code installed successfully.' },
-                    { type: 'comment', text: '# Done. Open a new PowerShell window and type: claude' },
-                  ]} />
+                  <div className="my-0 border border-navy/10 bg-cream px-6 py-5 text-sm space-y-2">
+                    <p className="font-sans text-charcoal/80 leading-relaxed">
+                      Press <strong className="text-navy">Win + X</strong> and select <strong className="text-navy">Windows PowerShell</strong> (or Terminal) from the menu. A window starting with <code className="font-mono text-xs bg-navy/5 px-1">PS C:\Users\YourName&gt;</code> will appear. That is your terminal. If it says <code className="font-mono text-xs bg-navy/5 px-1">C:\</code> without the PS, you are in CMD — close it and open PowerShell instead.
+                    </p>
+                  </div>
                 }
               />
             </div>
 
             <div>
-              <p className="font-sans text-sm font-semibold text-navy mb-1">Step 2 — Log in with your Claude account</p>
+              <p className="font-sans text-sm font-semibold text-navy mb-1">Step 2 — Install Claude Code</p>
+              <p className="font-sans text-sm text-charcoal/60 mb-3">Copy the command below, paste it into your terminal, and press Enter. That is it.</p>
+              <OSTabs
+                macContent={
+                  <MacTerminal lines={[
+                    { type: 'comment', text: '# Paste this into Terminal and press Enter:' },
+                    { type: 'prompt', text: 'curl -fsSL https://claude.ai/install.sh | bash' },
+                    { type: 'output', text: 'Installing Claude Code...' },
+                    { type: 'output', text: 'Claude Code successfully installed!' },
+                    { type: 'comment', text: '# Done. Claude Code is now on your machine.' },
+                  ]} />
+                }
+                windowsContent={
+                  <WindowsTerminal lines={[
+                    { type: 'comment', text: '# Paste this into PowerShell and press Enter:' },
+                    { type: 'prompt', text: 'irm https://claude.ai/install.ps1 | iex' },
+                    { type: 'output', text: 'Installing Claude Code...' },
+                    { type: 'output', text: 'Claude Code successfully installed!' },
+                    { type: 'comment', text: '# Close PowerShell, open a new window, then type: claude' },
+                  ]} />
+                }
+              />
+              <p className="font-sans text-xs text-charcoal/50 mt-2">
+                On Mac, paste with <strong>Cmd + V</strong>. On Windows, paste with <strong>Ctrl + V</strong> or right-click inside the window.
+              </p>
+            </div>
+
+            <div>
+              <p className="font-sans text-sm font-semibold text-navy mb-1">Step 3 — Log in with your Claude account</p>
               <p className="font-sans text-sm text-charcoal/60 mb-3">
                 Run <InlineCode>claude</InlineCode> in your terminal. It opens a browser window to log in with your existing Claude.ai account. Takes 30 seconds. You only do this once.
               </p>
@@ -813,7 +839,7 @@ If the meeting goes well and I want to propose a next step, give me one sentence
             </div>
 
             <div>
-              <p className="font-sans text-sm font-semibold text-navy mb-1">Step 3 — Paste the master prompt</p>
+              <p className="font-sans text-sm font-semibold text-navy mb-1">Step 4 — Paste the master prompt</p>
               <p className="font-sans text-sm text-charcoal/60 mb-4">
                 Once Claude Code is open, paste this prompt. Fill in your prospect&apos;s details at the bottom. Claude runs all four research phases in one go and produces a formatted brief.
               </p>
@@ -862,21 +888,79 @@ If the meeting goes well and I want to propose a next step, give me one sentence
 
           </div>
 
+          {/* Personal CTA */}
+          <div className="my-16 border border-gold/40 bg-cream p-10">
+            <p className="font-sans text-xs tracking-[0.25em] uppercase text-gold mb-4">Want help running this?</p>
+            <h2 className="font-serif text-navy text-3xl lg:text-4xl leading-tight mb-4">
+              I will walk through this system with you, live on a call.
+            </h2>
+            <p className="font-sans text-charcoal/80 text-base leading-relaxed mb-3 max-w-xl">
+              If you want to get this running for your team and would rather not figure it out alone, I am happy to jump on a call with you. We go through the system together, build your first brief live, and make sure your team knows how to use it before we hang up.
+            </p>
+            <p className="font-sans text-charcoal/80 text-base leading-relaxed mb-8 max-w-xl">
+              No agency pitch. No slide deck. Just a working session that ends with your team actually prepared for their next meeting.
+            </p>
+            <a
+              href="https://cal.com/kongwatech/free-consultation"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block bg-navy text-white font-sans text-sm px-8 py-4 hover:bg-navy/85 transition-colors mb-4"
+            >
+              Book a Free Call with Lubosi
+            </a>
+            <p className="font-sans text-xs text-charcoal/40">15 minutes. Free. No commitment.</p>
+          </div>
+
           {/* AIRO full product section */}
           <div className="my-16 border-t border-navy/10 pt-16">
 
-            <span className="font-sans text-xs tracking-[0.25em] uppercase text-gold block mb-6">Introducing AIRO by Velto</span>
+            <span className="font-sans text-xs tracking-[0.25em] uppercase text-gold block mb-6">Take it further — AIRO by Velto</span>
 
             <h2 className="font-serif text-navy text-3xl lg:text-4xl mb-6 leading-tight">
-              The intelligence system gets you ready for the meeting. AIRO gets you to it.
+              The intelligence system gets you ready for the meeting. AIRO makes sure you get the meeting in the first place.
             </h2>
 
             <p className="font-sans text-charcoal/80 text-base leading-relaxed mb-5">
-              There is one problem this guide does not solve. It assumes you got the meeting. It assumes the lead came in, someone called them quickly, qualified them properly, and handed them to your closer with context.
+              There is one problem this guide does not solve. It assumes you got the meeting. It assumes the lead came in, someone called them quickly, qualified them properly, and handed them to your closer with full context.
             </p>
 
             <p className="font-sans text-charcoal/80 text-base leading-relaxed mb-5">
-              For most sales teams, that is not what happens. Leads come in. They sit in a CRM. Someone calls them when they get around to it. By then, the prospect has already spoken to someone else.
+              For most sales teams, that is not what happens.
+            </p>
+
+            {/* Problem framing */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-0 border border-navy/10 mb-8">
+              {[
+                {
+                  label: 'The follow-up problem',
+                  content: 'Leads come in. They sit in a CRM. Someone follows up when they get around to it. By then the prospect has already spoken to someone else and moved on.',
+                },
+                {
+                  label: 'The volume problem',
+                  content: 'Too many leads means your closers spend their day triaging instead of selling. The buyers get the same attention as the time-wasters. Both get lost.',
+                },
+                {
+                  label: 'The speed problem',
+                  content: 'Companies that respond within 5 minutes are 100 times more likely to connect than those who respond in 30. No human sales team can maintain that consistently.',
+                },
+                {
+                  label: 'The handover problem',
+                  content: 'Even when a lead is followed up quickly, the closer often receives no context. They go into the conversation blind, with no intelligence and no preparation.',
+                },
+              ].map((item) => (
+                <div key={item.label} className="p-7 border-b border-r border-navy/10 [&:nth-child(even)]:border-r-0 last:border-b-0 [&:nth-last-child(2)]:border-b-0">
+                  <span className="font-sans text-xs uppercase tracking-widest text-gold block mb-2">{item.label}</span>
+                  <p className="font-sans text-sm text-charcoal/80 leading-relaxed">{item.content}</p>
+                </div>
+              ))}
+            </div>
+
+            <Callout>
+              If you suffer from any of those problems, the intelligence system alone will not fix them. You need something upstream.
+            </Callout>
+
+            <p className="font-sans text-charcoal/80 text-base leading-relaxed mb-5">
+              I am in partnership with Velto, a UK AI product company. Together we built AIRO to solve exactly these problems. If you want to take this further and install an AI digital sales employee that has been proven across different industries, here is everything.
             </p>
 
             <div className="border border-navy/15 bg-cream p-8 mb-8">
@@ -899,7 +983,7 @@ If the meeting goes well and I want to propose a next step, give me one sentence
                     <p className="font-sans text-gold text-xs tracking-widest uppercase">By Velto</p>
                   </div>
                   <p className="font-sans text-white/50 text-sm max-w-sm leading-relaxed pt-1">
-                    A voice AI built for high-value sales environments. Developed by Velto, a UK AI product company, and brought to market through Kongwa Tech.
+                    A voice AI built for high-value sales environments. Developed by Velto, a UK AI product company. Brought to market in partnership with Kongwa Tech.
                   </p>
                 </div>
               </div>
@@ -936,6 +1020,14 @@ If the meeting goes well and I want to propose a next step, give me one sentence
                     {
                       cap: 'Built for luxury and high-value sales',
                       detail: 'Real estate, financial services, high-ticket services. AIRO is calibrated for environments where deal size and tone both matter.',
+                    },
+                    {
+                      cap: 'Custom sales dashboard',
+                      detail: 'The head of sales gets a live overview of the pipeline. Every lead, every conversation, every handover. Full visibility without chasing individual reps for updates.',
+                    },
+                    {
+                      cap: 'Complements your marketing team',
+                      detail: 'AIRO captures every inbound lead your marketing generates, responds immediately, and feeds qualified buyers into the pipeline. No lead falls through the gap between marketing and sales.',
                     },
                   ].map((item) => (
                     <div key={item.cap} className="p-6 border-b border-r border-navy/10 [&:nth-child(even)]:border-r-0 last:border-b-0 [&:nth-last-child(2)]:border-b-0">
@@ -1016,13 +1108,16 @@ If the meeting goes well and I want to propose a next step, give me one sentence
               <span className="font-sans text-xs text-white/40">In partnership with Kongwa Tech</span>
             </div>
             <h2 className="font-serif text-white text-3xl lg:text-4xl leading-tight mb-4">
-              See what happens when speed meets intelligence.
+              Find out if AIRO is a fit for your business.
             </h2>
             <p className="font-sans text-white/60 text-base leading-relaxed mb-3 max-w-lg">
-              The intelligence system in this guide is yours to use today. If you want to add the speed layer — so your team is always first to the lead and fully prepared when they get there — book a 20-minute call with us.
+              The intelligence system in this guide is yours to use today. If the problems above sound familiar and you want to go further, book a call with me and the Velto team.
+            </p>
+            <p className="font-sans text-white/60 text-base leading-relaxed mb-3 max-w-lg">
+              We will look at your pipeline, your current follow-up process, and your deal volume. Then we tell you honestly whether AIRO makes sense for your business and what it would recover.
             </p>
             <p className="font-sans text-white/60 text-base leading-relaxed mb-8 max-w-lg">
-              No pitch. No slide deck. We will run the numbers on your pipeline and show you exactly what AIRO would recover. You leave with clarity on whether it makes sense for your business.
+              No pitch. No slide deck. Just the numbers, and a straight answer on whether this is the right move for you right now.
             </p>
             <a
               href="https://airo.velto.ai"
@@ -1030,9 +1125,9 @@ If the meeting goes well and I want to propose a next step, give me one sentence
               rel="noopener noreferrer"
               className="inline-block bg-gold text-white font-sans text-sm px-8 py-4 hover:bg-gold-dark transition-colors mb-4"
             >
-              Book a Call at airo.velto.ai
+              Book a Call with Lubosi and the Velto Team
             </a>
-            <p className="font-sans text-xs text-white/30">No commitment. Just the numbers on your pipeline.</p>
+            <p className="font-sans text-xs text-white/30">No commitment. We tell you whether it is a fit before anything else.</p>
           </div>
 
           {/* Author note */}
@@ -1041,7 +1136,7 @@ If the meeting goes well and I want to propose a next step, give me one sentence
             <p className="font-serif text-navy text-lg leading-relaxed max-w-2xl italic">
               &ldquo;I built this guide because most sales teams are one good process away from a real improvement in their close rate. The intelligence system is that process. AIRO is the layer that lets you run it at scale, without adding headcount.&rdquo;
             </p>
-            <p className="font-sans text-sm text-charcoal/60 mt-4">Lubosi, Founder of AIRO by Velto</p>
+            <p className="font-sans text-sm text-charcoal/60 mt-4">Lubosi Kongwa, in partnership with Velto</p>
           </div>
 
           <div className="mt-12">
