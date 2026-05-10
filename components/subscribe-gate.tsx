@@ -14,6 +14,41 @@ export default function SubscribeGate({
   title = 'Unlock with Some Free Game',
   description = 'Sign in with your email, subscribe through beehiiv, and the full article unlocks here.',
 }: SubscribeGateProps) {
+  const clerkEnabled = Boolean(
+    process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY &&
+      !process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY.includes('replace_me')
+  )
+
+  if (!clerkEnabled) {
+    return (
+      <div className={compact ? 'space-y-3' : 'space-y-5'}>
+        <div>
+          <div className="flex items-center gap-2 mb-2">
+            <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-navy text-white" aria-hidden="true">
+              <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M16.5 10.5V7.5a4.5 4.5 0 0 0-9 0v3m-.75 0h10.5A1.75 1.75 0 0 1 19 12.25v6A1.75 1.75 0 0 1 17.25 20H6.75A1.75 1.75 0 0 1 5 18.25v-6a1.75 1.75 0 0 1 1.75-1.75Z" />
+              </svg>
+            </span>
+            <h3 className={`${compact ? 'text-lg' : 'text-2xl'} font-serif text-navy leading-tight`}>
+              {title}
+            </h3>
+          </div>
+          <p className={`${compact ? 'text-xs' : 'text-sm'} font-sans text-charcoal/65 leading-relaxed`}>
+            Some Free Game signup is being configured. Add the Clerk environment variables in Vercel to enable access.
+          </p>
+        </div>
+      </div>
+    )
+  }
+
+  return <ClerkSubscribeGate compact={compact} title={title} description={description} />
+}
+
+function ClerkSubscribeGate({
+  compact = false,
+  title = 'Unlock with Some Free Game',
+  description = 'Sign in with your email, subscribe through beehiiv, and the full article unlocks here.',
+}: SubscribeGateProps) {
   const { isSignedIn, user } = useUser()
   const [status, setStatus] = useState<'idle' | 'loading' | 'pending' | 'active' | 'error'>('idle')
   const [message, setMessage] = useState('')

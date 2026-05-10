@@ -104,35 +104,59 @@ const schemaOrg = {
   ],
 }
 
+const clerkPublishableKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY || ''
+const clerkEnabled = Boolean(
+  clerkPublishableKey &&
+    !clerkPublishableKey.includes('replace_me')
+)
+
+function AppShell({
+  children,
+  clerkEnabled,
+}: {
+  children: React.ReactNode
+  clerkEnabled: boolean
+}) {
+  return (
+    <>
+      {/* Google Analytics */}
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=G-NF7L5E1BKQ"
+        strategy="afterInteractive"
+      />
+      <Script id="gtag-init" strategy="afterInteractive">{`
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-NF7L5E1BKQ');
+      `}</Script>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaOrg) }}
+      />
+      <Script
+        src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js"
+        strategy="afterInteractive"
+      />
+      <Nav clerkEnabled={clerkEnabled} />
+      <main className="pt-16">{children}</main>
+      <Footer />
+      <PopupWrapper />
+    </>
+  )
+}
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en-GB" className={`${cormorant.variable} ${inter.variable}`}>
       <body>
-        <ClerkProvider>
-          {/* Google Analytics */}
-          <Script
-            src="https://www.googletagmanager.com/gtag/js?id=G-NF7L5E1BKQ"
-            strategy="afterInteractive"
-          />
-          <Script id="gtag-init" strategy="afterInteractive">{`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-NF7L5E1BKQ');
-          `}</Script>
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaOrg) }}
-          />
-          <Script
-            src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js"
-            strategy="afterInteractive"
-          />
-          <Nav />
-          <main className="pt-16">{children}</main>
-          <Footer />
-          <PopupWrapper />
-        </ClerkProvider>
+        {clerkEnabled ? (
+          <ClerkProvider>
+            <AppShell clerkEnabled={clerkEnabled}>{children}</AppShell>
+          </ClerkProvider>
+        ) : (
+          <AppShell clerkEnabled={clerkEnabled}>{children}</AppShell>
+        )}
       </body>
     </html>
   )
