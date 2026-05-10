@@ -53,8 +53,8 @@ export default function LockedPreMeetingTeaser() {
             <div className="absolute inset-0 flex items-center justify-center bg-white/85 p-6">
               <div className="w-full max-w-xl bg-white p-6 shadow-sm ring-1 ring-gray-100">
                 <SubscribeGate
-                  title="Subscribe to unlock the full system"
-                  description="The prompts, examples, and implementation walkthrough are free for confirmed Kongwa Tech newsletter subscribers."
+                  title="Subscribe to Some Free Game"
+                  description="The prompts, examples, and implementation walkthrough are free for confirmed Some Free Game subscribers."
                 />
               </div>
             </div>

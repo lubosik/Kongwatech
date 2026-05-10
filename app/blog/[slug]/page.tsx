@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import SubscribeGate from '@/components/subscribe-gate'
 import { fetchPostBySlug, fetchAllPosts, formatDate, categoryLabel } from '@/lib/blog-utils'
+import { verifyLeadMagnetToken } from '@/lib/lead-magnet-access'
 import { isCurrentVisitorSubscribed } from '@/lib/subscriber-session'
 
 export const dynamic = 'force-dynamic'
@@ -23,8 +24,15 @@ export async function generateMetadata({
   }
 }
 
-export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function BlogPostPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ slug: string }>
+  searchParams: Promise<{ access?: string }>
+}) {
   const { slug } = await params
+  const { access } = await searchParams
   const post = await fetchPostBySlug(slug)
   if (!post) notFound()
 
@@ -50,7 +58,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
   const paragraphs = post.content.split('\n').filter(Boolean)
   const midpoint = Math.max(2, Math.floor(paragraphs.length / 2))
-  const isSubscribed = await isCurrentVisitorSubscribed()
+  const hasLeadMagnetAccess = verifyLeadMagnetToken(access, slug)
+  const isSubscribed = hasLeadMagnetAccess || await isCurrentVisitorSubscribed()
   const teaserParagraphs = paragraphs.filter(para => !para.startsWith('## ') && !para.startsWith('### ')).slice(0, 2)
 
   return (
@@ -198,8 +207,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 <div className="absolute inset-0 flex items-center justify-center bg-white/85 p-6">
                   <div className="w-full max-w-xl bg-white p-6 shadow-sm ring-1 ring-gray-100">
                     <SubscribeGate
-                      title="Subscribe to keep reading"
-                      description="The full Some Free Game archive is free for confirmed Kongwa Tech newsletter subscribers."
+                      title="Subscribe to Some Free Game"
+                      description="The full archive is free for confirmed Some Free Game subscribers."
                     />
                   </div>
                 </div>

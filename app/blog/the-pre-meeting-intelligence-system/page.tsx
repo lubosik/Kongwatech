@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import ArticleContent from './article-content'
 import LockedPreMeetingTeaser from './locked-teaser'
+import { verifyLeadMagnetToken } from '@/lib/lead-magnet-access'
 import { isCurrentVisitorSubscribed } from '@/lib/subscriber-session'
 
 export const dynamic = 'force-dynamic'
@@ -28,7 +29,13 @@ export const metadata: Metadata = {
   },
 }
 
-export default async function PreMeetingArticlePage() {
-  const isSubscribed = await isCurrentVisitorSubscribed()
+export default async function PreMeetingArticlePage({
+  searchParams,
+}: {
+  searchParams: Promise<{ access?: string }>
+}) {
+  const { access } = await searchParams
+  const hasLeadMagnetAccess = verifyLeadMagnetToken(access, 'the-pre-meeting-intelligence-system')
+  const isSubscribed = hasLeadMagnetAccess || await isCurrentVisitorSubscribed()
   return isSubscribed ? <ArticleContent /> : <LockedPreMeetingTeaser />
 }

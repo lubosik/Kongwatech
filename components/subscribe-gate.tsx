@@ -11,7 +11,7 @@ interface SubscribeGateProps {
 
 export default function SubscribeGate({
   compact = false,
-  title = 'Unlock with the free Kongwa Tech newsletter',
+  title = 'Unlock with Some Free Game',
   description = 'Sign in with your email, subscribe through beehiiv, and the full article unlocks here.',
 }: SubscribeGateProps) {
   const { isSignedIn, user } = useUser()
@@ -43,7 +43,7 @@ export default function SubscribeGate({
 
       if (!silent) {
         setStatus('pending')
-        setMessage("Your Clerk email is signed in, but beehiiv is not active yet. Subscribe or confirm your beehiiv email, then try again.")
+        setMessage("Your Clerk email is signed in, but your Some Free Game subscription is not active yet. Subscribe or confirm your beehiiv email, then try again.")
       }
     } catch (error) {
       if (!silent) {
@@ -80,7 +80,7 @@ export default function SubscribeGate({
       }
 
       setStatus('pending')
-      setMessage("Check your inbox to confirm your beehiiv subscription, then come back and click 'I've confirmed'.")
+      setMessage("Check your inbox to confirm your Some Free Game subscription, then come back and click 'I've confirmed'.")
     } catch (error) {
       setStatus('error')
       setMessage(error instanceof Error ? error.message : 'Something went wrong')

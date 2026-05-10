@@ -339,7 +339,7 @@ export default async function HomePage() {
             <div className="border border-gray-100 bg-cream p-8">
               <SubscribeGate
                 title="Subscribe free"
-                description="Create a verified account, join the Kongwa Tech beehiiv list, and receive the free guides by email."
+                description="Create a verified account, join Some Free Game, and receive the free guides by email."
               />
             </div>
           </div>

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import ArticleContent from '../article-content'
 import LockedPreMeetingTeaser from '../locked-teaser'
+import { verifyLeadMagnetToken } from '@/lib/lead-magnet-access'
 import { isCurrentVisitorSubscribed } from '@/lib/subscriber-session'
 
 export const dynamic = 'force-dynamic'
@@ -30,10 +31,14 @@ export async function generateMetadata({
 
 export default async function PersonalisedArticlePage({
   params,
+  searchParams,
 }: {
   params: Promise<{ company: string }>
+  searchParams: Promise<{ access?: string }>
 }) {
   const { company } = await params
-  const isSubscribed = await isCurrentVisitorSubscribed()
+  const { access } = await searchParams
+  const hasLeadMagnetAccess = verifyLeadMagnetToken(access, 'the-pre-meeting-intelligence-system')
+  const isSubscribed = hasLeadMagnetAccess || await isCurrentVisitorSubscribed()
   return isSubscribed ? <ArticleContent company={company} /> : <LockedPreMeetingTeaser />
 }
