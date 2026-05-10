@@ -1,5 +1,9 @@
 import type { Metadata } from 'next'
 import ArticleContent from '../article-content'
+import LockedPreMeetingTeaser from '../locked-teaser'
+import { isCurrentVisitorSubscribed } from '@/lib/subscriber-session'
+
+export const dynamic = 'force-dynamic'
 
 export async function generateMetadata({
   params,
@@ -23,10 +27,11 @@ export async function generateMetadata({
   }
 }
 
-export default function PersonalisedArticlePage({
+export default async function PersonalisedArticlePage({
   params,
 }: {
   params: { company: string }
 }) {
-  return <ArticleContent company={params.company} />
+  const isSubscribed = await isCurrentVisitorSubscribed()
+  return isSubscribed ? <ArticleContent company={params.company} /> : <LockedPreMeetingTeaser />
 }

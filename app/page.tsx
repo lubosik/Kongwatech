@@ -3,7 +3,12 @@ import Image from 'next/image'
 import Link from 'next/link'
 import ServiceCard from '@/components/service-card'
 import BlogCard from '@/components/blog-card'
+import SubscribeGate from '@/components/subscribe-gate'
 import { fetchAllPosts } from '@/lib/blog-utils'
+import { freeResources } from '@/lib/resources'
+import { isCurrentVisitorSubscribed } from '@/lib/subscriber-session'
+
+export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
   title: 'Kongwa Tech | Boutique AI Consultancy | Rochester, Kent',
@@ -44,6 +49,7 @@ const stats = [
 export default async function HomePage() {
   const posts = await fetchAllPosts()
   const featuredPosts = posts.slice(0, 3)
+  const isSubscribed = await isCurrentVisitorSubscribed()
 
   return (
     <>
@@ -309,7 +315,7 @@ export default async function HomePage() {
       </section>
 
       {/* Free Resources */}
-      <section className="py-24 bg-white">
+      <section id="free-resources" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="text-center mb-16">
             <span className="text-gold font-sans text-xs tracking-[0.3em] uppercase">Free Resources</span>
@@ -317,64 +323,48 @@ export default async function HomePage() {
               Practical AI intelligence.
             </h2>
             <p className="text-charcoal/60 font-sans text-base max-w-md mx-auto">
-              Frameworks, playbooks, and systems. Free on Notion. No strings attached.
+              Frameworks, playbooks, and systems. Free for active Kongwa Tech subscribers.
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {[
-              {
-                emoji: '🎬',
-                title: 'Viral TikTok Clip Formula',
-                desc: 'The exact framework I use to identify, cut, and position clips for maximum views.',
-                cta: 'Open Formula',
-                href: 'https://www.notion.so/Lubosi-s-Personal-Viral-Clip-Identification-Formula-3304cf7f59e680af9d0af431469a9477?source=copy_link',
-              },
-              {
-                emoji: '🔍',
-                title: 'SEO Strategy Playbook',
-                desc: 'How I generated 130K impressions across 3 sites in months. Site structure, content, and indexing.',
-                cta: 'Open Strategy',
-                href: 'https://www.notion.so/Lubosi-s-SEO-Content-Strategy-3304cf7f59e680aebd55c6d2ccc35700?source=copy_link',
-              },
-              {
-                emoji: '🤖',
-                title: 'Prompt Engineering Guide',
-                desc: 'My personal prompt system for building AI agents that actually work in production.',
-                cta: 'Open Playbook',
-                href: 'https://www.notion.so/The-Prompt-Engineering-Playbook-2216d05e192c8064b3a5fa3d79a8fd1c?source=copy_link',
-              },
-              {
-                emoji: '🖼️',
-                title: 'Hyper-Realistic AI Image Guide',
-                desc: 'My complete system for generating photorealistic AI images. Models, prompts, settings, and workflows.',
-                cta: 'Open Guide',
-                href: 'https://www.notion.so/COMPLETE-GUIDE-GENERATING-HYPER-REALISTIC-AI-IMAGES-2fd4cf7f59e680f7ba33c5d130dc951a?source=copy_link',
-              },
-              {
-                emoji: '🎥',
-                title: 'Hyper-Realistic AI Video Guide',
-                desc: 'The full playbook for creating AI video content that looks and feels real. Tools, pipelines, and prompts.',
-                cta: 'Open Guide',
-                href: 'https://www.notion.so/COMPLETE-GUIDE-GENERATING-HYPER-REALISTIC-AI-VIDEOS-2fd4cf7f59e6807b9284cdfb6405ad34?source=copy_link',
-              },
-            ].map(r => (
-              <a
+            {freeResources.map(r => (
+              <article
                 key={r.title}
-                href={r.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group border border-gray-100 p-7 hover:border-gold hover:shadow-sm transition-all duration-200 flex flex-col bg-white"
+                className="group relative overflow-hidden border border-gray-100 bg-white p-7 transition-all duration-200 hover:border-gold hover:shadow-sm"
               >
-                <span className="text-2xl mb-4" aria-hidden="true">{r.emoji}</span>
-                <h3 className="font-serif text-navy text-lg mb-2 group-hover:text-gold transition-colors leading-snug">{r.title}</h3>
-                <p className="text-sm text-charcoal/60 font-sans leading-relaxed mb-6 flex-1">{r.desc}</p>
-                <span className="inline-flex items-center gap-2 text-xs font-sans text-gold uppercase tracking-widest group-hover:gap-3 transition-all">
-                  {r.cta}
-                  <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </span>
-              </a>
+                <div className={!isSubscribed ? 'blur-[2px]' : ''}>
+                  <span className="text-2xl mb-4 block" aria-hidden="true">{r.emoji}</span>
+                  <h3 className="font-serif text-navy text-lg mb-2 group-hover:text-gold transition-colors leading-snug">{r.title}</h3>
+                  <p className="text-sm text-charcoal/60 font-sans leading-relaxed mb-6">{r.desc}</p>
+                  {isSubscribed ? (
+                    <a
+                      href={`/api/resources/${r.id}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-xs font-sans text-gold uppercase tracking-widest group-hover:gap-3 transition-all"
+                    >
+                      {r.cta}
+                      <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
+                    </a>
+                  ) : (
+                    <span className="inline-flex items-center gap-2 text-xs font-sans text-charcoal/35 uppercase tracking-widest">
+                      Locked
+                    </span>
+                  )}
+                </div>
+
+                {!isSubscribed && (
+                  <div className="mt-6 border-t border-gray-100 pt-6">
+                    <SubscribeGate
+                      compact
+                      title="Subscribe to unlock"
+                      description="Active subscribers can open this guide instantly."
+                    />
+                  </div>
+                )}
+              </article>
             ))}
           </div>
         </div>

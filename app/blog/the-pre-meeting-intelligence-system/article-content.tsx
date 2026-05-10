@@ -1,19 +1,7 @@
-'use client'
-
-import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
 function PromptBox({ label, prompt }: { label: string; prompt: string }) {
-  const [copied, setCopied] = useState(false)
-
-  function copy() {
-    navigator.clipboard.writeText(prompt).then(() => {
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2200)
-    })
-  }
-
   return (
     <div className="my-8 border border-navy/20 overflow-hidden">
       <div className="flex items-center justify-between px-5 py-3 bg-navy">
@@ -21,14 +9,7 @@ function PromptBox({ label, prompt }: { label: string; prompt: string }) {
           <span className="w-2 h-2 rounded-full bg-gold" />
           <span className="font-sans text-xs text-white/60 tracking-widest uppercase">{label}</span>
         </div>
-        <button
-          onClick={copy}
-          className={`font-sans text-xs px-4 py-1.5 transition-all ${
-            copied ? 'bg-green-600 text-white' : 'bg-gold text-white hover:bg-gold-dark'
-          }`}
-        >
-          {copied ? 'Copied!' : 'Copy Prompt'}
-        </button>
+        <span className="font-sans text-xs px-4 py-1.5 bg-gold text-white">Prompt</span>
       </div>
       <pre className="p-6 bg-[#0A1628] text-[#7AAEFF] font-mono text-sm leading-relaxed whitespace-pre-wrap break-words overflow-x-auto">
         {prompt}
@@ -167,28 +148,20 @@ function OSTabs({
   macContent: React.ReactNode
   windowsContent: React.ReactNode
 }) {
-  const [os, setOs] = useState<'mac' | 'windows'>('mac')
   return (
     <div className="my-8">
       <div className="flex border-b border-navy/20 mb-0">
-        <button
-          onClick={() => setOs('mac')}
-          className={`font-sans text-xs px-6 py-2.5 tracking-wide transition-colors border-b-2 ${
-            os === 'mac' ? 'border-gold text-navy font-medium' : 'border-transparent text-charcoal/40 hover:text-navy'
-          }`}
-        >
+        <div className="font-sans text-xs px-6 py-2.5 tracking-wide border-b-2 border-gold text-navy font-medium">
           Mac
-        </button>
-        <button
-          onClick={() => setOs('windows')}
-          className={`font-sans text-xs px-6 py-2.5 tracking-wide transition-colors border-b-2 ${
-            os === 'windows' ? 'border-gold text-navy font-medium' : 'border-transparent text-charcoal/40 hover:text-navy'
-          }`}
-        >
-          Windows
-        </button>
+        </div>
       </div>
-      {os === 'mac' ? macContent : windowsContent}
+      {macContent}
+      <div className="flex border-b border-navy/20 mb-0 mt-8">
+        <div className="font-sans text-xs px-6 py-2.5 tracking-wide border-b-2 border-gold text-navy font-medium">
+          Windows
+        </div>
+      </div>
+      {windowsContent}
     </div>
   )
 }

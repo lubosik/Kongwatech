@@ -2,12 +2,11 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
+import SubscribeGate from '@/components/subscribe-gate'
 import { fetchPostBySlug, fetchAllPosts, formatDate, categoryLabel } from '@/lib/blog-utils'
+import { isCurrentVisitorSubscribed } from '@/lib/subscriber-session'
 
-export async function generateStaticParams() {
-  const posts = await fetchAllPosts()
-  return posts.map(p => ({ slug: p.slug }))
-}
+export const dynamic = 'force-dynamic'
 
 export async function generateMetadata({
   params,
@@ -49,6 +48,8 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
 
   const paragraphs = post.content.split('\n').filter(Boolean)
   const midpoint = Math.max(2, Math.floor(paragraphs.length / 2))
+  const isSubscribed = await isCurrentVisitorSubscribed()
+  const teaserParagraphs = paragraphs.filter(para => !para.startsWith('## ') && !para.startsWith('### ')).slice(0, 2)
 
   return (
     <>
@@ -98,8 +99,9 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
       {/* Article body */}
       <section className="py-16 bg-white">
         <div className="max-w-3xl mx-auto px-6 lg:px-12">
-          <div className="prose prose-lg max-w-none prose-headings:font-serif prose-headings:text-navy prose-a:text-gold prose-strong:text-navy">
-            {paragraphs.map((para, i) => {
+          {isSubscribed ? (
+            <div className="prose prose-lg max-w-none prose-headings:font-serif prose-headings:text-navy prose-a:text-gold prose-strong:text-navy">
+              {paragraphs.map((para, i) => {
               const midCta = i === midpoint ? (
                 <div key={`mid-cta-${i}`} className="not-prose my-12 bg-cream border-l-4 border-gold p-8">
                   <p className="font-serif text-navy text-2xl mb-3">
@@ -174,11 +176,37 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                   {rendered}
                 </div>
               )
-            })}
-          </div>
+              })}
+            </div>
+          ) : (
+            <div>
+              <div className="prose prose-lg max-w-none prose-headings:font-serif prose-headings:text-navy prose-strong:text-navy">
+                {teaserParagraphs.map((para, index) => (
+                  <p key={index}>{para}</p>
+                ))}
+              </div>
+              <div className="relative mt-8 overflow-hidden border border-gray-100 bg-white">
+                <div className="h-44 select-none space-y-4 p-8 blur-[3px]" aria-hidden="true">
+                  <div className="h-5 w-3/4 bg-charcoal/10" />
+                  <div className="h-4 w-full bg-charcoal/10" />
+                  <div className="h-4 w-11/12 bg-charcoal/10" />
+                  <div className="h-4 w-5/6 bg-charcoal/10" />
+                  <div className="h-4 w-full bg-charcoal/10" />
+                </div>
+                <div className="absolute inset-0 flex items-center justify-center bg-white/85 p-6">
+                  <div className="w-full max-w-xl bg-white p-6 shadow-sm ring-1 ring-gray-100">
+                    <SubscribeGate
+                      title="Subscribe to keep reading"
+                      description="The full Some Free Game archive is free for confirmed Kongwa Tech newsletter subscribers."
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
 
           {/* End-article CTA */}
-          <div className="mt-16 bg-navy p-8">
+          {isSubscribed && <div className="mt-16 bg-navy p-8">
             <p className="font-serif text-navy text-2xl mb-3">
               <span className="text-white">Build the AI environment your business actually needs.</span>
             </p>
@@ -191,7 +219,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
             >
               Apply to Work with Lubosi
             </Link>
-          </div>
+          </div>}
         </div>
       </section>
 

@@ -1,5 +1,9 @@
 import type { Metadata } from 'next'
 import ArticleContent from './article-content'
+import LockedPreMeetingTeaser from './locked-teaser'
+import { isCurrentVisitorSubscribed } from '@/lib/subscriber-session'
+
+export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
   title: 'How to Research Any Sales Prospect Using Claude AI in 10 Minutes | Kongwa Tech',
@@ -24,6 +28,7 @@ export const metadata: Metadata = {
   },
 }
 
-export default function PreMeetingArticlePage() {
-  return <ArticleContent />
+export default async function PreMeetingArticlePage() {
+  const isSubscribed = await isCurrentVisitorSubscribed()
+  return isSubscribed ? <ArticleContent /> : <LockedPreMeetingTeaser />
 }
