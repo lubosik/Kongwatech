@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
+import { Show, SignInButton, SignUpButton, UserButton } from '@clerk/nextjs'
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false)
@@ -40,6 +41,23 @@ export default function Nav() {
         </nav>
 
         <div className="flex items-center gap-4">
+          <Show when="signed-out">
+            <SignInButton mode="modal">
+              <button className="hidden md:inline-block text-sm font-sans text-charcoal hover:text-navy transition-colors">
+                Sign in
+              </button>
+            </SignInButton>
+            <SignUpButton mode="modal">
+              <button className="hidden md:inline-block bg-navy text-white text-sm font-sans px-6 py-2.5 hover:bg-navy-light transition-colors">
+                Subscribe
+              </button>
+            </SignUpButton>
+          </Show>
+          <Show when="signed-in">
+            <div className="hidden md:block">
+              <UserButton />
+            </div>
+          </Show>
           <Link
             href="/apply"
             className="hidden md:inline-block bg-gold text-white text-sm font-sans px-6 py-2.5 hover:bg-gold-dark transition-colors"
@@ -70,6 +88,24 @@ export default function Nav() {
           <Link href="/team" className="text-base font-sans text-charcoal" onClick={() => setOpen(false)}>Team</Link>
           <Link href="/partners" className="text-base font-sans text-charcoal" onClick={() => setOpen(false)}>Partners</Link>
           <Link href="/blog" className="text-base font-sans text-charcoal" onClick={() => setOpen(false)}>Some Free Game</Link>
+          <Show when="signed-out">
+            <SignUpButton mode="modal">
+              <button className="bg-navy text-white text-sm font-sans px-6 py-3 text-center" onClick={() => setOpen(false)}>
+                Subscribe
+              </button>
+            </SignUpButton>
+            <SignInButton mode="modal">
+              <button className="border border-navy text-navy text-sm font-sans px-6 py-3 text-center" onClick={() => setOpen(false)}>
+                Sign in
+              </button>
+            </SignInButton>
+          </Show>
+          <Show when="signed-in">
+            <div className="flex items-center gap-3">
+              <UserButton />
+              <span className="font-sans text-sm text-charcoal/60">Signed in</span>
+            </div>
+          </Show>
           <Link href="/apply" className="bg-gold text-white text-sm font-sans px-6 py-3 text-center" onClick={() => setOpen(false)}>Apply Now</Link>
         </div>
       )}

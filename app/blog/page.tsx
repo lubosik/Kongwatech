@@ -22,10 +22,11 @@ const categories = [
 export default async function BlogPage({
   searchParams,
 }: {
-  searchParams: { category?: string }
+  searchParams: Promise<{ category?: string }>
 }) {
   const posts = await fetchAllPosts()
-  const activeCategory = searchParams.category || 'all'
+  const resolvedSearchParams = await searchParams
+  const activeCategory = resolvedSearchParams.category || 'all'
   const filtered =
     activeCategory === 'all'
       ? posts

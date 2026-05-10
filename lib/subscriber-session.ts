@@ -1,94 +1,35 @@
-import { createHmac, timingSafeEqual } from 'crypto'
-import { cookies } from 'next/headers'
+import { auth, clerkClient } from '@clerk/nextjs/server'
 import { isBeehiivSubscriberActive, normalizeEmail } from './beehiiv'
 
-export const SUBSCRIBER_COOKIE = 'kongwa_subscriber'
-const SESSION_MAX_AGE_SECONDS = 60 * 60 * 24 * 30
-
-function base64UrlEncode(value: string) {
-  return Buffer.from(value, 'utf8').toString('base64url')
+interface ClerkEmailAddress {
+  id: string
+  emailAddress: string
+  verification?: {
+    status?: string
+  } | null
 }
 
-function base64UrlDecode(value: string) {
-  return Buffer.from(value, 'base64url').toString('utf8')
+function isVerifiedEmail(email: ClerkEmailAddress) {
+  return email.verification?.status === 'verified'
 }
 
-function getSigningSecret() {
-  const secret = process.env.SUBSCRIBER_SESSION_SECRET || process.env.BEEHIIV_API_KEY
-  if (!secret) throw new Error('Missing subscriber session signing secret')
-  return secret
-}
+export async function getCurrentVerifiedSubscriberEmail() {
+  const { isAuthenticated, userId } = await auth()
+  if (!isAuthenticated || !userId) return null
 
-function sign(payload: string) {
-  return createHmac('sha256', getSigningSecret()).update(payload).digest('base64url')
-}
+  const client = await clerkClient()
+  const user = await client.users.getUser(userId)
+  const emailAddresses = user.emailAddresses as ClerkEmailAddress[]
+  const primaryEmail = emailAddresses.find(email => email.id === user.primaryEmailAddressId)
+  const verifiedEmail = primaryEmail && isVerifiedEmail(primaryEmail)
+    ? primaryEmail
+    : emailAddresses.find(isVerifiedEmail)
 
-function safeCompare(a: string, b: string) {
-  const left = Buffer.from(a)
-  const right = Buffer.from(b)
-  return left.length === right.length && timingSafeEqual(left, right)
-}
-
-export function createSubscriberToken(email: string) {
-  const payload = JSON.stringify({
-    email: normalizeEmail(email),
-    exp: Math.floor(Date.now() / 1000) + SESSION_MAX_AGE_SECONDS,
-  })
-  const encodedPayload = base64UrlEncode(payload)
-  return `${encodedPayload}.${sign(encodedPayload)}`
-}
-
-export function verifySubscriberToken(token?: string) {
-  if (!token) return null
-
-  const [encodedPayload, signature] = token.split('.')
-  if (!encodedPayload || !signature || !safeCompare(signature, sign(encodedPayload))) {
-    return null
-  }
-
-  try {
-    const payload = JSON.parse(base64UrlDecode(encodedPayload)) as {
-      email?: string
-      exp?: number
-    }
-
-    if (!payload.email || !payload.exp || payload.exp < Math.floor(Date.now() / 1000)) {
-      return null
-    }
-
-    return { email: normalizeEmail(payload.email) }
-  } catch {
-    return null
-  }
-}
-
-export function setSubscriberCookie(email: string) {
-  cookies().set(SUBSCRIBER_COOKIE, createSubscriberToken(email), {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'lax',
-    path: '/',
-    maxAge: SESSION_MAX_AGE_SECONDS,
-  })
-}
-
-export function clearSubscriberCookie() {
-  cookies().set(SUBSCRIBER_COOKIE, '', {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'lax',
-    path: '/',
-    maxAge: 0,
-  })
-}
-
-export function getSubscriberEmailFromCookie() {
-  const token = cookies().get(SUBSCRIBER_COOKIE)?.value
-  return verifySubscriberToken(token)?.email ?? null
+  return verifiedEmail ? normalizeEmail(verifiedEmail.emailAddress) : null
 }
 
 export async function isCurrentVisitorSubscribed() {
-  const email = getSubscriberEmailFromCookie()
+  const email = await getCurrentVerifiedSubscriberEmail()
   if (!email) return false
 
   try {

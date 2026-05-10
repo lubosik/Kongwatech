@@ -1,29 +1,25 @@
 'use client'
 
-import { FormEvent, useCallback, useEffect, useState } from 'react'
-
-const STORAGE_KEY = 'kongwa_subscriber_email'
+import { useCallback, useEffect, useState } from 'react'
+import { Show, SignInButton, SignUpButton, UserButton, useUser } from '@clerk/nextjs'
 
 interface SubscribeGateProps {
   compact?: boolean
   title?: string
   description?: string
-  onUnlocked?: () => void
 }
 
 export default function SubscribeGate({
   compact = false,
   title = 'Unlock with the free Kongwa Tech newsletter',
-  description = 'Enter your email, confirm the beehiiv email if prompted, and the full guide unlocks here.',
-  onUnlocked,
+  description = 'Sign in with your email, subscribe through beehiiv, and the full article unlocks here.',
 }: SubscribeGateProps) {
-  const [email, setEmail] = useState('')
+  const { isSignedIn, user } = useUser()
   const [status, setStatus] = useState<'idle' | 'loading' | 'pending' | 'active' | 'error'>('idle')
   const [message, setMessage] = useState('')
 
-  const checkSubscription = useCallback(async (emailToCheck: string, silent = false) => {
-    const normalized = emailToCheck.trim().toLowerCase()
-    if (!normalized) return
+  const checkSubscription = useCallback(async (silent = false) => {
+    if (!isSignedIn) return
 
     if (!silent) {
       setStatus('loading')
@@ -31,9 +27,7 @@ export default function SubscribeGate({
     }
 
     try {
-      const response = await fetch(`/api/check-subscription?email=${encodeURIComponent(normalized)}`, {
-        cache: 'no-store',
-      })
+      const response = await fetch('/api/check-subscription', { cache: 'no-store' })
       const payload = await response.json()
 
       if (!response.ok) {
@@ -41,17 +35,15 @@ export default function SubscribeGate({
       }
 
       if (payload.subscribed) {
-        localStorage.setItem(STORAGE_KEY, normalized)
         setStatus('active')
         setMessage('Subscription confirmed. Unlocking now.')
-        onUnlocked?.()
         window.location.reload()
         return
       }
 
       if (!silent) {
         setStatus('pending')
-        setMessage("We could not verify an active subscription yet. Confirm your email, then try again.")
+        setMessage("Your Clerk email is signed in, but beehiiv is not active yet. Subscribe or confirm your beehiiv email, then try again.")
       }
     } catch (error) {
       if (!silent) {
@@ -59,26 +51,13 @@ export default function SubscribeGate({
         setMessage(error instanceof Error ? error.message : 'Something went wrong')
       }
     }
-  }, [onUnlocked])
+  }, [isSignedIn])
 
   useEffect(() => {
-    const storedEmail = localStorage.getItem(STORAGE_KEY)
-    if (storedEmail) {
-      setEmail(storedEmail)
-      checkSubscription(storedEmail, true)
-    }
+    checkSubscription(true)
   }, [checkSubscription])
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault()
-    const normalized = email.trim().toLowerCase()
-
-    if (!normalized) {
-      setStatus('error')
-      setMessage('Enter your email address.')
-      return
-    }
-
+  async function subscribe() {
     setStatus('loading')
     setMessage('')
 
@@ -86,7 +65,6 @@ export default function SubscribeGate({
       const response = await fetch('/api/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: normalized }),
       })
       const payload = await response.json()
 
@@ -94,18 +72,15 @@ export default function SubscribeGate({
         throw new Error(payload.error || 'Unable to subscribe')
       }
 
-      localStorage.setItem(STORAGE_KEY, normalized)
-
       if (payload.status === 'active') {
         setStatus('active')
         setMessage('Subscription confirmed. Unlocking now.')
-        onUnlocked?.()
         window.location.reload()
         return
       }
 
       setStatus('pending')
-      setMessage("Check your inbox to confirm your subscription, then come back and click 'I've confirmed'.")
+      setMessage("Check your inbox to confirm your beehiiv subscription, then come back and click 'I've confirmed'.")
     } catch (error) {
       setStatus('error')
       setMessage(error instanceof Error ? error.message : 'Something went wrong')
@@ -113,6 +88,7 @@ export default function SubscribeGate({
   }
 
   const isLoading = status === 'loading'
+  const email = user?.primaryEmailAddress?.emailAddress
 
   return (
     <div className={compact ? 'space-y-3' : 'space-y-5'}>
@@ -132,36 +108,49 @@ export default function SubscribeGate({
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
-        <input
-          type="email"
-          value={email}
-          onChange={event => setEmail(event.target.value)}
-          placeholder="you@example.com"
-          autoComplete="email"
-          className="min-w-0 flex-1 border border-gray-200 bg-white px-4 py-3 font-sans text-sm text-charcoal outline-none transition-colors placeholder:text-charcoal/35 focus:border-gold"
-          disabled={isLoading}
-          required
-        />
-        <button
-          type="submit"
-          disabled={isLoading}
-          className="bg-gold px-5 py-3 font-sans text-sm text-white transition-colors hover:bg-gold-dark disabled:cursor-not-allowed disabled:bg-gold/60"
-        >
-          {isLoading ? 'Checking...' : 'Subscribe'}
-        </button>
-      </form>
+      <Show when="signed-out">
+        <div className="flex flex-col sm:flex-row gap-3">
+          <SignUpButton mode="modal">
+            <button className="bg-gold px-5 py-3 font-sans text-sm text-white transition-colors hover:bg-gold-dark">
+              Sign up free
+            </button>
+          </SignUpButton>
+          <SignInButton mode="modal">
+            <button className="border border-navy px-5 py-3 font-sans text-sm text-navy transition-colors hover:bg-navy hover:text-white">
+              I already signed up
+            </button>
+          </SignInButton>
+        </div>
+      </Show>
 
-      {status === 'pending' && (
-        <button
-          type="button"
-          onClick={() => checkSubscription(email)}
-          disabled={isLoading}
-          className="w-full border border-navy px-5 py-3 font-sans text-sm text-navy transition-colors hover:bg-navy hover:text-white disabled:cursor-not-allowed disabled:opacity-60"
-        >
-          I&apos;ve confirmed my email
-        </button>
-      )}
+      <Show when="signed-in">
+        <div className="space-y-3">
+          <div className="flex items-center justify-between gap-3 border border-gray-100 bg-cream px-4 py-3">
+            <p className="min-w-0 truncate font-sans text-xs text-charcoal/60">
+              Signed in as <span className="text-navy">{email}</span>
+            </p>
+            <UserButton />
+          </div>
+          <button
+            type="button"
+            onClick={subscribe}
+            disabled={isLoading}
+            className="w-full bg-gold px-5 py-3 font-sans text-sm text-white transition-colors hover:bg-gold-dark disabled:cursor-not-allowed disabled:bg-gold/60"
+          >
+            {isLoading ? 'Checking...' : 'Subscribe and unlock'}
+          </button>
+          {status === 'pending' && (
+            <button
+              type="button"
+              onClick={() => checkSubscription()}
+              disabled={isLoading}
+              className="w-full border border-navy px-5 py-3 font-sans text-sm text-navy transition-colors hover:bg-navy hover:text-white disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              I&apos;ve confirmed my email
+            </button>
+          )}
+        </div>
+      </Show>
 
       {message && (
         <p

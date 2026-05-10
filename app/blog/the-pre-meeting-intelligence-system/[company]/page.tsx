@@ -8,9 +8,10 @@ export const dynamic = 'force-dynamic'
 export async function generateMetadata({
   params,
 }: {
-  params: { company: string }
+  params: Promise<{ company: string }>
 }): Promise<Metadata> {
-  const companyName = params.company
+  const { company } = await params
+  const companyName = company
     .split('-')
     .map((w: string) => w.charAt(0).toUpperCase() + w.slice(1))
     .join(' ')
@@ -30,8 +31,9 @@ export async function generateMetadata({
 export default async function PersonalisedArticlePage({
   params,
 }: {
-  params: { company: string }
+  params: Promise<{ company: string }>
 }) {
+  const { company } = await params
   const isSubscribed = await isCurrentVisitorSubscribed()
-  return isSubscribed ? <ArticleContent company={params.company} /> : <LockedPreMeetingTeaser />
+  return isSubscribed ? <ArticleContent company={company} /> : <LockedPreMeetingTeaser />
 }

@@ -11,9 +11,10 @@ export const dynamic = 'force-dynamic'
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }): Promise<Metadata> {
-  const post = await fetchPostBySlug(params.slug)
+  const { slug } = await params
+  const post = await fetchPostBySlug(slug)
   if (!post) return {}
   return {
     title: post.title,
@@ -22,8 +23,9 @@ export async function generateMetadata({
   }
 }
 
-export default async function BlogPostPage({ params }: { params: { slug: string } }) {
-  const post = await fetchPostBySlug(params.slug)
+export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const post = await fetchPostBySlug(slug)
   if (!post) notFound()
 
   const articleSchema = {

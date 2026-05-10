@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { ClerkProvider } from '@clerk/nextjs'
 import { Cormorant_Garamond, Inter } from 'next/font/google'
 import Script from 'next/script'
 import './globals.css'
@@ -107,29 +108,31 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en-GB" className={`${cormorant.variable} ${inter.variable}`}>
       <body>
-        {/* Google Analytics */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-NF7L5E1BKQ"
-          strategy="afterInteractive"
-        />
-        <Script id="gtag-init" strategy="afterInteractive">{`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-NF7L5E1BKQ');
-        `}</Script>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaOrg) }}
-        />
-        <Script
-          src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js"
-          strategy="afterInteractive"
-        />
-        <Nav />
-        <main className="pt-16">{children}</main>
-        <Footer />
-        <PopupWrapper />
+        <ClerkProvider>
+          {/* Google Analytics */}
+          <Script
+            src="https://www.googletagmanager.com/gtag/js?id=G-NF7L5E1BKQ"
+            strategy="afterInteractive"
+          />
+          <Script id="gtag-init" strategy="afterInteractive">{`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-NF7L5E1BKQ');
+          `}</Script>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaOrg) }}
+          />
+          <Script
+            src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js"
+            strategy="afterInteractive"
+          />
+          <Nav />
+          <main className="pt-16">{children}</main>
+          <Footer />
+          <PopupWrapper />
+        </ClerkProvider>
       </body>
     </html>
   )

@@ -5,8 +5,6 @@ import ServiceCard from '@/components/service-card'
 import BlogCard from '@/components/blog-card'
 import SubscribeGate from '@/components/subscribe-gate'
 import { fetchAllPosts } from '@/lib/blog-utils'
-import { freeResources } from '@/lib/resources'
-import { isCurrentVisitorSubscribed } from '@/lib/subscriber-session'
 
 export const dynamic = 'force-dynamic'
 
@@ -49,7 +47,6 @@ const stats = [
 export default async function HomePage() {
   const posts = await fetchAllPosts()
   const featuredPosts = posts.slice(0, 3)
-  const isSubscribed = await isCurrentVisitorSubscribed()
 
   return (
     <>
@@ -317,55 +314,34 @@ export default async function HomePage() {
       {/* Free Resources */}
       <section id="free-resources" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="text-center mb-16">
-            <span className="text-gold font-sans text-xs tracking-[0.3em] uppercase">Free Resources</span>
-            <h2 className="font-serif text-navy text-4xl lg:text-5xl mt-4 mb-4">
-              Practical AI intelligence.
-            </h2>
-            <p className="text-charcoal/60 font-sans text-base max-w-md mx-auto">
-              Frameworks, playbooks, and systems. Free for active Kongwa Tech subscribers.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {freeResources.map(r => (
-              <article
-                key={r.title}
-                className="group relative overflow-hidden border border-gray-100 bg-white p-7 transition-all duration-200 hover:border-gold hover:shadow-sm"
-              >
-                <div className={!isSubscribed ? 'blur-[2px]' : ''}>
-                  <span className="text-2xl mb-4 block" aria-hidden="true">{r.emoji}</span>
-                  <h3 className="font-serif text-navy text-lg mb-2 group-hover:text-gold transition-colors leading-snug">{r.title}</h3>
-                  <p className="text-sm text-charcoal/60 font-sans leading-relaxed mb-6">{r.desc}</p>
-                  {isSubscribed ? (
-                    <a
-                      href={`/api/resources/${r.id}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-xs font-sans text-gold uppercase tracking-widest group-hover:gap-3 transition-all"
-                    >
-                      {r.cta}
-                      <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                      </svg>
-                    </a>
-                  ) : (
-                    <span className="inline-flex items-center gap-2 text-xs font-sans text-charcoal/35 uppercase tracking-widest">
-                      Locked
-                    </span>
-                  )}
-                </div>
-
-                {!isSubscribed && (
-                  <div className="mt-6 border-t border-gray-100 pt-6">
-                    <SubscribeGate
-                      compact
-                      title="Subscribe to unlock"
-                      description="Active subscribers can open this guide instantly."
-                    />
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_0.9fr] gap-12 items-center">
+            <div>
+              <span className="text-gold font-sans text-xs tracking-[0.3em] uppercase">Free Resources</span>
+              <h2 className="font-serif text-navy text-4xl lg:text-5xl mt-4 mb-4 leading-tight">
+                Get the guide pack and Some Free Game.
+              </h2>
+              <p className="text-charcoal/60 font-sans text-base max-w-xl leading-relaxed">
+                Sign up once. Beehiiv sends the free guides through the welcome series, and your verified account unlocks the full article archive on this website whenever you return.
+              </p>
+              <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
+                {[
+                  'Prompt systems',
+                  'SEO playbooks',
+                  'AI image and video workflows',
+                ].map(item => (
+                  <div key={item} className="border border-gray-100 bg-cream px-5 py-4">
+                    <p className="font-sans text-xs uppercase tracking-widest text-gold mb-2">Included</p>
+                    <p className="font-serif text-navy text-lg leading-snug">{item}</p>
                   </div>
-                )}
-              </article>
-            ))}
+                ))}
+              </div>
+            </div>
+            <div className="border border-gray-100 bg-cream p-8">
+              <SubscribeGate
+                title="Subscribe free"
+                description="Create a verified account, join the Kongwa Tech beehiiv list, and receive the free guides by email."
+              />
+            </div>
           </div>
         </div>
       </section>
