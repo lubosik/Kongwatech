@@ -4,6 +4,8 @@ import Link from 'next/link'
 import BlogCard from '@/components/blog-card'
 import { fetchAllPosts, categoryLabel, formatDate } from '@/lib/blog-utils'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata: Metadata = {
   title: 'Some Free Game | AI Insights That Make Businesses Money | Kongwa Tech',
   description:

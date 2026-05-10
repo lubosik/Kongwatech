@@ -12,6 +12,7 @@ export interface BlogPost {
 
 const STRAPI_URL = process.env.STRAPI_URL || ''
 const STRAPI_API_TOKEN = process.env.STRAPI_API_TOKEN || ''
+const STRAPI_FETCH_TIMEOUT_MS = 5000
 
 function getHeaders(): HeadersInit {
   const headers: HeadersInit = { 'Content-Type': 'application/json' }
@@ -79,10 +80,21 @@ function mapPost(item: StrapiItem): BlogPost {
   }
 }
 
+async function fetchWithTimeout(url: string, init: RequestInit = {}) {
+  const controller = new AbortController()
+  const timeout = setTimeout(() => controller.abort(), STRAPI_FETCH_TIMEOUT_MS)
+
+  try {
+    return await fetch(url, { ...init, signal: controller.signal })
+  } finally {
+    clearTimeout(timeout)
+  }
+}
+
 export async function getAllPostsFromStrapi(): Promise<BlogPost[]> {
   if (!STRAPI_URL) return []
   try {
-    const res = await fetch(
+    const res = await fetchWithTimeout(
       `${STRAPI_URL}/api/articles?populate=*&sort=publishedAt:desc`,
       { headers: getHeaders(), next: { revalidate: 3600 } }
     )
@@ -97,7 +109,7 @@ export async function getAllPostsFromStrapi(): Promise<BlogPost[]> {
 export async function getPostBySlugFromStrapi(slug: string): Promise<BlogPost | null> {
   if (!STRAPI_URL) return null
   try {
-    const res = await fetch(
+    const res = await fetchWithTimeout(
       `${STRAPI_URL}/api/articles?filters[slug][$eq]=${slug}&populate=*`,
       { headers: getHeaders(), next: { revalidate: 3600 } }
     )
