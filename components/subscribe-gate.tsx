@@ -2,6 +2,8 @@
 
 import { useState } from 'react'
 
+const BEEHIIV_FALLBACK = 'https://some-free-game.beehiiv.com'
+
 interface SubscribeGateProps {
   compact?: boolean
   title?: string
@@ -14,7 +16,7 @@ export default function SubscribeGate({
   description = 'Join the free newsletter to unlock the full article archive.',
 }: SubscribeGateProps) {
   const [email, setEmail] = useState('')
-  const [status, setStatus] = useState<'idle' | 'loading' | 'pending' | 'active' | 'error'>('idle')
+  const [status, setStatus] = useState<'idle' | 'loading' | 'subscribed' | 'error'>('idle')
   const [errorMsg, setErrorMsg] = useState('')
 
   async function handleSubscribe(e: React.FormEvent) {
@@ -32,52 +34,47 @@ export default function SubscribeGate({
 
       if (!res.ok || !data.success) throw new Error(data.error || 'Unable to subscribe')
 
-      setStatus(data.status === 'active' ? 'active' : 'pending')
+      setStatus('subscribed')
     } catch (err) {
       setStatus('error')
-      setErrorMsg(err instanceof Error ? err.message : 'Something went wrong. Please try again.')
+      setErrorMsg(err instanceof Error ? err.message : 'Unable to subscribe')
     }
   }
 
-  async function handleVerify() {
-    setStatus('loading')
-    setErrorMsg('')
-
-    try {
-      const res = await fetch('/api/check-subscription', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
-      })
-      const data = await res.json() as { subscribed: boolean; error?: string }
-
-      if (!res.ok) throw new Error(data.error || 'Unable to verify')
-
-      setStatus(data.subscribed ? 'active' : 'pending')
-      if (!data.subscribed) {
-        setErrorMsg("Still pending. Please confirm your email in your inbox first, then try again.")
-      }
-    } catch (err) {
-      setStatus('error')
-      setErrorMsg(err instanceof Error ? err.message : 'Something went wrong. Please try again.')
-    }
-  }
-
-  const isLoading = status === 'loading'
-
-  if (status === 'active') {
+  if (status === 'subscribed') {
     return (
       <div className="space-y-3">
         <h3 className={`${compact ? 'text-lg' : 'text-2xl'} font-serif text-navy leading-tight`}>
-          So glad to have you.
+          You are subscribed. Welcome.
         </h3>
         <p className={`${compact ? 'text-xs' : 'text-sm'} font-sans text-charcoal/65 leading-relaxed`}>
-          All of your free resources will be sent to your inbox in the next few minutes. If you do not see them, please check your spam folder. Any issues, reach out directly at{' '}
+          Your free resources are on their way to your inbox now. If you do not see them within a few minutes, check your spam folder. Any issues, reach out at{' '}
           <a href="mailto:lubosi@kongwatech.com" className="text-navy underline">lubosi@kongwatech.com</a>.
         </p>
       </div>
     )
   }
+
+  if (status === 'error') {
+    return (
+      <div className="space-y-3">
+        <h3 className={`${compact ? 'text-lg' : 'text-2xl'} font-serif text-navy leading-tight`}>
+          Something went wrong.
+        </h3>
+        <p className={`${compact ? 'text-xs' : 'text-sm'} font-sans text-charcoal/65 leading-relaxed`}>
+          Oops, we ran into an error subscribing you. Head to{' '}
+          <a href={BEEHIIV_FALLBACK} target="_blank" rel="noopener noreferrer" className="text-navy underline">
+            some-free-game.beehiiv.com
+          </a>{' '}
+          to get subscribed directly. Any issues, reach out at{' '}
+          <a href="mailto:lubosi@kongwatech.com" className="text-navy underline">lubosi@kongwatech.com</a>.
+        </p>
+        {errorMsg && <p className="font-sans text-xs text-charcoal/40 mt-1">{errorMsg}</p>}
+      </div>
+    )
+  }
+
+  const isLoading = status === 'loading'
 
   return (
     <div className={compact ? 'space-y-3' : 'space-y-5'}>
@@ -105,53 +102,24 @@ export default function SubscribeGate({
         </p>
       </div>
 
-      {status !== 'pending' && (
-        <form onSubmit={handleSubscribe} className="space-y-3">
-          <input
-            type="email"
-            required
-            placeholder="Your email address"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            disabled={isLoading}
-            className="w-full border border-gray-200 px-4 py-3 font-sans text-sm focus:outline-none focus:border-navy transition-colors disabled:opacity-60 bg-white"
-          />
-          <button
-            type="submit"
-            disabled={isLoading}
-            className="w-full bg-gold text-white font-sans text-sm px-5 py-3 hover:bg-gold-dark transition-colors disabled:cursor-not-allowed disabled:bg-gold/60"
-          >
-            {isLoading ? 'One moment...' : 'Subscribe free'}
-          </button>
-        </form>
-      )}
-
-      {status === 'pending' && (
-        <div className="space-y-3">
-          <p className="font-sans text-sm text-charcoal/65 leading-relaxed">
-            Check your inbox to confirm your subscription. Once confirmed, click below and your free resources will be on their way.
-          </p>
-          <button
-            type="button"
-            onClick={handleVerify}
-            disabled={isLoading}
-            className="w-full bg-gold text-white font-sans text-sm px-5 py-3 hover:bg-gold-dark transition-colors disabled:cursor-not-allowed disabled:bg-gold/60"
-          >
-            {isLoading ? 'Checking...' : "I've confirmed my email"}
-          </button>
-          <button
-            type="button"
-            onClick={() => { setStatus('idle'); setErrorMsg('') }}
-            className="w-full border border-navy text-navy font-sans text-sm px-5 py-3 hover:bg-navy hover:text-white transition-colors"
-          >
-            Use a different email
-          </button>
-        </div>
-      )}
-
-      {(status === 'error' || errorMsg) && (
-        <p className="font-sans text-xs text-red-700 leading-relaxed">{errorMsg}</p>
-      )}
+      <form onSubmit={handleSubscribe} className="space-y-3">
+        <input
+          type="email"
+          required
+          placeholder="Your email address"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+          disabled={isLoading}
+          className="w-full border border-gray-200 px-4 py-3 font-sans text-sm focus:outline-none focus:border-navy transition-colors disabled:opacity-60 bg-white"
+        />
+        <button
+          type="submit"
+          disabled={isLoading}
+          className="w-full bg-gold text-white font-sans text-sm px-5 py-3 hover:bg-gold-dark transition-colors disabled:cursor-not-allowed disabled:bg-gold/60"
+        >
+          {isLoading ? 'One moment...' : 'Subscribe free'}
+        </button>
+      </form>
     </div>
   )
 }

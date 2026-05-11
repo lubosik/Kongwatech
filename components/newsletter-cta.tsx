@@ -2,15 +2,17 @@
 
 import { useState } from 'react'
 
+const BEEHIIV_FALLBACK = 'https://some-free-game.beehiiv.com'
+
 export default function NewsletterCta() {
   const [email, setEmail] = useState('')
-  const [status, setStatus] = useState<'idle' | 'loading' | 'pending' | 'done' | 'error'>('idle')
-  const [message, setMessage] = useState('')
+  const [status, setStatus] = useState<'idle' | 'loading' | 'subscribed' | 'error'>('idle')
+  const [errorMsg, setErrorMsg] = useState('')
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     setStatus('loading')
-    setMessage('')
+    setErrorMsg('')
 
     try {
       const res = await fetch('/api/subscribe', {
@@ -22,33 +24,38 @@ export default function NewsletterCta() {
 
       if (!res.ok || !data.success) throw new Error(data.error || 'Unable to subscribe')
 
-      setStatus(data.status === 'active' ? 'done' : 'pending')
+      setStatus('subscribed')
     } catch (err) {
       setStatus('error')
-      setMessage(err instanceof Error ? err.message : 'Something went wrong. Please try again.')
+      setErrorMsg(err instanceof Error ? err.message : 'Unable to subscribe')
     }
   }
 
-  if (status === 'done') {
+  if (status === 'subscribed') {
     return (
       <div className="border border-gold/30 bg-cream p-8">
-        <p className="font-serif text-navy text-xl mb-3">So glad to have you.</p>
+        <p className="font-serif text-navy text-xl mb-3">You are subscribed. Welcome.</p>
         <p className="font-sans text-sm text-charcoal/65 leading-relaxed">
-          All of your free resources will be sent to your inbox in the next few minutes. If you do not see them straight away, please check your spam folder. Any issues at all, reach out directly at{' '}
+          Your free resources are on their way to your inbox now. If you do not see them within a few minutes, check your spam folder. Any issues at all, reach out directly at{' '}
           <a href="mailto:lubosi@kongwatech.com" className="text-navy underline">lubosi@kongwatech.com</a>.
         </p>
       </div>
     )
   }
 
-  if (status === 'pending') {
+  if (status === 'error') {
     return (
       <div className="border border-gold/30 bg-cream p-8">
-        <p className="font-serif text-navy text-xl mb-3">Almost there.</p>
+        <p className="font-serif text-navy text-xl mb-3">Something went wrong.</p>
         <p className="font-sans text-sm text-charcoal/65 leading-relaxed">
-          Check your inbox to confirm your subscription. Once confirmed, your free resources will arrive within a few minutes. If you do not see anything, check your spam folder or reach out at{' '}
+          Oops, we ran into an error subscribing you. Head to{' '}
+          <a href={BEEHIIV_FALLBACK} target="_blank" rel="noopener noreferrer" className="text-navy underline">
+            some-free-game.beehiiv.com
+          </a>{' '}
+          to get subscribed directly. Any issues, reach out at{' '}
           <a href="mailto:lubosi@kongwatech.com" className="text-navy underline">lubosi@kongwatech.com</a>.
         </p>
+        {errorMsg && <p className="mt-3 font-sans text-xs text-charcoal/40">{errorMsg}</p>}
       </div>
     )
   }
@@ -80,9 +87,6 @@ export default function NewsletterCta() {
           {status === 'loading' ? 'One moment...' : 'Subscribe free'}
         </button>
       </form>
-      {status === 'error' && (
-        <p className="mt-3 font-sans text-xs text-red-700">{message}</p>
-      )}
     </div>
   )
 }
