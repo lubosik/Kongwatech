@@ -14,18 +14,23 @@ function isVerifiedEmail(email: ClerkEmailAddress) {
 }
 
 export async function getCurrentVerifiedSubscriberEmail() {
-  const { isAuthenticated, userId } = await auth()
-  if (!isAuthenticated || !userId) return null
+  try {
+    const { isAuthenticated, userId } = await auth()
+    if (!isAuthenticated || !userId) return null
 
-  const client = await clerkClient()
-  const user = await client.users.getUser(userId)
-  const emailAddresses = user.emailAddresses as ClerkEmailAddress[]
-  const primaryEmail = emailAddresses.find(email => email.id === user.primaryEmailAddressId)
-  const verifiedEmail = primaryEmail && isVerifiedEmail(primaryEmail)
-    ? primaryEmail
-    : emailAddresses.find(isVerifiedEmail)
+    const client = await clerkClient()
+    const user = await client.users.getUser(userId)
+    const emailAddresses = user.emailAddresses as ClerkEmailAddress[]
+    const primaryEmail = emailAddresses.find(email => email.id === user.primaryEmailAddressId)
+    const verifiedEmail = primaryEmail && isVerifiedEmail(primaryEmail)
+      ? primaryEmail
+      : emailAddresses.find(isVerifiedEmail)
 
-  return verifiedEmail ? normalizeEmail(verifiedEmail.emailAddress) : null
+    return verifiedEmail ? normalizeEmail(verifiedEmail.emailAddress) : null
+  } catch (error) {
+    console.error('Unable to read Clerk subscriber session', error)
+    return null
+  }
 }
 
 export async function isCurrentVisitorSubscribed() {
