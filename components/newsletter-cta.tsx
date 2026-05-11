@@ -55,7 +55,6 @@ export default function NewsletterCta() {
           to get subscribed directly. Any issues, reach out at{' '}
           <a href="mailto:lubosi@kongwatech.com" className="text-navy underline">lubosi@kongwatech.com</a>.
         </p>
-        {errorMsg && <p className="mt-3 font-sans text-xs text-charcoal/40">{errorMsg}</p>}
       </div>
     )
   }

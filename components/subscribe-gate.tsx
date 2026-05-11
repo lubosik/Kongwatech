@@ -69,7 +69,6 @@ export default function SubscribeGate({
           to get subscribed directly. Any issues, reach out at{' '}
           <a href="mailto:lubosi@kongwatech.com" className="text-navy underline">lubosi@kongwatech.com</a>.
         </p>
-        {errorMsg && <p className="font-sans text-xs text-charcoal/40 mt-1">{errorMsg}</p>}
       </div>
     )
   }
