@@ -1,6 +1,7 @@
 import { NextResponse, type NextRequest } from 'next/server'
 import { clerkMiddleware } from '@clerk/nextjs/server'
 import type { NextFetchEvent } from 'next/server'
+import type { NextMiddleware } from 'next/server'
 
 const hasClerkKeys = Boolean(
   process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY &&
@@ -9,7 +10,15 @@ const hasClerkKeys = Boolean(
     !process.env.CLERK_SECRET_KEY.includes('replace_me')
 )
 
-const clerk = hasClerkKeys ? clerkMiddleware() : null
+let clerk: NextMiddleware | null = null
+
+if (hasClerkKeys) {
+  try {
+    clerk = clerkMiddleware()
+  } catch (error) {
+    console.error('Clerk middleware could not initialize, continuing without auth middleware', error)
+  }
+}
 
 export default async function middleware(request: NextRequest, event: NextFetchEvent) {
   if (!clerk) return NextResponse.next()
