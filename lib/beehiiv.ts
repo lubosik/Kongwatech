@@ -65,7 +65,6 @@ export async function createBeehiivSubscription(email: string) {
       email,
       reactivate_existing: true,
       send_welcome_email: true,
-      double_opt_override: 'not_set',
     }),
     cache: 'no-store',
   })
@@ -73,7 +72,8 @@ export async function createBeehiivSubscription(email: string) {
   const payload = await readJsonSafely(response)
 
   if (!response.ok) {
-    throw new Error(getBeehiivError(payload, 'Unable to create subscription'))
+    const errMsg = getBeehiivError(payload, `Beehiiv error ${response.status}`)
+    throw new Error(errMsg)
   }
 
   const status = normalizeStatus((payload as BeehiivSubscriptionResponse | null)?.data?.status)

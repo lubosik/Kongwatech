@@ -325,23 +325,25 @@ export default async function HomePage() {
       {/* Free Resources */}
       <section id="free-resources" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_0.9fr] gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_0.9fr] gap-12 items-start">
             <div>
               <span className="text-gold font-sans text-xs tracking-[0.3em] uppercase">Free Resources</span>
               <h2 className="font-serif text-navy text-4xl lg:text-5xl mt-4 mb-4 leading-tight">
-                Get the guide pack and Some Free Game.
+                Some Free Game. In your inbox.
               </h2>
               <p className="text-charcoal/60 font-sans text-base max-w-xl leading-relaxed">
-                Subscribe once. Beehiiv sends the free guides through the welcome series, and your subscription unlocks the full article archive on this site.
+                Subscribe free. The welcome series delivers five practical guides, and new articles land in your inbox every week.
               </p>
-              <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {[
-                  'Prompt systems',
-                  'SEO playbooks',
-                  'AI image and video workflows',
+                  'Prompt engineering basics',
+                  'Hyper-realistic AI image creation',
+                  'AI video workflows',
+                  'SEO playbook for new sites',
+                  'Viral clip identification formula',
                 ].map(item => (
                   <div key={item} className="border border-gray-100 bg-cream px-5 py-4">
-                    <p className="font-sans text-xs uppercase tracking-widest text-gold mb-2">Included</p>
+                    <p className="font-sans text-xs uppercase tracking-widest text-gold mb-2">Free guide</p>
                     <p className="font-serif text-navy text-lg leading-snug">{item}</p>
                   </div>
                 ))}
@@ -350,7 +352,7 @@ export default async function HomePage() {
             <div className="border border-gray-100 bg-cream p-8">
               <SubscribeGate
                 title="Subscribe free"
-                description="Enter your email, join Some Free Game, and receive the free guides by email. Your subscription also unlocks the full article archive here."
+                description="Enter your email to join Some Free Game. The five guides ship with the welcome email."
               />
             </div>
           </div>

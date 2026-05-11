@@ -26,12 +26,7 @@ export async function POST(request: NextRequest) {
       status: subscription.status === 'active' ? 'active' : 'pending',
     })
   } catch (error) {
-    return NextResponse.json(
-      {
-        success: false,
-        error: error instanceof Error ? error.message : 'Unable to subscribe right now.',
-      },
-      { status: 502 }
-    )
+    const message = error instanceof Error ? error.message : 'Unable to subscribe right now.'
+    return NextResponse.json({ success: false, error: message }, { status: 502 })
   }
 }

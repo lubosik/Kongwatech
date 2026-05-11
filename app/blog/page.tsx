@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import BlogCard from '@/components/blog-card'
+import NewsletterCta from '@/components/newsletter-cta'
 import { fetchAllPosts, categoryLabel, formatDate } from '@/lib/blog-utils'
 
 export const dynamic = 'force-dynamic'
@@ -128,6 +129,11 @@ export default async function BlogPage({
           ) : (
             <p className="text-charcoal/50 font-sans">No articles in this category yet. Check back soon.</p>
           )}
+
+          {/* Newsletter subscribe strip */}
+          <div className="mt-16 pt-16 border-t border-gray-100">
+            <NewsletterCta />
+          </div>
         </div>
       </section>
     </>

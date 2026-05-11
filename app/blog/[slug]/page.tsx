@@ -2,10 +2,8 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
-import SubscribeGate from '@/components/subscribe-gate'
+import NewsletterCta from '@/components/newsletter-cta'
 import { fetchPostBySlug, fetchAllPosts, formatDate, categoryLabel } from '@/lib/blog-utils'
-import { verifyLeadMagnetToken } from '@/lib/lead-magnet-access'
-import { hasSubscriberAccessCookie } from '@/lib/subscriber-session'
 
 export const dynamic = 'force-dynamic'
 
@@ -26,13 +24,10 @@ export async function generateMetadata({
 
 export default async function BlogPostPage({
   params,
-  searchParams,
 }: {
   params: Promise<{ slug: string }>
-  searchParams: Promise<{ access?: string }>
 }) {
   const { slug } = await params
-  const { access } = await searchParams
   const post = await fetchPostBySlug(slug)
   if (!post) notFound()
 
@@ -58,9 +53,6 @@ export default async function BlogPostPage({
 
   const paragraphs = post.content.split('\n').filter(Boolean)
   const midpoint = Math.max(2, Math.floor(paragraphs.length / 2))
-  const hasLeadMagnetAccess = verifyLeadMagnetToken(access, slug)
-  const isSubscribed = hasLeadMagnetAccess || await hasSubscriberAccessCookie()
-  const teaserParagraphs = paragraphs.filter(para => !para.startsWith('## ') && !para.startsWith('### ')).slice(0, 2)
 
   return (
     <>
@@ -70,7 +62,7 @@ export default async function BlogPostPage({
       />
 
       {/* Article header */}
-      <section className="bg-navy py-24 px-6 lg:px-12">
+      <section className="bg-navy py-20 px-6 lg:px-12">
         <div className="max-w-3xl mx-auto">
           <div className="flex items-center gap-4 mb-8">
             <span className="text-gold font-sans text-xs tracking-[0.3em] uppercase">
@@ -79,7 +71,7 @@ export default async function BlogPostPage({
             <span className="text-white/30 text-xs">|</span>
             <span className="text-white/50 font-sans text-xs">{formatDate(post.date)}</span>
           </div>
-          <h1 className="font-serif text-white text-4xl lg:text-5xl leading-tight mb-8">
+          <h1 className="font-serif text-white text-3xl sm:text-4xl lg:text-5xl leading-tight mb-8">
             {post.title}
           </h1>
           <p className="text-white/60 font-sans text-base leading-relaxed">{post.excerpt}</p>
@@ -107,12 +99,11 @@ export default async function BlogPostPage({
         </section>
       )}
 
-      {/* Article body */}
+      {/* Article body — freely readable */}
       <section className="py-16 bg-white">
         <div className="max-w-3xl mx-auto px-6 lg:px-12">
-          {isSubscribed ? (
-            <div className="prose prose-lg max-w-none prose-headings:font-serif prose-headings:text-navy prose-a:text-gold prose-strong:text-navy">
-              {paragraphs.map((para, i) => {
+          <div className="prose prose-lg max-w-none prose-headings:font-serif prose-headings:text-navy prose-a:text-gold prose-strong:text-navy">
+            {paragraphs.map((para, i) => {
               const midCta = i === midpoint ? (
                 <div key={`mid-cta-${i}`} className="not-prose my-12 bg-cream border-l-4 border-gold p-8">
                   <p className="font-serif text-navy text-2xl mb-3">
@@ -131,54 +122,50 @@ export default async function BlogPostPage({
               ) : null
 
               const rendered = (() => {
-              if (para.startsWith('## ')) {
-                return <h2 key={i}>{para.slice(3)}</h2>
-              }
-              if (para.startsWith('### ')) {
-                return <h3 key={i}>{para.slice(4)}</h3>
-              }
-              if (para.startsWith('![')) {
-                const match = para.match(/^!\[(.*)]\((.*)\)$/)
-                if (match) {
+                if (para.startsWith('## ')) return <h2 key={i}>{para.slice(3)}</h2>
+                if (para.startsWith('### ')) return <h3 key={i}>{para.slice(4)}</h3>
+                if (para.startsWith('![')) {
+                  const match = para.match(/^!\[(.*)]\((.*)\)$/)
+                  if (match) {
+                    return (
+                      <figure key={i} className="not-prose my-10">
+                        <div className="relative aspect-[16/9] overflow-hidden bg-navy">
+                          <Image src={match[2]} alt={match[1]} fill className="object-cover" />
+                        </div>
+                      </figure>
+                    )
+                  }
+                }
+                if (para.startsWith('| ')) {
                   return (
-                    <figure key={i} className="not-prose my-10">
-                      <div className="relative aspect-[16/9] overflow-hidden bg-navy">
-                        <Image src={match[2]} alt={match[1]} fill className="object-cover" />
-                      </div>
-                    </figure>
+                    <div key={i} className="overflow-x-auto my-6">
+                      <table className="min-w-full border-collapse text-sm">
+                        <tbody>
+                          {para.split('\n').filter(r => r.startsWith('|')).map((row, ri) => {
+                            if (row.replace(/\|/g, '').replace(/-/g, '').trim() === '') return null
+                            const cells = row.split('|').filter(Boolean).map(c => c.trim())
+                            const isHeader = ri === 0
+                            return (
+                              <tr key={ri} className={isHeader ? 'bg-navy text-white' : 'border-b border-gray-100'}>
+                                {cells.map((cell, ci) =>
+                                  isHeader ? (
+                                    <th key={ci} className="px-4 py-2 text-left font-sans text-xs font-medium">{cell}</th>
+                                  ) : (
+                                    <td key={ci} className="px-4 py-3 text-charcoal/80">{cell}</td>
+                                  )
+                                )}
+                              </tr>
+                            )
+                          })}
+                        </tbody>
+                      </table>
+                    </div>
                   )
                 }
-              }
-              if (para.startsWith('| ')) {
-                return (
-                  <div key={i} className="overflow-x-auto my-6">
-                    <table className="min-w-full border-collapse text-sm">
-                      <tbody>
-                        {para.split('\n').filter(r => r.startsWith('|')).map((row, ri) => {
-                          if (row.replace(/\|/g, '').replace(/-/g, '').trim() === '') return null
-                          const cells = row.split('|').filter(Boolean).map(c => c.trim())
-                          const isHeader = ri === 0
-                          return (
-                            <tr key={ri} className={isHeader ? 'bg-navy text-white' : 'border-b border-gray-100'}>
-                              {cells.map((cell, ci) =>
-                                isHeader ? (
-                                  <th key={ci} className="px-4 py-2 text-left font-sans text-xs font-medium">{cell}</th>
-                                ) : (
-                                  <td key={ci} className="px-4 py-3 text-charcoal/80">{cell}</td>
-                                )
-                              )}
-                            </tr>
-                          )
-                        })}
-                      </tbody>
-                    </table>
-                  </div>
-                )
-              }
-              if (para.startsWith('**') && para.endsWith('**')) {
-                return <p key={i}><strong>{para.slice(2, -2)}</strong></p>
-              }
-              return <p key={i}>{para}</p>
+                if (para.startsWith('**') && para.endsWith('**')) {
+                  return <p key={i}><strong>{para.slice(2, -2)}</strong></p>
+                }
+                return <p key={i}>{para}</p>
               })()
 
               return (
@@ -187,42 +174,27 @@ export default async function BlogPostPage({
                   {rendered}
                 </div>
               )
-              })}
-            </div>
-          ) : (
-            <div>
-              <div className="prose prose-lg max-w-none prose-headings:font-serif prose-headings:text-navy prose-strong:text-navy">
-                {teaserParagraphs.map((para, index) => (
-                  <p key={index}>{para}</p>
-                ))}
-              </div>
-              <div className="relative mt-8 overflow-hidden border border-gray-100 bg-white">
-                <div className="h-44 select-none space-y-4 p-8 blur-[3px]" aria-hidden="true">
-                  <div className="h-5 w-3/4 bg-charcoal/10" />
-                  <div className="h-4 w-full bg-charcoal/10" />
-                  <div className="h-4 w-11/12 bg-charcoal/10" />
-                  <div className="h-4 w-5/6 bg-charcoal/10" />
-                  <div className="h-4 w-full bg-charcoal/10" />
-                </div>
-                <div className="absolute inset-0 flex items-center justify-center bg-white/85 p-6">
-                  <div className="w-full max-w-xl bg-white p-6 shadow-sm ring-1 ring-gray-100">
-                    <SubscribeGate
-                      title="Subscribe to Some Free Game"
-                      description="Enter your email to join the free newsletter and unlock the full article archive."
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
+            })}
+          </div>
+        </div>
+      </section>
 
-          {/* End-article CTA */}
-          {isSubscribed && <div className="mt-16 bg-navy p-8">
-            <p className="font-serif text-navy text-2xl mb-3">
-              <span className="text-white">Build the AI environment your business actually needs.</span>
+      {/* Newsletter CTA — soft, non-blocking */}
+      <section className="pb-8 bg-white">
+        <div className="max-w-3xl mx-auto px-6 lg:px-12">
+          <NewsletterCta />
+        </div>
+      </section>
+
+      {/* End-article service CTA */}
+      <section className="pb-16 bg-white">
+        <div className="max-w-3xl mx-auto px-6 lg:px-12">
+          <div className="bg-navy p-8">
+            <p className="font-serif text-white text-2xl mb-3">
+              Build the AI environment your business actually needs.
             </p>
             <p className="font-sans text-white/60 text-sm mb-6">
-              Apply to work with Lubosi through AI Foundations online or Eco Launch in person.
+              Apply to work with Lubosi through the Blueprint Session online or Eco Launch in person.
             </p>
             <Link
               href="/apply"
@@ -230,7 +202,7 @@ export default async function BlogPostPage({
             >
               Apply to Work with Lubosi
             </Link>
-          </div>}
+          </div>
         </div>
       </section>
 
