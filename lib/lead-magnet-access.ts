@@ -7,7 +7,7 @@ interface LeadMagnetPayload {
 }
 
 function getLeadMagnetSecret() {
-  return process.env.LEAD_MAGNET_SECRET || process.env.CLERK_SECRET_KEY || ''
+  return process.env.LEAD_MAGNET_SECRET || process.env.BEEHIIV_API_KEY || ''
 }
 
 function sign(payload: string) {

@@ -1,17 +1,18 @@
-import { NextResponse } from 'next/server'
-import { getBeehiivSubscriptionStatus } from '@/lib/beehiiv'
-import {
-  clearSubscriberAccessCookie,
-  getCurrentVerifiedSubscriberEmail,
-  setSubscriberAccessCookie,
-} from '@/lib/subscriber-session'
+import { NextRequest, NextResponse } from 'next/server'
+import { getBeehiivSubscriptionStatus, isValidEmail, normalizeEmail } from '@/lib/beehiiv'
+import { clearSubscriberAccessCookie, setSubscriberAccessCookie } from '@/lib/subscriber-session'
 
-export async function GET() {
+export async function POST(request: NextRequest) {
   try {
-    const email = await getCurrentVerifiedSubscriberEmail()
+    const body = await request.json() as { email?: unknown }
+    const raw = typeof body.email === 'string' ? body.email : ''
+    const email = normalizeEmail(raw)
 
-    if (!email) {
-      return NextResponse.json({ subscribed: false, error: 'Sign in with a verified email address.' }, { status: 401 })
+    if (!isValidEmail(email)) {
+      return NextResponse.json(
+        { subscribed: false, error: 'Please enter a valid email address.' },
+        { status: 400 }
+      )
     }
 
     const subscription = await getBeehiivSubscriptionStatus(email)
@@ -23,11 +24,7 @@ export async function GET() {
       await clearSubscriberAccessCookie()
     }
 
-    return NextResponse.json({
-      subscribed,
-      status: subscription.status,
-      rawStatus: subscription.rawStatus,
-    })
+    return NextResponse.json({ subscribed, status: subscription.status })
   } catch (error) {
     return NextResponse.json(
       {

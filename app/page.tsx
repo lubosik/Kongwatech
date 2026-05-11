@@ -51,15 +51,26 @@ export default async function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="min-h-[calc(100vh-4rem)] flex">
-        <div className="flex-1 flex flex-col justify-center bg-navy px-8 lg:px-16 xl:px-24 py-24">
-          <span className="text-gold font-sans text-xs tracking-[0.3em] uppercase mb-8">
+      <section className="min-h-[calc(100vh-4rem)] flex flex-col lg:flex-row">
+        {/* Mobile image banner */}
+        <div className="lg:hidden relative h-64 w-full bg-navy">
+          <Image
+            src="/images/team/lubosi.png"
+            alt="Lubosi Kongwa, founder and lead consultant"
+            fill
+            className="object-cover object-top"
+            priority
+          />
+          <div className="absolute inset-0 bg-navy/30" />
+        </div>
+        <div className="flex-1 flex flex-col justify-center bg-navy px-8 lg:px-16 xl:px-24 py-16 lg:py-24">
+          <span className="text-gold font-sans text-xs tracking-[0.3em] uppercase mb-6 lg:mb-8">
             Boutique AI Consultancy
           </span>
-          <h1 className="font-serif text-white text-5xl lg:text-6xl xl:text-7xl leading-tight mb-8 max-w-xl">
+          <h1 className="font-serif text-white text-4xl sm:text-5xl lg:text-6xl xl:text-7xl leading-tight mb-6 lg:mb-8 max-w-xl">
             Your AI environment, built and running. In one session.
           </h1>
-          <p className="text-white/60 font-sans text-base mb-12 max-w-md leading-relaxed">
+          <p className="text-white/60 font-sans text-base mb-10 lg:mb-12 max-w-md leading-relaxed">
             Lubosi Kongwa. Rochester, Kent. Helping ambitious business owners build practical AI systems that actually work.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
@@ -321,7 +332,7 @@ export default async function HomePage() {
                 Get the guide pack and Some Free Game.
               </h2>
               <p className="text-charcoal/60 font-sans text-base max-w-xl leading-relaxed">
-                Sign up once. Beehiiv sends the free guides through the welcome series, and your verified account unlocks the full article archive on this website whenever you return.
+                Subscribe once. Beehiiv sends the free guides through the welcome series, and your subscription unlocks the full article archive on this site.
               </p>
               <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {[
@@ -339,7 +350,7 @@ export default async function HomePage() {
             <div className="border border-gray-100 bg-cream p-8">
               <SubscribeGate
                 title="Subscribe free"
-                description="Create a verified account, join Some Free Game, and receive the free guides by email."
+                description="Enter your email, join Some Free Game, and receive the free guides by email. Your subscription also unlocks the full article archive here."
               />
             </div>
           </div>

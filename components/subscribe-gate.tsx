@@ -1,7 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useState } from 'react'
-import { Show, SignInButton, SignUpButton, UserButton, useUser } from '@clerk/nextjs'
+import { useState } from 'react'
 
 interface SubscribeGateProps {
   compact?: boolean
@@ -11,103 +10,31 @@ interface SubscribeGateProps {
 
 export default function SubscribeGate({
   compact = false,
-  title = 'Unlock with Some Free Game',
-  description = 'Sign in with your email, subscribe through beehiiv, and the full article unlocks here.',
+  title = 'Subscribe to Some Free Game',
+  description = 'Join the free newsletter to unlock the full article archive.',
 }: SubscribeGateProps) {
-  const clerkEnabled = Boolean(
-    process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY &&
-      !process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY.includes('replace_me')
-  )
-
-  if (!clerkEnabled) {
-    return (
-      <div className={compact ? 'space-y-3' : 'space-y-5'}>
-        <div>
-          <div className="flex items-center gap-2 mb-2">
-            <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-navy text-white" aria-hidden="true">
-              <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M16.5 10.5V7.5a4.5 4.5 0 0 0-9 0v3m-.75 0h10.5A1.75 1.75 0 0 1 19 12.25v6A1.75 1.75 0 0 1 17.25 20H6.75A1.75 1.75 0 0 1 5 18.25v-6a1.75 1.75 0 0 1 1.75-1.75Z" />
-              </svg>
-            </span>
-            <h3 className={`${compact ? 'text-lg' : 'text-2xl'} font-serif text-navy leading-tight`}>
-              {title}
-            </h3>
-          </div>
-          <p className={`${compact ? 'text-xs' : 'text-sm'} font-sans text-charcoal/65 leading-relaxed`}>
-            Some Free Game signup is being configured. Add the Clerk environment variables in Vercel to enable access.
-          </p>
-        </div>
-      </div>
-    )
-  }
-
-  return <ClerkSubscribeGate compact={compact} title={title} description={description} />
-}
-
-function ClerkSubscribeGate({
-  compact = false,
-  title = 'Unlock with Some Free Game',
-  description = 'Sign in with your email, subscribe through beehiiv, and the full article unlocks here.',
-}: SubscribeGateProps) {
-  const { isSignedIn, user } = useUser()
+  const [email, setEmail] = useState('')
   const [status, setStatus] = useState<'idle' | 'loading' | 'pending' | 'active' | 'error'>('idle')
   const [message, setMessage] = useState('')
 
-  const checkSubscription = useCallback(async (silent = false) => {
-    if (!isSignedIn) return
-
-    if (!silent) {
-      setStatus('loading')
-      setMessage('')
-    }
-
-    try {
-      const response = await fetch('/api/check-subscription', { cache: 'no-store' })
-      const payload = await response.json()
-
-      if (!response.ok) {
-        throw new Error(payload.error || 'Unable to check subscription')
-      }
-
-      if (payload.subscribed) {
-        setStatus('active')
-        setMessage('Subscription confirmed. Unlocking now.')
-        window.location.reload()
-        return
-      }
-
-      if (!silent) {
-        setStatus('pending')
-        setMessage("Your Clerk email is signed in, but your Some Free Game subscription is not active yet. Subscribe or confirm your beehiiv email, then try again.")
-      }
-    } catch (error) {
-      if (!silent) {
-        setStatus('error')
-        setMessage(error instanceof Error ? error.message : 'Something went wrong')
-      }
-    }
-  }, [isSignedIn])
-
-  useEffect(() => {
-    checkSubscription(true)
-  }, [checkSubscription])
-
-  async function subscribe() {
+  async function handleSubscribe(e: React.FormEvent) {
+    e.preventDefault()
     setStatus('loading')
     setMessage('')
 
     try {
-      const response = await fetch('/api/subscribe', {
+      const res = await fetch('/api/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
       })
-      const payload = await response.json()
+      const data = await res.json() as { success: boolean; status?: string; error?: string }
 
-      if (!response.ok) {
-        throw new Error(payload.error || 'Unable to subscribe')
+      if (!res.ok || !data.success) {
+        throw new Error(data.error || 'Unable to subscribe')
       }
 
-      if (payload.status === 'active') {
+      if (data.status === 'active') {
         setStatus('active')
         setMessage('Subscription confirmed. Unlocking now.')
         window.location.reload()
@@ -115,23 +42,61 @@ function ClerkSubscribeGate({
       }
 
       setStatus('pending')
-      setMessage("Check your inbox to confirm your Some Free Game subscription, then come back and click 'I've confirmed'.")
-    } catch (error) {
+      setMessage("Check your inbox to confirm your subscription. Once confirmed, click below to unlock.")
+    } catch (err) {
       setStatus('error')
-      setMessage(error instanceof Error ? error.message : 'Something went wrong')
+      setMessage(err instanceof Error ? err.message : 'Something went wrong. Please try again.')
+    }
+  }
+
+  async function handleVerify() {
+    setStatus('loading')
+    setMessage('')
+
+    try {
+      const res = await fetch('/api/check-subscription', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      })
+      const data = await res.json() as { subscribed: boolean; status?: string; error?: string }
+
+      if (!res.ok) {
+        throw new Error(data.error || 'Unable to verify')
+      }
+
+      if (data.subscribed) {
+        setStatus('active')
+        setMessage('Subscription confirmed. Unlocking now.')
+        window.location.reload()
+        return
+      }
+
+      setStatus('pending')
+      setMessage("Still pending. Please confirm your email in your inbox first, then try again.")
+    } catch (err) {
+      setStatus('error')
+      setMessage(err instanceof Error ? err.message : 'Something went wrong. Please try again.')
     }
   }
 
   const isLoading = status === 'loading'
-  const email = user?.primaryEmailAddress?.emailAddress
 
   return (
     <div className={compact ? 'space-y-3' : 'space-y-5'}>
       <div>
         <div className="flex items-center gap-2 mb-2">
-          <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-navy text-white" aria-hidden="true">
+          <span
+            className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-navy text-white"
+            aria-hidden="true"
+          >
             <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M16.5 10.5V7.5a4.5 4.5 0 0 0-9 0v3m-.75 0h10.5A1.75 1.75 0 0 1 19 12.25v6A1.75 1.75 0 0 1 17.25 20H6.75A1.75 1.75 0 0 1 5 18.25v-6a1.75 1.75 0 0 1 1.75-1.75Z" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={1.8}
+                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+              />
             </svg>
           </span>
           <h3 className={`${compact ? 'text-lg' : 'text-2xl'} font-serif text-navy leading-tight`}>
@@ -143,58 +108,54 @@ function ClerkSubscribeGate({
         </p>
       </div>
 
-      <Show when="signed-out">
-        <div className="flex flex-col sm:flex-row gap-3">
-          <SignUpButton mode="modal">
-            <button className="bg-gold px-5 py-3 font-sans text-sm text-white transition-colors hover:bg-gold-dark">
-              Sign up free
-            </button>
-          </SignUpButton>
-          <SignInButton mode="modal">
-            <button className="border border-navy px-5 py-3 font-sans text-sm text-navy transition-colors hover:bg-navy hover:text-white">
-              I already signed up
-            </button>
-          </SignInButton>
-        </div>
-      </Show>
+      {status !== 'pending' && (
+        <form onSubmit={handleSubscribe} className="space-y-3">
+          <input
+            type="email"
+            required
+            placeholder="Your email address"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+            disabled={isLoading}
+            className="w-full border border-gray-200 px-4 py-3 font-sans text-sm focus:outline-none focus:border-navy transition-colors disabled:opacity-60 bg-white"
+          />
+          <button
+            type="submit"
+            disabled={isLoading}
+            className="w-full bg-gold text-white font-sans text-sm px-5 py-3 hover:bg-gold-dark transition-colors disabled:cursor-not-allowed disabled:bg-gold/60"
+          >
+            {isLoading ? 'One moment...' : 'Subscribe and unlock'}
+          </button>
+        </form>
+      )}
 
-      <Show when="signed-in">
+      {status === 'pending' && (
         <div className="space-y-3">
-          <div className="flex items-center justify-between gap-3 border border-gray-100 bg-cream px-4 py-3">
-            <p className="min-w-0 truncate font-sans text-xs text-charcoal/60">
-              Signed in as <span className="text-navy">{email}</span>
-            </p>
-            <UserButton />
-          </div>
+          <p className="font-sans text-xs text-charcoal/60 leading-relaxed">{message}</p>
           <button
             type="button"
-            onClick={subscribe}
+            onClick={handleVerify}
             disabled={isLoading}
-            className="w-full bg-gold px-5 py-3 font-sans text-sm text-white transition-colors hover:bg-gold-dark disabled:cursor-not-allowed disabled:bg-gold/60"
+            className="w-full bg-gold text-white font-sans text-sm px-5 py-3 hover:bg-gold-dark transition-colors disabled:cursor-not-allowed disabled:bg-gold/60"
           >
-            {isLoading ? 'Checking...' : 'Subscribe and unlock'}
+            {isLoading ? 'Checking...' : "I've confirmed my email"}
           </button>
-          {status === 'pending' && (
-            <button
-              type="button"
-              onClick={() => checkSubscription()}
-              disabled={isLoading}
-              className="w-full border border-navy px-5 py-3 font-sans text-sm text-navy transition-colors hover:bg-navy hover:text-white disabled:cursor-not-allowed disabled:opacity-60"
-            >
-              I&apos;ve confirmed my email
-            </button>
-          )}
+          <button
+            type="button"
+            onClick={() => { setStatus('idle'); setMessage('') }}
+            className="w-full border border-navy text-navy font-sans text-sm px-5 py-3 hover:bg-navy hover:text-white transition-colors"
+          >
+            Use a different email
+          </button>
         </div>
-      </Show>
+      )}
 
-      {message && (
-        <p
-          className={`font-sans text-xs leading-relaxed ${
-            status === 'error' ? 'text-red-700' : status === 'active' ? 'text-green-700' : 'text-charcoal/60'
-          }`}
-        >
-          {message}
-        </p>
+      {status === 'error' && (
+        <p className="font-sans text-xs text-red-700 leading-relaxed">{message}</p>
+      )}
+
+      {status === 'active' && (
+        <p className="font-sans text-xs text-green-700 leading-relaxed">{message}</p>
       )}
     </div>
   )

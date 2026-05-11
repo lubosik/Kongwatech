@@ -208,7 +208,7 @@ export default async function BlogPostPage({
                   <div className="w-full max-w-xl bg-white p-6 shadow-sm ring-1 ring-gray-100">
                     <SubscribeGate
                       title="Subscribe to Some Free Game"
-                      description="The full archive is free for confirmed Some Free Game subscribers."
+                      description="Enter your email to join the free newsletter and unlock the full article archive."
                     />
                   </div>
                 </div>
