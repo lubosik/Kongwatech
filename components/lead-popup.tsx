@@ -113,7 +113,7 @@ export default function LeadPopup() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           access_key: 'e8144041-9073-44fa-bba9-3b9089fc8511',
-          subject: 'New Lead Popup — Kongwa Tech',
+          subject: 'New Lead Popup, Kongwa Tech',
           industry,
           goal,
           name,

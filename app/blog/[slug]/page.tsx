@@ -145,7 +145,7 @@ export default async function BlogPostPage({
             <div className="relative aspect-[16/9] overflow-hidden border border-gray-100 bg-navy">
               <Image
                 src={post.coverImage}
-                alt={`${post.title} — Kongwa Tech`}
+                alt={`${post.title}, Kongwa Tech`}
                 fill
                 className="object-cover"
                 priority
@@ -161,7 +161,7 @@ export default async function BlogPostPage({
           {/* First half */}
           <div>{firstHalf.map((para, i) => renderParagraph(para, i))}</div>
 
-          {/* Mid-article CTA — outside any prose/link colour context */}
+          {/* Mid-article CTA */}
           <div className="my-12 bg-cream border-l-4 border-gold p-8">
             <p className="font-serif text-navy text-2xl mb-3">
               Want this applied to your business?

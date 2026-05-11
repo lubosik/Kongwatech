@@ -226,7 +226,7 @@ export default function BlueprintSessionPage() {
             href="/apply"
             className="inline-block bg-gold text-white font-sans text-sm px-10 py-4 hover:bg-gold-dark transition-colors"
           >
-            Book the Blueprint Session — £997
+            Book the Blueprint Session. £997
           </Link>
         </div>
       </section>
