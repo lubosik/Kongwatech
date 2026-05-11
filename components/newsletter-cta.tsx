@@ -23,24 +23,32 @@ export default function NewsletterCta() {
       if (!res.ok || !data.success) throw new Error(data.error || 'Unable to subscribe')
 
       setStatus(data.status === 'active' ? 'done' : 'pending')
-      setMessage(
-        data.status === 'active'
-          ? 'You are subscribed. Welcome to Some Free Game.'
-          : 'Check your inbox to confirm your subscription. The free guides ship with the welcome email.'
-      )
     } catch (err) {
       setStatus('error')
       setMessage(err instanceof Error ? err.message : 'Something went wrong. Please try again.')
     }
   }
 
-  if (status === 'done' || status === 'pending') {
+  if (status === 'done') {
     return (
       <div className="border border-gold/30 bg-cream p-8">
-        <p className="font-serif text-navy text-xl mb-2">
-          {status === 'done' ? 'You are in.' : 'Almost there.'}
+        <p className="font-serif text-navy text-xl mb-3">So glad to have you.</p>
+        <p className="font-sans text-sm text-charcoal/65 leading-relaxed">
+          All of your free resources will be sent to your inbox in the next few minutes. If you do not see them straight away, please check your spam folder. Any issues at all, reach out directly at{' '}
+          <a href="mailto:lubosi@kongwatech.com" className="text-navy underline">lubosi@kongwatech.com</a>.
         </p>
-        <p className="font-sans text-sm text-charcoal/65 leading-relaxed">{message}</p>
+      </div>
+    )
+  }
+
+  if (status === 'pending') {
+    return (
+      <div className="border border-gold/30 bg-cream p-8">
+        <p className="font-serif text-navy text-xl mb-3">Almost there.</p>
+        <p className="font-sans text-sm text-charcoal/65 leading-relaxed">
+          Check your inbox to confirm your subscription. Once confirmed, your free resources will arrive within a few minutes. If you do not see anything, check your spam folder or reach out at{' '}
+          <a href="mailto:lubosi@kongwatech.com" className="text-navy underline">lubosi@kongwatech.com</a>.
+        </p>
       </div>
     )
   }

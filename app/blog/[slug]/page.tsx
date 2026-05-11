@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import NewsletterCta from '@/components/newsletter-cta'
-import { fetchPostBySlug, fetchAllPosts, formatDate, categoryLabel } from '@/lib/blog-utils'
+import { fetchPostBySlug, formatDate, categoryLabel } from '@/lib/blog-utils'
 
 export const dynamic = 'force-dynamic'
 
@@ -20,6 +20,60 @@ export async function generateMetadata({
     description: post.excerpt,
     openGraph: { title: post.title, description: post.excerpt, type: 'article' },
   }
+}
+
+function renderParagraph(para: string, i: number) {
+  if (para.startsWith('## ')) {
+    return <h2 key={i} className="font-serif text-navy text-2xl lg:text-3xl mt-10 mb-4 leading-snug">{para.slice(3)}</h2>
+  }
+  if (para.startsWith('### ')) {
+    return <h3 key={i} className="font-serif text-navy text-xl lg:text-2xl mt-8 mb-3 leading-snug">{para.slice(4)}</h3>
+  }
+  if (para.startsWith('![')) {
+    const match = para.match(/^!\[(.*)]\((.*)\)$/)
+    if (match) {
+      return (
+        <figure key={i} className="my-10">
+          <div className="relative aspect-[16/9] overflow-hidden bg-navy">
+            <Image src={match[2]} alt={match[1]} fill className="object-cover" />
+          </div>
+          {match[1] && (
+            <figcaption className="mt-2 text-center font-sans text-xs text-charcoal/40">{match[1]}</figcaption>
+          )}
+        </figure>
+      )
+    }
+  }
+  if (para.startsWith('| ')) {
+    return (
+      <div key={i} className="overflow-x-auto my-6">
+        <table className="min-w-full border-collapse text-sm">
+          <tbody>
+            {para.split('\n').filter(r => r.startsWith('|')).map((row, ri) => {
+              if (row.replace(/\|/g, '').replace(/-/g, '').trim() === '') return null
+              const cells = row.split('|').filter(Boolean).map(c => c.trim())
+              const isHeader = ri === 0
+              return (
+                <tr key={ri} className={isHeader ? 'bg-navy text-white' : 'border-b border-gray-100'}>
+                  {cells.map((cell, ci) =>
+                    isHeader ? (
+                      <th key={ci} className="px-4 py-2 text-left font-sans text-xs font-medium">{cell}</th>
+                    ) : (
+                      <td key={ci} className="px-4 py-3 text-charcoal/80 font-sans text-sm">{cell}</td>
+                    )
+                  )}
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
+      </div>
+    )
+  }
+  if (para.startsWith('**') && para.endsWith('**')) {
+    return <p key={i} className="font-sans text-charcoal leading-relaxed mb-4"><strong className="text-navy">{para.slice(2, -2)}</strong></p>
+  }
+  return <p key={i} className="font-sans text-charcoal/80 leading-relaxed mb-4 text-base">{para}</p>
 }
 
 export default async function BlogPostPage({
@@ -53,6 +107,8 @@ export default async function BlogPostPage({
 
   const paragraphs = post.content.split('\n').filter(Boolean)
   const midpoint = Math.max(2, Math.floor(paragraphs.length / 2))
+  const firstHalf = paragraphs.slice(0, midpoint)
+  const secondHalf = paragraphs.slice(midpoint)
 
   return (
     <>
@@ -89,7 +145,7 @@ export default async function BlogPostPage({
             <div className="relative aspect-[16/9] overflow-hidden border border-gray-100 bg-navy">
               <Image
                 src={post.coverImage}
-                alt={post.title}
+                alt={`${post.title} — Kongwa Tech`}
                 fill
                 className="object-cover"
                 priority
@@ -99,87 +155,34 @@ export default async function BlogPostPage({
         </section>
       )}
 
-      {/* Article body — freely readable */}
+      {/* Article body */}
       <section className="py-16 bg-white">
         <div className="max-w-3xl mx-auto px-6 lg:px-12">
-          <div className="prose prose-lg max-w-none prose-headings:font-serif prose-headings:text-navy prose-a:text-gold prose-strong:text-navy">
-            {paragraphs.map((para, i) => {
-              const midCta = i === midpoint ? (
-                <div key={`mid-cta-${i}`} className="not-prose my-12 bg-cream border-l-4 border-gold p-8">
-                  <p className="font-serif text-navy text-2xl mb-3">
-                    Want this applied to your business?
-                  </p>
-                  <p className="font-sans text-charcoal/70 text-sm mb-6">
-                    Book a short application call and we will identify the first AI workflow worth building.
-                  </p>
-                  <Link
-                    href="/apply"
-                    className="inline-block bg-gold text-white font-sans text-sm px-6 py-3 hover:bg-gold-dark transition-colors"
-                  >
-                    Apply to Work with Lubosi
-                  </Link>
-                </div>
-              ) : null
+          {/* First half */}
+          <div>{firstHalf.map((para, i) => renderParagraph(para, i))}</div>
 
-              const rendered = (() => {
-                if (para.startsWith('## ')) return <h2 key={i}>{para.slice(3)}</h2>
-                if (para.startsWith('### ')) return <h3 key={i}>{para.slice(4)}</h3>
-                if (para.startsWith('![')) {
-                  const match = para.match(/^!\[(.*)]\((.*)\)$/)
-                  if (match) {
-                    return (
-                      <figure key={i} className="not-prose my-10">
-                        <div className="relative aspect-[16/9] overflow-hidden bg-navy">
-                          <Image src={match[2]} alt={match[1]} fill className="object-cover" />
-                        </div>
-                      </figure>
-                    )
-                  }
-                }
-                if (para.startsWith('| ')) {
-                  return (
-                    <div key={i} className="overflow-x-auto my-6">
-                      <table className="min-w-full border-collapse text-sm">
-                        <tbody>
-                          {para.split('\n').filter(r => r.startsWith('|')).map((row, ri) => {
-                            if (row.replace(/\|/g, '').replace(/-/g, '').trim() === '') return null
-                            const cells = row.split('|').filter(Boolean).map(c => c.trim())
-                            const isHeader = ri === 0
-                            return (
-                              <tr key={ri} className={isHeader ? 'bg-navy text-white' : 'border-b border-gray-100'}>
-                                {cells.map((cell, ci) =>
-                                  isHeader ? (
-                                    <th key={ci} className="px-4 py-2 text-left font-sans text-xs font-medium">{cell}</th>
-                                  ) : (
-                                    <td key={ci} className="px-4 py-3 text-charcoal/80">{cell}</td>
-                                  )
-                                )}
-                              </tr>
-                            )
-                          })}
-                        </tbody>
-                      </table>
-                    </div>
-                  )
-                }
-                if (para.startsWith('**') && para.endsWith('**')) {
-                  return <p key={i}><strong>{para.slice(2, -2)}</strong></p>
-                }
-                return <p key={i}>{para}</p>
-              })()
-
-              return (
-                <div key={`block-${i}`}>
-                  {midCta}
-                  {rendered}
-                </div>
-              )
-            })}
+          {/* Mid-article CTA — outside any prose/link colour context */}
+          <div className="my-12 bg-cream border-l-4 border-gold p-8">
+            <p className="font-serif text-navy text-2xl mb-3">
+              Want this applied to your business?
+            </p>
+            <p className="font-sans text-charcoal/70 text-sm mb-6">
+              Book a short application call and we will identify the first AI workflow worth building.
+            </p>
+            <Link
+              href="/apply"
+              className="inline-block bg-navy text-white font-sans text-sm px-6 py-3 hover:bg-navy-light transition-colors"
+            >
+              Apply to Work with Lubosi
+            </Link>
           </div>
+
+          {/* Second half */}
+          <div>{secondHalf.map((para, i) => renderParagraph(para, midpoint + i))}</div>
         </div>
       </section>
 
-      {/* Newsletter CTA — soft, non-blocking */}
+      {/* Newsletter CTA */}
       <section className="pb-8 bg-white">
         <div className="max-w-3xl mx-auto px-6 lg:px-12">
           <NewsletterCta />
