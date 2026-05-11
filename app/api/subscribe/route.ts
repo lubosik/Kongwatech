@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { createBeehiivSubscription } from '@/lib/beehiiv'
-import { getCurrentVerifiedSubscriberEmail } from '@/lib/subscriber-session'
+import { getCurrentVerifiedSubscriberEmail, setSubscriberAccessCookie } from '@/lib/subscriber-session'
 
 export async function POST() {
   try {
@@ -14,6 +14,10 @@ export async function POST() {
     }
 
     const subscription = await createBeehiivSubscription(email)
+
+    if (subscription.status === 'active') {
+      await setSubscriberAccessCookie(email)
+    }
 
     return NextResponse.json({
       success: true,

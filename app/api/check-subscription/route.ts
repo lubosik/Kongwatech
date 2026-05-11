@@ -1,6 +1,10 @@
 import { NextResponse } from 'next/server'
 import { getBeehiivSubscriptionStatus } from '@/lib/beehiiv'
-import { getCurrentVerifiedSubscriberEmail } from '@/lib/subscriber-session'
+import {
+  clearSubscriberAccessCookie,
+  getCurrentVerifiedSubscriberEmail,
+  setSubscriberAccessCookie,
+} from '@/lib/subscriber-session'
 
 export async function GET() {
   try {
@@ -12,6 +16,12 @@ export async function GET() {
 
     const subscription = await getBeehiivSubscriptionStatus(email)
     const subscribed = subscription.status === 'active'
+
+    if (subscribed) {
+      await setSubscriberAccessCookie(email)
+    } else {
+      await clearSubscriberAccessCookie()
+    }
 
     return NextResponse.json({
       subscribed,

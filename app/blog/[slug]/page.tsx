@@ -5,7 +5,7 @@ import Image from 'next/image'
 import SubscribeGate from '@/components/subscribe-gate'
 import { fetchPostBySlug, fetchAllPosts, formatDate, categoryLabel } from '@/lib/blog-utils'
 import { verifyLeadMagnetToken } from '@/lib/lead-magnet-access'
-import { isCurrentVisitorSubscribed } from '@/lib/subscriber-session'
+import { hasSubscriberAccessCookie } from '@/lib/subscriber-session'
 
 export const dynamic = 'force-dynamic'
 
@@ -59,7 +59,7 @@ export default async function BlogPostPage({
   const paragraphs = post.content.split('\n').filter(Boolean)
   const midpoint = Math.max(2, Math.floor(paragraphs.length / 2))
   const hasLeadMagnetAccess = verifyLeadMagnetToken(access, slug)
-  const isSubscribed = hasLeadMagnetAccess || await isCurrentVisitorSubscribed()
+  const isSubscribed = hasLeadMagnetAccess || await hasSubscriberAccessCookie()
   const teaserParagraphs = paragraphs.filter(para => !para.startsWith('## ') && !para.startsWith('### ')).slice(0, 2)
 
   return (
