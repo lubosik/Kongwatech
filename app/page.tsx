@@ -107,36 +107,22 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <div className="operating-map" aria-label="Kongwa Tech operating capability map">
-            <div className="operating-map__header">
-              <span>OPERATING MAP / 01</span>
-              <span className="operating-map__live">ACTIVE</span>
+          <figure className="holding-hero__portrait">
+            <div className="holding-hero__portrait-frame">
+              <Image
+                src="/images/lubosi-hero-portrait.webp"
+                alt="Lubosi Kongwa, founder of Kongwa Tech, working at his desk"
+                width={900}
+                height={940}
+                priority
+                sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 820px) 520px, 42vw"
+              />
             </div>
-            <div className="operating-map__canvas">
-              <div className="operating-map__rings" aria-hidden="true"><i /><i /><i /></div>
-              <div className="operating-map__core">
-                <span>KT</span>
-                <small>OPERATING CORE</small>
-              </div>
-              <div className="operating-map__node operating-map__node--product">
-                <b>01</b><span>PRODUCT</span>
-              </div>
-              <div className="operating-map__node operating-map__node--ai">
-                <b>02</b><span>AI</span>
-              </div>
-              <div className="operating-map__node operating-map__node--platform">
-                <b>03</b><span>PLATFORM</span>
-              </div>
-              <div className="operating-map__node operating-map__node--audience">
-                <b>04</b><span>AUDIENCE</span>
-              </div>
-            </div>
-            <div className="operating-map__footer">
-              <span>FOUNDER + BRAND</span>
-              <i aria-hidden="true" />
-              <span>ALIGNED VENTURE</span>
-            </div>
-          </div>
+            <figcaption>
+              <span>Lubosi Kongwa</span>
+              <span>Founder / Operator</span>
+            </figcaption>
+          </figure>
         </div>
       </section>
 
