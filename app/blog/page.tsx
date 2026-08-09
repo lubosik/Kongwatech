@@ -2,15 +2,15 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import BlogCard from '@/components/blog-card'
-import NewsletterCta from '@/components/newsletter-cta'
 import { fetchAllPosts, categoryLabel, formatDate } from '@/lib/blog-utils'
 
 export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
-  title: 'Some Free Game | AI Insights That Make Businesses Money | Kongwa Tech',
+  title: 'Insights',
   description:
-    'High-quality guides on Claude Code, Anthropic AI, vibe coding, and AI strategy for ambitious businesses. Real tactics, real results. From Lubosi Kongwa at Kongwa Tech.',
+    'Practical field notes on AI systems, product development, platform engineering and venture operations from Kongwa Tech.',
+  alternates: { canonical: '/blog' },
 }
 
 const categories = [
@@ -44,10 +44,10 @@ export default async function BlogPage({
         <div className="max-w-4xl mx-auto">
           <span className="text-gold font-sans text-xs tracking-[0.3em] uppercase">Kongwa Tech</span>
           <h1 className="font-serif text-white text-5xl lg:text-6xl mt-6 leading-tight">
-            Some Free Game.
+            Insights.
           </h1>
           <p className="text-white/60 font-sans text-lg mt-6 max-w-xl leading-relaxed">
-            High-quality guides on Claude Code, Anthropic AI, and AI strategy. Written for businesses that want to actually make money from AI.
+            Practical field notes on AI systems, product development and the operating choices behind useful technology.
           </p>
         </div>
       </section>
@@ -129,11 +129,6 @@ export default async function BlogPage({
           ) : (
             <p className="text-charcoal/50 font-sans">No articles in this category yet. Check back soon.</p>
           )}
-
-          {/* Newsletter subscribe strip */}
-          <div className="mt-16 pt-16 border-t border-gray-100">
-            <NewsletterCta />
-          </div>
         </div>
       </section>
     </>

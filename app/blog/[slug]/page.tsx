@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
-import NewsletterCta from '@/components/newsletter-cta'
 import { fetchPostBySlug, formatDate, categoryLabel } from '@/lib/blog-utils'
 
 export const dynamic = 'force-dynamic'
@@ -18,7 +17,13 @@ export async function generateMetadata({
   return {
     title: post.title,
     description: post.excerpt,
-    openGraph: { title: post.title, description: post.excerpt, type: 'article' },
+    alternates: { canonical: `/blog/${slug}` },
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      type: 'article',
+      url: `/blog/${slug}`,
+    },
   }
 }
 
@@ -101,8 +106,9 @@ export default async function BlogPostPage({
       url: 'https://kongwatech.com',
     },
     datePublished: post.date,
+    mainEntityOfPage: `https://kongwatech.com/blog/${slug}`,
     image: post.coverImage,
-    keywords: [post.category, 'AI consultancy', 'Claude Code', 'Southeast England'],
+    keywords: [post.category, 'AI systems', 'Claude Code', 'venture operations'],
   }
 
   const paragraphs = post.content.split('\n').filter(Boolean)
@@ -133,7 +139,7 @@ export default async function BlogPostPage({
           <p className="text-white/60 font-sans text-base leading-relaxed">{post.excerpt}</p>
           <div className="mt-8 pt-8 border-t border-white/10">
             <p className="text-white/40 font-sans text-sm">
-              By <span className="text-white/70">Lubosi Kongwa</span>. Kongwa Tech, Rochester, Kent
+              By <span className="text-white/70">Lubosi Kongwa</span>. Kongwa Tech
             </p>
           </div>
         </div>
@@ -164,16 +170,16 @@ export default async function BlogPostPage({
           {/* Mid-article CTA */}
           <div className="my-12 bg-cream border-l-4 border-gold p-8">
             <p className="font-serif text-navy text-2xl mb-3">
-              Want this applied to your business?
+              Building something this could strengthen?
             </p>
             <p className="font-sans text-charcoal/70 text-sm mb-6">
-              Book a short application call and we will identify the first AI workflow worth building.
+              Tell us what you are building and where a stronger product, AI or operating layer could change the trajectory.
             </p>
             <Link
-              href="/apply"
+              href="/consult"
               className="inline-block bg-navy text-white font-sans text-sm px-6 py-3 hover:bg-navy-light transition-colors"
             >
-              Apply to Work with Lubosi
+              Consult About Your Project
             </Link>
           </div>
 
@@ -182,28 +188,21 @@ export default async function BlogPostPage({
         </div>
       </section>
 
-      {/* Newsletter CTA */}
-      <section className="pb-8 bg-white">
-        <div className="max-w-3xl mx-auto px-6 lg:px-12">
-          <NewsletterCta />
-        </div>
-      </section>
-
-      {/* End-article service CTA */}
+      {/* End-article consultation CTA */}
       <section className="pb-16 bg-white">
         <div className="max-w-3xl mx-auto px-6 lg:px-12">
           <div className="bg-navy p-8">
             <p className="font-serif text-white text-2xl mb-3">
-              Build the AI environment your business actually needs.
+              Building something we should know about?
             </p>
             <p className="font-sans text-white/60 text-sm mb-6">
-              Apply to work with Lubosi through the Blueprint Session online or Eco Launch in person.
+              Kongwa Tech partners selectively where hands-on operating capability can create disproportionate leverage.
             </p>
             <Link
-              href="/apply"
+              href="/consult"
               className="inline-block bg-gold text-white font-sans text-sm px-6 py-3 hover:bg-gold-dark transition-colors"
             >
-              Apply to Work with Lubosi
+              Consult About Your Project
             </Link>
           </div>
         </div>

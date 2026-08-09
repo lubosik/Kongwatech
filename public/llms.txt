@@ -1,33 +1,22 @@
-# kongwatech.com
+# Kongwa Tech
 
-> Kongwa Tech is a boutique AI consultancy founded by Lubosi Kongwa, based in Rochester, Kent, UK.
+> Kongwa Tech is a technology and strategy holding company that partners with founders and brands to build, scale and operate ventures at the intersection of AI, digital infrastructure and community.
 
-Lubosi Kongwa is a practitioner and educator specialising in:
-- AI implementation for UK small and medium businesses
-- Claude Code (Anthropic) and the broader Anthropic AI ecosystem
-- Vibe coding: building applications using AI coding assistants without traditional development
-- AI automation using Make.com, n8n, Zapier, and custom AI agents
-- AI ecosystem launches for businesses ready to operationalise AI
-- Go-to-market, fundraising, and recruitment automation systems
-- Local AI adoption consulting for Southeast England businesses
+Kongwa Tech deploys hands-on operating capability across:
+- Product development
+- AI implementation
+- Platform engineering
+- Audience growth
 
-## Services
-- AI Foundations: Online advisory for business owners implementing AI
-- Eco Launch: In-person AI environment and ecosystem launch (£6,000)
+The company takes equity positions in select projects. This does not mean every collaboration or item of operating work is an equity holding.
 
-## Key Content
-- /blog/what-is-claude-code: Plain-English guide to Claude Code for UK business owners
-- /blog/what-is-vibe-coding: Complete guide to vibe coding for non-developers
-- /blog/claude-code-vs-cursor: Comparison of Claude Code and Cursor AI from a practitioner's view
-- /services/ai-foundations: Online advisory for AI implementation
-- /services/eco-launch: In-person AI ecosystem launch
-- /ai-consultant-kent: AI consulting services for Kent businesses
-- /ai-consultant-southeast-england: AI consulting across Southeast England
-
-## Location
-Rochester, Kent, UK. Serving Southeast England in person (Kent, Surrey, Sussex, Greater London).
-National UK clients served remotely.
+## Key pages
+- /: Company thesis, operating capability and selected work
+- /consult: Project consultation
+- /ai-stack: The AI tools and systems Lubosi Kongwa uses
+- /team/lubosi-kongwa: Founder profile
+- /blog: Kongwa Tech insights
 
 ## Contact
 lubosi@kongwatech.com
-https://kongwatech.com/apply
+https://kongwatech.com/consult

@@ -3,24 +3,21 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Lubosi Kongwa | Founder and Lead Consultant',
+  title: 'Lubosi Kongwa, Founder of Kongwa Tech',
   description:
-    'Lubosi Kongwa is the founder and lead consultant at Kongwa Tech, building AI systems and implementation environments for ambitious businesses.',
+    'Lubosi Kongwa is the founder of Kongwa Tech, working across venture building, AI systems, product and platform execution, and audience growth.',
+  alternates: { canonical: '/team/lubosi-kongwa' },
 }
 
 const personSchema = {
   '@context': 'https://schema.org',
   '@type': 'Person',
+  '@id': 'https://kongwatech.com/#lubosi',
   name: 'Lubosi Kongwa',
-  jobTitle: 'Founder and Lead Consultant',
+  jobTitle: 'Founder, Kongwa Tech',
   url: 'https://kongwatech.com/team/lubosi-kongwa',
   email: 'lubosi@kongwatech.com',
-  address: {
-    '@type': 'PostalAddress',
-    addressLocality: 'Rochester',
-    addressRegion: 'Kent',
-    addressCountry: 'GB',
-  },
+  worksFor: { '@id': 'https://kongwatech.com/#organization' },
   sameAs: [
     'https://www.linkedin.com/in/lubosi-kongwa-a9abb9244/',
     'https://x.com/lubosi_k',
@@ -29,103 +26,74 @@ const personSchema = {
   ],
   knowsAbout: [
     'Artificial Intelligence',
-    'AI Automation',
-    'AI Strategy',
-    'Claude Code',
-    'Go-to-market automation',
-    'Agentic systems',
-    'Recruitment automation',
-    'Fundraising automation',
+    'Venture Building',
+    'Product Development',
+    'Platform Engineering',
+    'Audience Growth',
+    'Agentic Systems',
   ],
 }
+
+const socialLinks = [
+  ['LinkedIn', 'https://www.linkedin.com/in/lubosi-kongwa-a9abb9244/'],
+  ['X', 'https://x.com/lubosi_k'],
+  ['Instagram', 'https://www.instagram.com/lubosi.k/'],
+  ['TikTok', 'https://www.tiktok.com/@b0si5'],
+] as const
 
 export default function LubosiProfilePage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }} />
 
-      <section className="bg-navy py-28 px-6 lg:px-12">
-        <div className="max-w-4xl mx-auto">
-          <span className="text-gold font-sans text-xs tracking-[0.3em] uppercase">Founder Profile</span>
-          <h1 className="font-serif text-white text-5xl lg:text-7xl mt-6 leading-tight">
-            Lubosi Kongwa
-          </h1>
-          <p className="text-white/60 font-sans text-lg mt-6 max-w-xl leading-relaxed">
-            Founder and lead consultant at Kongwa Tech.
-          </p>
+      <section className="bg-navy px-6 py-20 text-white lg:px-12 lg:py-28">
+        <div className="mx-auto max-w-6xl">
+          <p className="text-xs font-medium uppercase tracking-[0.24em] text-gold">Founder</p>
+          <h1 className="mt-6 font-serif text-5xl leading-none sm:text-6xl lg:text-7xl">Lubosi Kongwa</h1>
+          <p className="mt-5 text-base uppercase tracking-[0.16em] text-white/55">Founder, Kongwa Tech</p>
         </div>
       </section>
 
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
-            <div className="relative h-[560px] lg:sticky lg:top-24 overflow-hidden bg-navy">
-                <Image
-                src="/images/team/lubosi.png"
-                alt="Lubosi Kongwa"
-                fill
-                className="object-cover object-center"
-                priority
-              />
-            </div>
-            <div className="space-y-8 font-sans text-charcoal/80 text-base leading-relaxed">
-              <p>
-                Lubosi Kongwa founded Kongwa Tech to help ambitious businesses move from AI curiosity to
-                practical AI infrastructure. The work is focused on building environments, workflows, and
-                systems that make teams faster, clearer, and more commercially effective.
-              </p>
-              <p>
-                His work spans go-to-market automation, growth marketing systems, private equity and
-                fundraising agents, recruitment sourcing systems, and AI-enabled operating workflows for
-                founders and leadership teams.
-              </p>
-              <p>
-                Kongwa Tech is deliberately boutique. Every engagement is led directly by Lubosi, from the
-                initial strategy through to the implementation details. The goal is not to sell generic AI
-                training. The goal is to launch useful systems in the context of the real business.
-              </p>
-              <p>
-                Eco Launch is the in-person expression of that work: Lubosi enters the client environment,
-                maps the ecosystem, identifies the automation layer, and helps launch the first working
-                version of the AI operating environment.
-              </p>
-              <p>
-                AI Foundations is the online advisory path for businesses that need structured guidance,
-                direct feedback, and implementation support without an in-person engagement.
-              </p>
+      <section className="bg-cream px-6 py-16 lg:px-12 lg:py-24">
+        <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
+          <div className="relative aspect-[4/5] overflow-hidden bg-navy lg:sticky lg:top-24">
+            <Image
+              src="/images/team/lubosi.png"
+              alt="Lubosi Kongwa, founder of Kongwa Tech"
+              fill
+              className="object-cover object-center"
+              sizes="(min-width: 1024px) 38vw, 100vw"
+              priority
+            />
+          </div>
 
-              <div className="pt-6 border-t border-gray-200">
-                <p className="text-xs font-sans text-charcoal/40 uppercase tracking-widest mb-4">Connect</p>
-                <div className="flex flex-wrap gap-6">
-                  {[
-                    ['LinkedIn', 'https://www.linkedin.com/in/lubosi-kongwa-a9abb9244/'],
-                    ['X / Twitter', 'https://x.com/lubosi_k'],
-                    ['Instagram', 'https://www.instagram.com/lubosi.k/'],
-                    ['TikTok', 'https://www.tiktok.com/@b0si5'],
-                  ].map(([label, href]) => (
-                    <a
-                      key={label}
-                      href={href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm text-charcoal/60 hover:text-gold transition-colors"
-                    >
-                      {label}
-                    </a>
-                  ))}
-                </div>
-              </div>
-
-              <Link
-                href="/apply"
-                className="inline-block bg-gold text-white font-sans text-sm px-10 py-4 hover:bg-gold-dark transition-colors"
-              >
-                Apply to Work Together
-              </Link>
+          <div className="self-center">
+            <p className="font-serif text-3xl leading-snug text-navy sm:text-4xl">
+              Technology, strategy and operating capability in one company.
+            </p>
+            <div className="mt-8 space-y-6 text-base leading-relaxed text-charcoal/70">
+              <p>
+                Lubosi Kongwa founded Kongwa Tech to bring technology, strategy and operating capability into one company. His work focuses on building the product, AI and infrastructure layers that help ventures move from an idea or operating constraint to a useful system.
+              </p>
+              <p>
+                His experience spans go-to-market automation, growth systems, private-markets research and outreach, recruitment sourcing, AI-enabled workflows and product execution for founders and leadership teams.
+              </p>
+              <p>
+                Through Kongwa Tech, Lubosi works with a small number of founders and brands where hands-on execution and aligned incentives can create meaningful leverage. The work may include product development, AI implementation, platform engineering and audience growth, depending on what the venture needs.
+              </p>
             </div>
+
+            <div className="mt-9 flex flex-wrap gap-x-6 gap-y-3 border-t border-navy/15 pt-7">
+              {socialLinks.map(([label, href]) => (
+                <a key={label} href={href} target="_blank" rel="noopener noreferrer" className="text-sm text-charcoal/60 underline decoration-gold underline-offset-4 transition-colors hover:text-navy">
+                  {label}
+                </a>
+              ))}
+            </div>
+
+            <Link href="/consult" className="mt-10 inline-flex min-h-12 items-center bg-gold px-8 py-3 text-sm font-medium text-white transition-colors hover:bg-gold-dark">
+              Consult About Your Project
+            </Link>
           </div>
         </div>
       </section>

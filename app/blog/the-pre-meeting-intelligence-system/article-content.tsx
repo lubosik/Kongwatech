@@ -861,27 +861,21 @@ If the meeting goes well and I want to propose a next step, give me one sentence
 
           </div>
 
-          {/* Personal CTA */}
+          {/* Consultation CTA */}
           <div className="my-16 border border-gold/40 bg-cream p-10">
-            <p className="font-sans text-xs tracking-[0.25em] uppercase text-gold mb-4">Want help running this?</p>
+            <p className="font-sans text-xs tracking-[0.25em] uppercase text-gold mb-4">Building a system around this?</p>
             <h2 className="font-serif text-navy text-3xl lg:text-4xl leading-tight mb-4">
-              I will walk through this system with you, live on a call.
+              Tell us what you are building.
             </h2>
             <p className="font-sans text-charcoal/80 text-base leading-relaxed mb-3 max-w-xl">
-              If you want to get this running for your team and would rather not figure it out alone, I am happy to jump on a call with you. We go through the system together, build your first brief live, and make sure your team knows how to use it before we hang up.
+              Share the venture, the stage and the operating problem. Kongwa Tech reviews projects selectively where product, AI or growth capability can create meaningful leverage.
             </p>
-            <p className="font-sans text-charcoal/80 text-base leading-relaxed mb-8 max-w-xl">
-              No agency pitch. No slide deck. Just a working session that ends with your team actually prepared for their next meeting.
-            </p>
-            <a
-              href="https://cal.com/kongwatech/free-consultation"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/consult"
               className="inline-block bg-navy text-white font-sans text-sm px-8 py-4 hover:bg-navy/85 transition-colors mb-4"
             >
-              Book a Free Call with Lubosi
-            </a>
-            <p className="font-sans text-xs text-charcoal/40">15 minutes. Free. No commitment.</p>
+              Consult About Your Project
+            </Link>
           </div>
 
           {/* AIRO full product section */}
@@ -1059,39 +1053,6 @@ If the meeting goes well and I want to propose a next step, give me one sentence
               ))}
             </div>
 
-            {/* Audio */}
-            <div className="border border-navy/15 bg-navy mb-10">
-              <div className="p-8">
-                <span className="font-sans text-xs tracking-widest uppercase text-gold block mb-4">Hear it before you judge it</span>
-                <h3 className="font-serif text-white text-2xl mb-3 leading-tight">
-                  Two real calls. Handled entirely by AIRO.
-                </h3>
-                <p className="font-sans text-white/60 text-sm leading-relaxed mb-8 max-w-lg">
-                  No human agent. No script reading. These are inbound enquiries handled start to finish by AIRO. The first call shows a prospect qualifying themselves without any pressure. The second answers the question most people ask when they first hear about this product.
-                </p>
-
-                <div className="space-y-6">
-                  <div className="border border-white/10 p-6">
-                    <span className="font-sans text-xs uppercase tracking-widest text-gold/70 block mb-2">Recording 01</span>
-                    <p className="font-serif text-white text-lg mb-1">A buyer qualifies themselves. No closer required.</p>
-                    <p className="font-sans text-white/40 text-xs mb-4">Listen for the moment the prospect starts describing their own buying timeline without being asked.</p>
-                    <audio controls className="w-full" style={{ accentColor: '#B89A5A' }}>
-                      <source src="https://airo.velto.ai/audio/wire-transfer.mp3" type="audio/mpeg" />
-                    </audio>
-                  </div>
-
-                  <div className="border border-white/10 p-6">
-                    <span className="font-sans text-xs uppercase tracking-widest text-gold/70 block mb-2">Recording 02</span>
-                    <p className="font-serif text-white text-lg mb-1">&ldquo;You&apos;re not AI, are you?&rdquo;</p>
-                    <p className="font-sans text-white/40 text-xs mb-4">The question every sceptic asks. This is what AIRO says back.</p>
-                    <audio controls className="w-full" style={{ accentColor: '#B89A5A' }}>
-                      <source src="https://airo.velto.ai/audio/not-ai.mp3" type="audio/mpeg" />
-                    </audio>
-                  </div>
-                </div>
-              </div>
-            </div>
-
           </div>
 
           {/* Final CTA */}
@@ -1105,7 +1066,7 @@ If the meeting goes well and I want to propose a next step, give me one sentence
               Find out if AIRO is a fit for your business.
             </h2>
             <p className="font-sans text-white/60 text-base leading-relaxed mb-3 max-w-lg">
-              The intelligence system in this guide is yours to use today. If the problems above sound familiar and you want to go further, book a call with me and the Velto team.
+              The intelligence system in this guide is yours to use today. If the operating problem sounds familiar, tell Kongwa Tech what you are building and where the system needs to go next.
             </p>
             <p className="font-sans text-white/60 text-base leading-relaxed mb-3 max-w-lg">
               We will look at your pipeline, your current follow-up process, and your deal volume. Then we tell you honestly whether AIRO makes sense for your business and what it would recover.
@@ -1113,15 +1074,13 @@ If the meeting goes well and I want to propose a next step, give me one sentence
             <p className="font-sans text-white/60 text-base leading-relaxed mb-8 max-w-lg">
               No pitch. No slide deck. Just the numbers, and a straight answer on whether this is the right move for you right now.
             </p>
-            <a
-              href="https://airo.velto.ai"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/consult"
               className="inline-block bg-gold text-white font-sans text-sm px-8 py-4 hover:bg-gold-dark transition-colors mb-4"
             >
-              Book a Call with Lubosi and the Velto Team
-            </a>
-            <p className="font-sans text-xs text-white/30">No commitment. We tell you whether it is a fit before anything else.</p>
+              Consult About Your Project
+            </Link>
+            <p className="font-sans text-xs text-white/45">Kongwa Tech reviews each project for strategic and operating fit.</p>
           </div>
 
           {/* Author note */}

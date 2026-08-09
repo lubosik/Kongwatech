@@ -1,28 +1,36 @@
-# PROJECT: Kongwa & Co.
+# PROJECT: Kongwa Tech
 
-## Goal
-A boutique AI consultancy website for Lubosi Kongwa. Attracts high-end clients and investors in the AI space. Positions Lubosi as the McKinsey/KPMG of AI — pure luxury, authoritative, not digital/tech looking. Clients feel they must apply to work with him.
+## Positioning
 
-## Design System
-- **Colors:** White #FFFFFF, Cream #F5F0E8, Forest Green #2C5234, Warm Grey #8A8A8A, Black #0A0A0A, Gold accent #B89A5A
-- **Fonts:** Cormorant Garamond (serif headlines via Google Fonts), Inter (body)
-- **Style:** Editorial. Quiet luxury. Generous whitespace. One idea per section. No em-dashes. No gradients. No neon. No AI clichés.
+Kongwa Tech is a technology and strategy holding company that partners with founders and brands to build, scale and operate ventures at the intersection of AI, digital infrastructure and community.
 
-## Pages
-- index.html — Homepage
-- about.html — About Lubosi
-- services.html — All 4 service tiers
-- session.html — The Kongwa Session standalone
-- network.html — The Kongwa Intelligence Network
-- partners.html — Strategic partners
-- apply.html — Application form (Web3Forms)
+The company takes equity positions in select projects. Never imply that every collaboration or item of operating work is an equity holding.
 
-## Assets
-- images/lubosi-hero.jpg — Wide landscape. Lubosi left, white space right. Use for desktop hero.
-- images/lubosi-mobile.jpg — Same image, CSS object-position for mobile crop
+Core line: **We do not take clients. We take stakes.**
 
-## Rules
-- ZERO em-dashes anywhere. Use periods, commas, or line breaks.
-- All CTAs use application language: "Apply to work with us", "Apply Here", "Submit your application"
-- Web3Forms access_key: PLACEHOLDER_KEY (user to replace)
-- Production grade. Fully responsive. No console.logs.
+## Public architecture
+
+- `/`: company thesis, operating capability, model, selected work and about
+- `/consult`: single corporate conversion path
+- `/ai-stack`: editorial tools and affiliate page
+- `/team/lubosi-kongwa`: founder profile
+- `/blog`: retained insights
+
+Retired offer, location and package URLs are permanent redirects. Do not restore package, newsletter, local consultancy or application language.
+
+## Design system
+
+- Editorial venture-operator aesthetic
+- Cream, deep navy, warm metallic gold and charcoal palette
+- Cormorant Garamond headlines with Inter body copy
+- Typography, hierarchy, grids and restrained systems diagrams over decorative effects
+- Respect reduced-motion preferences and maintain strong mobile ergonomics
+
+## Conversion and trust rules
+
+- The corporate site has one conversion goal: `Consult About Your Project`
+- The AI Stack may link to individual tools
+- Affiliate status is driven only by `lib/ai-tools.ts`
+- Every affiliate link is visibly labelled and uses sponsored semantics
+- Never invent discounts, results, investment relationships or partnership terms
+- Preserve owner-supplied affiliate destination URLs exactly

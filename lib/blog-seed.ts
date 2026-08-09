@@ -80,7 +80,7 @@ Claude Code is not right for every business owner. The tool lives in the termina
 
 However, for business owners willing to invest a few days in the basics, or who work alongside a technical co-founder or consultant, Claude Code unlocks a level of software capability that was simply not accessible to small businesses before.
 
-If you are considering this seriously, the fastest path is a structured session with someone who uses Claude Code daily. A single morning of guidance will compress weeks of trial and error into a clear, productive starting point.
+If you are considering this seriously, start with a contained, low-risk internal workflow. Write down the current process, define what a correct output looks like, and keep a human review step until the system is dependable.
 
 ## Frequently Asked Questions
 
@@ -116,7 +116,7 @@ It is not a replacement for a skilled developer on complex projects. It is an al
 
 Claude Code and Cursor are the two AI coding tools that come up most often in conversations with business owners and technical founders in 2026. They are both excellent. They are also fundamentally different in what they are and who they are for.
 
-This comparison comes from direct experience using both in client projects across Southeast England and internationally.
+This comparison comes from direct experience using both across product builds and operating partnerships.
 
 ## What Cursor Is
 
@@ -152,9 +152,7 @@ For most business owners reading this, Claude Code is the more immediately usefu
 
 Neither tool is plug-and-play if you have no technical background at all. Claude Code requires some comfort with the terminal, and learning how to give it clear, structured instructions is a skill in itself.
 
-If you want to get up and running without weeks of trial and error, a structured session with someone who uses both tools daily is the fastest path. One morning of the right guidance compresses weeks of self-teaching.
-
-Get in touch to discuss which tool is the right starting point for your specific situation.
+The best starting point is a small representative task in both tools. Compare the quality of the output, the amount of supervision required, and how naturally each fits the way your team already works.
     `.trim(),
   },
   {
@@ -206,9 +204,9 @@ Marketers are building landing page variants, email sequence managers, and socia
 
 Consultants are building proposal generators, client onboarding workflows, and project tracking systems in an afternoon.
 
-Small businesses in Kent and across Southeast England are using vibe coding to build things that give them genuine competitive advantages over competitors who are still waiting six weeks for a developer quote.
+Small teams are using vibe coding to test internal tools and product ideas before committing to a larger engineering programme.
 
-At Kongwa Tech, every client-facing tool we build starts with a vibe coding session to rapidly prototype the core functionality. The prototype informs the architecture. The architecture guides the build. The cycle from idea to testable product is measured in hours, not weeks.
+At Kongwa Tech, selected product builds start with a rapid AI-assisted prototype. The prototype informs the architecture. The architecture guides the build. The cycle from idea to testable product is measured in hours, not weeks.
 
 ## Is Vibe Coding Bad for Professional Developers?
 
@@ -220,15 +218,13 @@ But the majority of internal business tools do not require production-grade code
 
 Developers who view vibe coding as a threat are thinking about it wrong. Developers who learn to use AI tools to accelerate their own work, and who position themselves to review and refine AI-generated code, will be more productive and more valuable than ever.
 
-## What This Means for UK Businesses
+## What This Means for Businesses
 
-The practical implication for business owners in Kent, Surrey, and across Southeast England is this: the cost of building software has dropped dramatically. Tools that were previously only accessible to businesses with development budgets are now within reach.
+The practical implication is that the cost of testing software ideas has dropped dramatically. Tools that were previously only accessible to businesses with development budgets are now within reach.
 
 The constraint is no longer money or time. It is knowing what to build, how to structure the problem, and how to guide the AI toward a result that is genuinely useful for your business.
 
-This is where strategic AI consulting adds the most value. Not in writing the code, but in defining the right problem and ensuring the output solves it.
-
-If you want to explore what vibe coding could build for your business, start with a 15-minute discovery call. We will identify two or three specific tools that could meaningfully improve your operations, and you will leave with a clear picture of what is possible.
+The highest-leverage work is defining the right problem, setting clear acceptance criteria and ensuring the output solves it. Start with one bounded workflow, measure the result and only then decide whether it belongs in a production system.
     `.trim(),
   },
 ]
