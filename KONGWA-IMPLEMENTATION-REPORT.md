@@ -4,6 +4,7 @@
 **Repository:** `lubosik/Kongwatech`
 **Release branch:** `rebrand/holding-company-ai-stack`
 **Audited production baseline:** `7621d64795a0b5f16b5b501aecbafe51be8dba5c`
+**Merged application release:** `e4f560b527c26aae1adf63c5ef2947c4b29f8e44`
 
 ## Outcome
 
@@ -29,6 +30,8 @@ Primary navigation: Thesis, Capabilities, Ventures, AI Stack, About, and `Consul
 - Presented AIRO by Velto, Vici and a private-markets system with explicit, relationship-neutral boundaries; inclusion does not imply investment or equity ownership.
 - Updated navigation, footer, founder positioning, metadata, Organization/Person schema, manifest, sitemap, robots and `llms.txt`.
 - Consolidated every corporate conversion into `/consult` and instrumented existing GA4 behavior without adding a second analytics vendor.
+
+Principal implementation files include `app/page.tsx`, `app/layout.tsx`, `app/globals.css`, `components/nav.tsx`, `components/footer.tsx`, `app/consult/*`, `app/ai-stack/*`, `components/ai-stack-explorer.tsx`, `lib/ai-tools.ts`, `app/go/[slug]/route.ts`, `proxy.ts`, `app/sitemap.ts`, `app/manifest.ts`, `next.config.mjs` and the owned files beneath `public/media/ai-stack/`. Retired route, package, subscription and lead-capture files are recorded as deletions in the release commit.
 
 ## AI Stack
 
@@ -74,8 +77,11 @@ Twelve retired public routes now return permanent 301 redirects. Nine branded to
 
 ## Publication and hosting record
 
-- Preview URL: recorded in the GitHub pull request and release handoff after branch deployment
-- Production domain: `https://kongwatech.com`
+- Preview URL: `https://kongwatech-git-rebrand-hold-adcbfc-lubosikongwa5-7492s-projects.vercel.app` (Vercel authentication may be required)
+- Production deployment URL: `https://kongwatech-obruzpmgr-lubosikongwa5-7492s-projects.vercel.app`
+- Canonical production domain: `https://kongwatech.com`
+- Application release commit: `e4f560b527c26aae1adf63c5ef2947c4b29f8e44`
+- Production deployment status: successful; post-deploy route, redirect, content and affiliate smoke checks passed through Cloudflare
 - DNS state observed before release: Cloudflare nameservers and proxy active; the application origin remains Vercel
 - DNS changes made by this release: none
 
