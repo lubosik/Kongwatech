@@ -1,10 +1,5 @@
 import type { Metadata } from 'next'
 import ArticleContent from './article-content'
-import LockedPreMeetingTeaser from './locked-teaser'
-import { verifyLeadMagnetToken } from '@/lib/lead-magnet-access'
-import { hasSubscriberAccessCookie } from '@/lib/subscriber-session'
-
-export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
   title: 'How to Research Any Sales Prospect Using Claude AI in 10 Minutes | Kongwa Tech',
@@ -20,22 +15,17 @@ export const metadata: Metadata = {
     'Claude AI for business',
     'AI sales assistant',
   ],
+  alternates: { canonical: '/blog/the-pre-meeting-intelligence-system' },
   openGraph: {
     title: 'How to Research Any Sales Prospect Using Claude AI in 10 Minutes',
     description:
       'Four Claude AI prompts that build a complete prospect brief in under 10 minutes. Background, buying triggers, objections, conversation openers.',
     type: 'article',
+    url: '/blog/the-pre-meeting-intelligence-system',
     images: ['/images/blog/pre-meeting-hero.jpg'],
   },
 }
 
-export default async function PreMeetingArticlePage({
-  searchParams,
-}: {
-  searchParams: Promise<{ access?: string }>
-}) {
-  const { access } = await searchParams
-  const hasLeadMagnetAccess = verifyLeadMagnetToken(access, 'the-pre-meeting-intelligence-system')
-  const isSubscribed = hasLeadMagnetAccess || await hasSubscriberAccessCookie()
-  return isSubscribed ? <ArticleContent /> : <LockedPreMeetingTeaser />
+export default function PreMeetingArticlePage() {
+  return <ArticleContent />
 }

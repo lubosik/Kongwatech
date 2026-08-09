@@ -1,10 +1,5 @@
 import type { Metadata } from 'next'
 import ArticleContent from '../article-content'
-import LockedPreMeetingTeaser from '../locked-teaser'
-import { verifyLeadMagnetToken } from '@/lib/lead-magnet-access'
-import { hasSubscriberAccessCookie } from '@/lib/subscriber-session'
-
-export const dynamic = 'force-dynamic'
 
 export async function generateMetadata({
   params,
@@ -20,10 +15,13 @@ export async function generateMetadata({
   return {
     title: `The Pre-Meeting Intelligence System |Prepared for ${companyName} | Kongwa Tech`,
     description: `A personalised intelligence briefing system built for ${companyName}. How to research any prospect in under 10 minutes using Claude.`,
+    alternates: { canonical: '/blog/the-pre-meeting-intelligence-system' },
+    robots: { index: false, follow: true },
     openGraph: {
       title: `Pre-Meeting Intelligence System |${companyName}`,
       description: `Personalised for ${companyName}. Build a 4-layer prospect briefing in under 10 minutes with Claude.`,
       type: 'article',
+      url: '/blog/the-pre-meeting-intelligence-system',
       images: ['/images/blog/pre-meeting-hero.jpg'],
     },
   }
@@ -31,14 +29,9 @@ export async function generateMetadata({
 
 export default async function PersonalisedArticlePage({
   params,
-  searchParams,
 }: {
   params: Promise<{ company: string }>
-  searchParams: Promise<{ access?: string }>
 }) {
   const { company } = await params
-  const { access } = await searchParams
-  const hasLeadMagnetAccess = verifyLeadMagnetToken(access, 'the-pre-meeting-intelligence-system')
-  const isSubscribed = hasLeadMagnetAccess || await hasSubscriberAccessCookie()
-  return isSubscribed ? <ArticleContent company={company} /> : <LockedPreMeetingTeaser />
+  return <ArticleContent company={company} />
 }

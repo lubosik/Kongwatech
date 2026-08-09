@@ -1,383 +1,298 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import ServiceCard from '@/components/service-card'
-import BlogCard from '@/components/blog-card'
-import SubscribeGate from '@/components/subscribe-gate'
-import { fetchAllPosts } from '@/lib/blog-utils'
-
-export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
-  title: 'Kongwa Tech | Boutique AI Consultancy | Rochester, Kent',
+  title: 'Kongwa Tech: Technology & Strategy Holding Company',
   description:
-    'Hands-on AI systems for ambitious business owners. The Blueprint Session from £997 online. Eco Launch in-person from £3,000. Book or apply today.',
+    'Kongwa Tech partners with founders and brands to build, scale and operate ventures across AI, digital infrastructure and community.',
+  alternates: { canonical: '/' },
+  openGraph: {
+    title: 'Kongwa Tech: Technology & Strategy Holding Company',
+    description:
+      'Technology, strategy and operating capability for ventures built to compound.',
+    url: '/',
+  },
 }
 
-const services = [
+const capabilities = [
   {
     number: '01',
-    title: 'The Blueprint Session',
+    title: 'Product Development',
     description:
-      'A live two to three hour working session where you build a real AI system alongside Lubosi. Lead generators, content engines, ad intelligence agents, social pipelines. You leave with something working.',
-    price: '£997',
-    format: 'Online',
-    href: '/services/blueprint-session',
-    cta: 'Book Now',
+      'From concept and prototype to usable software, product systems and digital experiences.',
+    signal: 'IDEA / PRODUCT',
   },
   {
     number: '02',
-    title: 'Eco Launch',
+    title: 'AI Implementation',
     description:
-      'Lubosi comes to you. Full day on site. Claude Code installed, APIs connected, CRM plugged in, memory layer live. Your AI environment built from the ground up, in one day.',
-    price: 'From £3,000',
-    format: 'In Person',
-    href: '/services/eco-launch',
-    cta: 'Apply Now',
+      'Agentic systems, workflow automation, data pipelines, model integration and practical AI operating layers.',
+    signal: 'DATA / AGENTS',
   },
-]
+  {
+    number: '03',
+    title: 'Platform Engineering',
+    description:
+      'Infrastructure, APIs, integrations and internal tools that allow ventures to operate and scale.',
+    signal: 'SYSTEM / SCALE',
+  },
+  {
+    number: '04',
+    title: 'Audience Growth',
+    description:
+      'Positioning, content systems, distribution and community-led growth designed alongside the product.',
+    signal: 'TRUST / REACH',
+  },
+] as const
 
-const stats = [
-  { value: '2 Packages', label: 'Ways to Work Together' },
-  { value: '£997', label: 'Blueprint Session' },
-  { value: '1 Day', label: 'Eco Launch Delivery' },
-  { value: '48 hrs', label: 'Application Response' },
-]
+const operatingModel = [
+  {
+    step: 'Partner',
+    copy: 'We align with a founder, brand or venture where Kongwa Tech can create disproportionate operating leverage.',
+  },
+  {
+    step: 'Build',
+    copy: 'We deploy hands-on product, AI, infrastructure and growth capability around the opportunity.',
+  },
+  {
+    step: 'Operate',
+    copy: 'We stay close to the system, measure what works and keep improving the operating layer.',
+  },
+  {
+    step: 'Scale',
+    copy: 'Where the fit and structure are right, we participate in the upside rather than act as a traditional vendor.',
+  },
+] as const
 
-export default async function HomePage() {
-  const posts = await fetchAllPosts()
-  const featuredPosts = posts.slice(0, 3)
+const work = [
+  {
+    label: 'GO-TO-MARKET PARTNERSHIP',
+    title: 'AIRO by Velto',
+    copy: 'A voice AI product developed by Velto and brought to market in partnership with Kongwa Tech, connecting inbound lead handling with qualification and commercial follow-through.',
+    code: 'VOICE / GTM',
+  },
+  {
+    label: 'E-COMMERCE OPERATING WORK',
+    title: 'Vici Peptides growth infrastructure',
+    copy: 'Growth infrastructure spanning e-commerce intelligence, lifecycle automation, campaign systems, product positioning and conversion optimisation.',
+    code: 'GROWTH / OPS',
+  },
+  {
+    label: 'AI RESEARCH & OUTREACH',
+    title: 'Private-markets outreach architecture',
+    copy: 'Agentic systems for sourcing, research, structured deal intelligence and outreach across private-markets workflows.',
+    code: 'RESEARCH / AI',
+  },
+] as const
 
+export default function HomePage() {
   return (
-    <>
-      {/* Hero */}
-      <section className="min-h-[calc(100vh-4rem)] flex flex-col lg:flex-row">
-        {/* Mobile image banner */}
-        <div className="lg:hidden relative h-64 w-full bg-navy">
-          <Image
-            src="/images/team/lubosi.png"
-            alt="Lubosi Kongwa, founder and lead consultant"
-            fill
-            className="object-cover object-top"
-            priority
-          />
-          <div className="absolute inset-0 bg-navy/30" />
-        </div>
-        <div className="flex-1 flex flex-col justify-center bg-navy px-8 lg:px-16 xl:px-24 py-16 lg:py-24">
-          <span className="text-gold font-sans text-xs tracking-[0.3em] uppercase mb-6 lg:mb-8">
-            Boutique AI Consultancy
-          </span>
-          <h1 className="font-serif text-white text-4xl sm:text-5xl lg:text-6xl xl:text-7xl leading-tight mb-6 lg:mb-8 max-w-xl">
-            Your AI environment, built and running. In one session.
-          </h1>
-          <p className="text-white/60 font-sans text-base mb-10 lg:mb-12 max-w-md leading-relaxed">
-            Lubosi Kongwa. Rochester, Kent. Helping ambitious business owners build practical AI systems that actually work.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Link
-              href="/services/blueprint-session"
-              className="bg-gold text-white font-sans text-sm px-8 py-4 hover:bg-gold-dark transition-colors text-center"
-            >
-              Book the Blueprint Session
-            </Link>
-            <Link
-              href="/services/eco-launch"
-              className="border border-white/40 text-white font-sans text-sm px-8 py-4 hover:border-white transition-colors text-center"
-            >
-              Apply for Eco Launch
+    <div className="holding-home">
+      <section className="holding-hero" aria-labelledby="holding-hero-title">
+        <div className="holding-hero__grid" aria-hidden="true" />
+        <div className="holding-shell holding-hero__layout">
+          <div className="holding-hero__copy">
+            <p className="holding-kicker">TECHNOLOGY · STRATEGY · VENTURES</p>
+            <h1 id="holding-hero-title">We build and operate companies at the edge of AI.</h1>
+            <p className="holding-hero__lede">
+              Kongwa Tech is a technology and strategy holding company that partners with founders
+              and brands to build, scale and operate ventures at the intersection of AI, digital
+              infrastructure and community.
+            </p>
+            <p className="holding-hero__thesis">We do not take clients. We take stakes.</p>
+            <Link className="holding-cta" href="/consult">
+              <span>Consult About Your Project</span>
+              <span aria-hidden="true">↗</span>
             </Link>
           </div>
-        </div>
-        <div className="hidden lg:block flex-1 relative">
-          <Image
-            src="/images/team/lubosi.png"
-            alt="Lubosi Kongwa, founder and lead consultant"
-            fill
-            className="object-cover object-center"
-            priority
-          />
-        </div>
-      </section>
 
-      {/* Stats */}
-      <section className="bg-navy-dark py-16 border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-0 md:divide-x md:divide-white/10">
-            {stats.map(s => (
-              <div key={s.label} className="text-center px-4">
-                <p className="font-serif text-gold text-4xl lg:text-5xl mb-2">{s.value}</p>
-                <p className="font-sans text-white/50 text-xs uppercase tracking-widest">{s.label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Services */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="text-center mb-16">
-            <span className="text-gold font-sans text-xs tracking-[0.3em] uppercase">Services</span>
-            <h2 className="font-serif text-navy text-4xl lg:text-5xl mt-4 mb-4">
-              Two Ways to Work Together
-            </h2>
-            <p className="text-charcoal/60 font-sans text-base max-w-md mx-auto">
-              Each engagement is tailored. Every client is selected.
-            </p>
-            <p className="text-charcoal/40 font-sans text-xs mt-3 uppercase tracking-widest">
-              Limited availability each month
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {services.map(s => (
-              <ServiceCard key={s.number} {...s} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Meet the Team */}
-      <section className="py-24 bg-cream">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="text-center mb-16">
-            <span className="text-gold font-sans text-xs tracking-[0.3em] uppercase">Meet the Team</span>
-            <h2 className="font-serif text-navy text-4xl lg:text-5xl mt-4 mb-4">
-              Led directly by Lubosi Kongwa.
-            </h2>
-            <p className="text-charcoal/60 font-sans text-base max-w-md mx-auto">
-              A boutique practice with direct founder involvement on every engagement.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <article className="bg-white border border-gray-100">
-              <div className="relative aspect-[4/3] overflow-hidden bg-navy">
-              <Image
-                src="/images/team/lubosi.png"
-                alt="Lubosi Kongwa"
-                fill
-                className="object-cover object-center"
-              />
-              </div>
-              <div className="p-8">
-                <span className="text-gold font-sans text-xs tracking-[0.2em] uppercase">Founder & Lead Consultant</span>
-                <h3 className="font-serif text-navy text-3xl mt-3 mb-4">Lubosi Kongwa</h3>
-                <p className="text-sm text-charcoal/70 font-sans leading-relaxed">
-                  AI systems builder helping businesses design, launch, and operate practical AI environments.
-                </p>
-              <Link
-                href="/team/lubosi-kongwa"
-                className="inline-flex items-center gap-2 mt-8 text-sm font-sans text-navy hover:text-gold transition-colors"
-              >
-                Read Full Profile
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </Link>
+          <div className="operating-map" aria-label="Kongwa Tech operating capability map">
+            <div className="operating-map__header">
+              <span>OPERATING MAP / 01</span>
+              <span className="operating-map__live">ACTIVE</span>
             </div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      {/* Portfolio */}
-      <section className="py-24 bg-cream">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="text-center mb-16">
-            <span className="text-gold font-sans text-xs tracking-[0.3em] uppercase">Selected Work</span>
-            <h2 className="font-serif text-navy text-4xl lg:text-5xl mt-4 mb-4">
-              Work That Ships.
-            </h2>
-            <p className="text-charcoal/60 font-sans text-base max-w-md mx-auto">
-              AI systems built from the ground up. Real businesses. Real results.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              {
-                name: 'Velto AI Revenue Engine',
-                desc: 'Go-to-market systems, growth marketing automation, outbound email campaigns, lead handling workflows, and ecosystem support for an AI enablement company serving high-ticket and luxury-market businesses.',
-                tag: 'GTM Automation',
-              },
-              {
-                name: 'LIBDR AI Research Platform',
-                desc: 'Two full agentic systems for private equity and fundraising: sourcing, research, outreach automation, and structured deal intelligence for investor-facing teams.',
-                tag: 'Fundraising AI',
-              },
-              {
-                name: 'Vici Peptides Growth Stack',
-                desc: 'A US growth stack covering ecommerce intelligence, lifecycle automation, campaign infrastructure, product positioning, and conversion optimisation.',
-                tag: 'E-commerce AI',
-              },
-              {
-                name: 'Recruitment Sourcing System',
-                desc: 'Agentic recruitment infrastructure for sourcing candidates, qualifying profiles, enriching data, and automating personalised outreach at scale.',
-                tag: 'Recruitment AI',
-              },
-            ].map(p => (
-              <div key={p.name} className="bg-white border border-gray-100 p-8 flex flex-col">
-                <span className="text-xs font-sans text-gold uppercase tracking-widest mb-4">{p.tag}</span>
-                <h3 className="font-serif text-navy text-xl mb-3">{p.name}</h3>
-                <p className="text-sm text-charcoal/70 font-sans leading-relaxed flex-1">{p.desc}</p>
-                <div className="mt-6 pt-4 border-t border-gray-100">
-                  <span className="text-xs font-sans text-charcoal/30 uppercase tracking-wider">Confidential</span>
-                </div>
+            <div className="operating-map__canvas">
+              <div className="operating-map__rings" aria-hidden="true"><i /><i /><i /></div>
+              <div className="operating-map__core">
+                <span>KT</span>
+                <small>OPERATING CORE</small>
               </div>
-            ))}
+              <div className="operating-map__node operating-map__node--product">
+                <b>01</b><span>PRODUCT</span>
+              </div>
+              <div className="operating-map__node operating-map__node--ai">
+                <b>02</b><span>AI</span>
+              </div>
+              <div className="operating-map__node operating-map__node--platform">
+                <b>03</b><span>PLATFORM</span>
+              </div>
+              <div className="operating-map__node operating-map__node--audience">
+                <b>04</b><span>AUDIENCE</span>
+              </div>
+            </div>
+            <div className="operating-map__footer">
+              <span>FOUNDER + BRAND</span>
+              <i aria-hidden="true" />
+              <span>ALIGNED VENTURE</span>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Blog Preview */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+      <section className="capability-section" id="capabilities" aria-labelledby="capabilities-title">
+        <div className="holding-shell">
+          <div className="holding-section-head">
             <div>
-              <span className="text-gold font-sans text-xs tracking-[0.3em] uppercase">Kongwa Tech News</span>
-              <h2 className="font-serif text-navy text-4xl lg:text-5xl mt-4 leading-tight">
-                Insights from the frontier.
-              </h2>
+              <p className="holding-kicker">WHAT WE DEPLOY</p>
+              <h2 id="capabilities-title">Operating Capability</h2>
             </div>
-            <Link
-              href="/blog"
-              className="text-sm font-sans text-navy border border-navy px-6 py-3 hover:bg-navy hover:text-white transition-colors whitespace-nowrap self-start md:self-auto"
-            >
-              View all articles
+            <p>Hands-on capability across the layers that turn an idea into an operating venture.</p>
+          </div>
+          <div className="capability-grid">
+            {capabilities.map((capability) => (
+              <article className="capability-card" key={capability.number}>
+                <div className="capability-card__top">
+                  <span>{capability.number}</span>
+                  <span>{capability.signal}</span>
+                </div>
+                <h3>{capability.title}</h3>
+                <p>{capability.description}</p>
+                <div className="capability-card__signal" aria-hidden="true">
+                  <i /><i /><i /><i />
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="model-section" aria-labelledby="model-title">
+        <div className="holding-shell">
+          <div className="holding-section-head holding-section-head--dark">
+            <div>
+              <p className="holding-kicker">HOW WE WORK</p>
+              <h2 id="model-title">Partner. Build. Operate. Scale.</h2>
+            </div>
+            <p>An operating relationship, designed around what creates the most leverage.</p>
+          </div>
+          <ol className="model-track">
+            {operatingModel.map((item, index) => (
+              <li key={item.step}>
+                <div className="model-track__node">
+                  <span>{String(index + 1).padStart(2, '0')}</span>
+                </div>
+                <h3>{item.step}</h3>
+                <p>{item.copy}</p>
+              </li>
+            ))}
+          </ol>
+          <p className="model-section__note">Partnership structures vary by project.</p>
+        </div>
+      </section>
+
+      <section className="ventures-section" id="ventures" aria-labelledby="ventures-title">
+        <div className="holding-shell">
+          <div className="holding-section-head">
+            <div>
+              <p className="holding-kicker">SELECTED WORK</p>
+              <h2 id="ventures-title">Selected Ventures &amp; Operating Work</h2>
+            </div>
+            <p>A selection of partnerships and systems where Kongwa Tech has deployed operating capability.</p>
+          </div>
+          <div className="venture-list">
+            {work.map((item, index) => (
+              <article className="venture-card" key={item.title}>
+                <div className="venture-card__number" aria-hidden="true">
+                  {String(index + 1).padStart(2, '0')}
+                </div>
+                <div className="venture-card__copy">
+                  <p>{item.label}</p>
+                  <h3>{item.title}</h3>
+                  <span>{item.copy}</span>
+                </div>
+                <div className="venture-card__code">{item.code}</div>
+              </article>
+            ))}
+          </div>
+          <p className="relationship-note">
+            Relationships vary by project. Inclusion here does not imply an investment or equity holding.
+          </p>
+        </div>
+      </section>
+
+      <section className="thesis-section" id="thesis" aria-labelledby="thesis-title">
+        <div className="holding-shell thesis-section__layout">
+          <div className="thesis-section__marker" aria-hidden="true">
+            <span>KT</span>
+            <i />
+            <small>THESIS / 2026</small>
+          </div>
+          <div className="thesis-section__copy">
+            <p className="holding-kicker">OUR THESIS</p>
+            <h2 id="thesis-title">Building is cheaper. Operating well is still rare.</h2>
+            <p>
+              AI is reducing the time and cost required to build useful products. But lower build
+              costs do not create distribution, trust or durable operations. We believe product,
+              infrastructure and audience should be designed as one system.
+            </p>
+            <p>
+              That is why Kongwa Tech works hands-on with a small number of aligned founders and
+              brands and may take equity positions where the structure is right. The goal is aligned
+              upside, not a queue of transactional projects.
+            </p>
+            <blockquote>We do not take clients. We take stakes.</blockquote>
+          </div>
+        </div>
+      </section>
+
+      <section className="about-section" id="about" aria-labelledby="about-title">
+        <div className="holding-shell about-section__layout">
+          <div className="about-portrait">
+            <Image
+              src="/images/team/lubosi-profile.jpg"
+              alt="Lubosi Kongwa, founder of Kongwa Tech"
+              fill
+              sizes="(max-width: 768px) 100vw, 42vw"
+              className="object-cover"
+            />
+            <div className="about-portrait__caption">
+              <span>LUBOSI KONGWA</span>
+              <span>FOUNDER / KONGWA TECH</span>
+            </div>
+          </div>
+          <div className="about-section__copy">
+            <p className="holding-kicker">ABOUT KONGWA TECH</p>
+            <h2 id="about-title">Technical depth, product judgement and distribution in one operating model.</h2>
+            <p>
+              Founded by Lubosi Kongwa, Kongwa Tech combines technical execution, AI implementation,
+              product thinking and audience growth under one operating model. The company partners
+              selectively where that combination can materially improve how a venture is built,
+              operated and scaled.
+            </p>
+            <Link href="/team/lubosi-kongwa" className="holding-text-link">
+              Read Lubosi&apos;s profile <span aria-hidden="true">→</span>
             </Link>
           </div>
-          <p className="text-charcoal/60 font-sans text-base mb-12 max-w-lg">
-            Weekly analysis on AI tools, strategy, and implementation for ambitious businesses.
+        </div>
+      </section>
+
+      <section className="holding-final" aria-labelledby="holding-final-title">
+        <div className="holding-final__grid" aria-hidden="true" />
+        <div className="holding-shell holding-final__inner">
+          <p className="holding-kicker">START A CONVERSATION</p>
+          <h2 id="holding-final-title">Building something we should know about?</h2>
+          <p>
+            If you are building an ambitious venture, or facing an operating problem where product,
+            AI, infrastructure or audience could materially change the trajectory, tell us what you
+            are working on.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            {featuredPosts.map(post => (
-              <BlogCard key={post.id} post={post} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Trustpilot */}
-      <section className="py-12 bg-white border-t border-gray-100">
-        <div className="max-w-3xl mx-auto px-6 lg:px-12 text-center">
-          <p className="font-sans text-xs text-charcoal/40 uppercase tracking-widest mb-6">Reviews</p>
-          <div
-            className="trustpilot-widget"
-            data-locale="en-US"
-            data-template-id="56278e9abfbbba0bdcd568bc"
-            data-businessunit-id="69f51b3705be17cd998c9830"
-            data-style-height="52px"
-            data-style-width="100%"
-            data-token="df893063-dd86-4536-b58f-6aa0c569162f"
-          >
-            <a href="https://www.trustpilot.com/review/kongwatech.com" target="_blank" rel="noopener">
-              Trustpilot
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="py-24 bg-cream">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="text-center mb-16">
-            <span className="text-gold font-sans text-xs tracking-[0.3em] uppercase">Client Testimonials</span>
-            <h2 className="font-serif text-navy text-4xl lg:text-5xl mt-4 mb-4">
-              Clients and collaborators.
-            </h2>
-            <p className="text-charcoal/60 font-sans text-base max-w-md mx-auto">
-              Real people. Real projects. Real outcomes.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              {
-                quote: 'Lubosi turned a vague AI ambition into a working growth system with clear priorities, dashboards, and campaigns we could actually operate.',
-                name: 'Growth founder',
-              },
-              {
-                quote: 'The value was speed and clarity. We left with the system logic, the implementation path, and the confidence to launch.',
-                name: 'Private equity operator',
-              },
-              {
-                quote: 'He thinks in outcomes first, then builds the AI environment around the business. That changed how our team approached automation.',
-                name: 'Recruitment partner',
-              },
-            ].map(item => (
-              <figure key={item.name} className="bg-white border border-gray-100 p-8">
-                <div className="mb-5 flex gap-1 text-gold" aria-label="5 out of 5 star review">
-                  {Array.from({ length: 5 }).map((_, index) => (
-                    <span key={index} aria-hidden="true" className="text-lg leading-none">
-                      ★
-                    </span>
-                  ))}
-                </div>
-                <blockquote className="font-serif text-navy text-2xl leading-snug">
-                  "{item.quote}"
-                </blockquote>
-                <figcaption className="mt-8 pt-4 border-t border-gray-100 text-xs font-sans text-charcoal/40 uppercase tracking-widest">
-                  {item.name}
-                </figcaption>
-              </figure>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Free Resources */}
-      <section id="free-resources" className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_0.9fr] gap-12 items-start">
-            <div>
-              <span className="text-gold font-sans text-xs tracking-[0.3em] uppercase">Free Resources</span>
-              <h2 className="font-serif text-navy text-4xl lg:text-5xl mt-4 mb-4 leading-tight">
-                Some Free Game. In your inbox.
-              </h2>
-              <p className="text-charcoal/60 font-sans text-base max-w-xl leading-relaxed">
-                Subscribe free. The welcome series delivers five practical guides, and new articles land in your inbox every week.
-              </p>
-              <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {[
-                  'Prompt engineering basics',
-                  'Hyper-realistic AI image creation',
-                  'AI video workflows',
-                  'SEO playbook for new sites',
-                  'Viral clip identification formula',
-                ].map(item => (
-                  <div key={item} className="border border-gray-100 bg-cream px-5 py-4">
-                    <p className="font-sans text-xs uppercase tracking-widest text-gold mb-2">Free guide</p>
-                    <p className="font-serif text-navy text-lg leading-snug">{item}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="border border-gray-100 bg-cream p-8">
-              <SubscribeGate
-                title="Subscribe free"
-                description="Enter your email to join Some Free Game. The five guides ship with the welcome email."
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Apply CTA */}
-      <section className="py-28 bg-navy text-center">
-        <div className="max-w-2xl mx-auto px-6">
-          <span className="text-gold font-sans text-xs tracking-[0.3em] uppercase">Work With Lubosi</span>
-          <h2 className="font-serif text-white text-4xl lg:text-5xl mt-6 mb-6 leading-tight">
-            Applications are reviewed personally.
-          </h2>
-          <p className="text-white/60 font-sans text-base mb-10 leading-relaxed">
-            Every engagement starts with a 15-minute discovery call. Submit an application
-            and Lubosi will respond within 48 hours.
-          </p>
-          <Link
-            href="/apply"
-            className="inline-block bg-gold text-white font-sans text-sm px-10 py-4 hover:bg-gold-dark transition-colors"
-          >
-            Apply to Work Together
+          <Link className="holding-cta" href="/consult">
+            <span>Consult About Your Project</span>
+            <span aria-hidden="true">↗</span>
           </Link>
         </div>
       </section>
-    </>
+    </div>
   )
 }
