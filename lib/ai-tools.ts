@@ -1,32 +1,20 @@
-export const toolCategories = [
-  'Build',
-  'Research & Data',
-  'Get Customers',
-  'Create',
-  'Work Faster',
-] as const
-
-export type ToolCategory = (typeof toolCategories)[number]
 export type ToolStatus = 'active' | 'watching' | 'retired'
 
 export type ToolMedia = {
-  kind: 'image' | 'video'
+  kind: 'video'
   src: string
   alt: string
-  poster?: string
-  caption?: string
+  poster: string
+  caption: string
 }
 
 export type AiTool = {
   slug: string
   redirectSlug: string
   name: string
-  category: ToolCategory
-  headline: string
-  description: string
-  useCases: string[]
-  proofTitle: string
-  proofDescription: string
+  prompt: string
+  paragraphs: string[]
+  bullets?: string[]
   destinationUrl: string
   isAffiliate: boolean
   offerText: string | null
@@ -39,151 +27,33 @@ export type AiTool = {
 
 export const aiTools: AiTool[] = [
   {
-    slug: 'claude-code',
-    redirectSlug: 'claude-code',
-    name: 'Claude Code',
-    category: 'Build',
-    headline: 'Give an agent the project, not just a prompt.',
-    description:
-      'Work across a codebase, make coordinated changes, run tests and iterate from the terminal.',
-    useCases: [
-      'Build products',
-      'Refactor codebases',
-      'Automate workflows',
-      'Work across files',
-      'Run tests and iterate',
-    ],
-    proofTitle: 'Inside the build loop',
-    proofDescription:
-      'Used across Kongwa Tech product, internal-tool and automation work.',
-    destinationUrl: 'https://www.anthropic.com/product/claude-code',
-    isAffiliate: false,
-    offerText: null,
-    cta: 'Explore Claude Code',
-    logo: 'CC',
-    media: [],
-    status: 'active',
-    lastVerified: '2026-08-09',
-  },
-  {
-    slug: 'codex',
-    redirectSlug: 'codex',
-    name: 'Codex',
-    category: 'Build',
-    headline: 'Run engineering work in parallel.',
-    description:
-      'Give scoped engineering tasks to agents that can inspect a repository, implement changes and verify the result.',
-    useCases: ['Features', 'Migrations', 'Refactors', 'Multi-agent work', 'Background tasks'],
-    proofTitle: 'Parallel implementation',
-    proofDescription:
-      "Part of Kongwa Tech's workflow for implementation, review and repository-wide change.",
-    destinationUrl: 'https://openai.com/codex/',
-    isAffiliate: false,
-    offerText: null,
-    cta: 'Explore Codex',
-    logo: 'CX',
-    media: [],
-    status: 'active',
-    lastVerified: '2026-08-09',
-  },
-  {
-    slug: 'apify',
-    redirectSlug: 'apify',
-    name: 'Apify',
-    category: 'Research & Data',
-    headline: 'Turn the public web into structured data.',
-    description:
-      'Collect authorised public-web data on a schedule, structure it and feed it into analysis or an operating workflow.',
-    useCases: [
-      'Content collection',
-      'Creator and competitor research',
-      'Lead and research data',
-      'Scheduled collection',
-      'AI analysis inputs',
-    ],
-    proofTitle: 'Content intelligence input',
-    proofDescription:
-      "The collection layer in Kongwa Tech's content intelligence workflow.",
-    destinationUrl: 'https://apify.com/',
-    isAffiliate: false,
-    offerText: null,
-    cta: 'Explore Apify',
-    logo: 'AP',
-    media: [],
-    status: 'active',
-    lastVerified: '2026-08-09',
-  },
-  {
     slug: 'instantly',
     redirectSlug: 'instantly',
     name: 'Instantly',
-    category: 'Get Customers',
-    headline: 'Turn a target market into an outbound system.',
-    description:
-      'Move from lead discovery and verification into sequences, campaign execution and structured experimentation.',
-    useCases: [
-      'Lead discovery',
-      'Verification',
-      'Email sequences',
-      'Campaign execution',
-      'Outbound experimentation',
+    prompt: "Here's what I use it for.",
+    paragraphs: [
+      'I use Instantly for outbound. Right now I use it to find leads, verify email addresses and run cold-email campaigns without having to jump between loads of different tools.',
+      "If you're trying to get customers for an agency, service or B2B offer, this is one of the tools I'd start with because you can go from finding the people you want to contact to actually running the campaign in one place.",
     ],
-    proofTitle: 'Outbound operating layer',
-    proofDescription: 'Used by Kongwa Tech in outbound workflows.',
-    destinationUrl: 'https://instantly.ai/',
-    isAffiliate: false,
-    offerText: null,
-    cta: 'Explore Instantly',
+    bullets: ['Find leads', 'Verify emails', 'Run campaigns'],
+    destinationUrl: 'https://refer.instantly.ai/c9mm9zhzvtmh',
+    isAffiliate: true,
+    offerText: '14-day free trial',
+    cta: 'Try Instantly free for 14 days',
     logo: 'IN',
     media: [],
     status: 'active',
-    lastVerified: '2026-08-09',
-  },
-  {
-    slug: 'unipile',
-    redirectSlug: 'unipile',
-    name: 'Unipile',
-    category: 'Get Customers',
-    headline: 'Give your AI a communication layer.',
-    description:
-      'Connect agentic workflows to LinkedIn, email and messaging through one integration layer.',
-    useCases: [
-      'LinkedIn workflows',
-      'Email',
-      'Messaging',
-      'Agentic outreach',
-      'Reply handling',
-    ],
-    proofTitle: 'Wokko — capital formation outreach system',
-    proofDescription:
-      'A communication layer for deal-by-deal capital formation outreach, allowing AI workflows to work across LinkedIn and email from one integration.',
-    destinationUrl: 'https://www.unipile.com/',
-    isAffiliate: false,
-    offerText: null,
-    cta: 'Explore Unipile',
-    logo: 'UP',
-    media: [],
-    status: 'active',
-    lastVerified: '2026-08-09',
+    lastVerified: '2026-08-10',
   },
   {
     slug: 'higgsfield',
     redirectSlug: 'higgsfield',
     name: 'Higgsfield',
-    category: 'Create',
-    headline: 'Create cinematic AI video without a production crew.',
-    description:
-      'Turn concepts, images and product ideas into high-production-value visual sequences for content and campaigns.',
-    useCases: [
-      'Cinematic AI video',
-      'Product visuals',
-      'AI UGC concepts',
-      'Campaign creative',
-      'Rapid visual iteration',
+    prompt: "This is what I've been using for AI video.",
+    paragraphs: [
+      "If you've seen me posting realistic AI UGC or cinematic AI clips, this is one of the main tools I've been using.",
+      'Rather than trying to explain it, here are a few examples.',
     ],
-    proofTitle: 'Owner-created visual work',
-    proofDescription:
-      'A selection of AI UGC and brand-video experiments from Lubosi’s production workflow.',
     destinationUrl: 'https://higgsfield.ai/',
     isAffiliate: false,
     offerText: null,
@@ -213,25 +83,35 @@ export const aiTools: AiTool[] = [
       },
     ],
     status: 'active',
-    lastVerified: '2026-08-09',
+    lastVerified: '2026-08-10',
+  },
+  {
+    slug: 'wispr-flow',
+    redirectSlug: 'wispr',
+    name: 'Wispr Flow',
+    prompt: 'I use this because I got tired of typing everything into AI.',
+    paragraphs: [
+      "When I'm working with Claude or Codex, I usually have way more context in my head than I want to type out.",
+      'Wispr lets me just speak normally and turns it into clean text wherever I am working. I use it for prompts, emails, scripts and getting long ideas out quickly.',
+    ],
+    destinationUrl: 'https://ref.wisprflow.ai/lubosi-kongwa',
+    isAffiliate: true,
+    offerText: null,
+    cta: 'Try Wispr Flow',
+    logo: 'WF',
+    media: [],
+    status: 'active',
+    lastVerified: '2026-08-10',
   },
   {
     slug: 'heygen',
     redirectSlug: 'heygen',
     name: 'HeyGen',
-    category: 'Create',
-    headline: 'Create a digital twin and turn scripts into videos.',
-    description:
-      'Capture a reusable on-camera presence, then produce avatar-led content from a script.',
-    useCases: [
-      'AI twin',
-      'Avatar-led content',
-      'Tutorials',
-      'Multilingual content',
-      'Repeatable creator and business video',
+    prompt: 'I use HeyGen when I want an AI version of me on camera.',
+    paragraphs: [
+      'The main thing I like it for is AI avatars and digital twins. You can create a reusable version of yourself and then turn scripts into videos without recording every single one manually.',
+      "I think this is especially useful if you're making educational content, product walkthroughs or videos in volume.",
     ],
-    proofTitle: 'A repeatable video pipeline',
-    proofDescription: '15-second capture → digital twin → script → finished video.',
     destinationUrl:
       'https://www.heygen.com/?sid=rewardful&utm_content=creator&utm_medium=influencera&via=lubosi',
     isAffiliate: true,
@@ -240,26 +120,17 @@ export const aiTools: AiTool[] = [
     logo: 'HG',
     media: [],
     status: 'active',
-    lastVerified: '2026-08-09',
+    lastVerified: '2026-08-10',
   },
   {
     slug: 'elevenlabs',
     redirectSlug: 'elevenlabs',
     name: 'ElevenLabs',
-    category: 'Create',
-    headline: 'Give your product a voice.',
-    description:
-      'Add expressive speech, narration or conversational voice to content and digital products.',
-    useCases: [
-      'Voice agents',
-      'Conversational AI',
-      'Narration',
-      'Voiceovers',
-      'Interactive website agents',
+    prompt: 'This is what I use when AI needs to actually sound good.',
+    paragraphs: [
+      'ElevenLabs is the voice tool I come back to for realistic speech, voiceovers and voice-agent experiments.',
+      "If you're building something where AI needs to talk to a customer or you just need good AI narration, this is where I'd look first.",
     ],
-    proofTitle: 'Voice-agent interface study',
-    proofDescription:
-      'A visual concept for the speaking and listening states of an embedded voice agent.',
     destinationUrl: 'https://try.elevenlabs.io/uyeh31gegisi',
     isAffiliate: true,
     offerText: null,
@@ -267,34 +138,78 @@ export const aiTools: AiTool[] = [
     logo: '11',
     media: [],
     status: 'active',
-    lastVerified: '2026-08-09',
+    lastVerified: '2026-08-10',
   },
   {
-    slug: 'wispr-flow',
-    redirectSlug: 'wispr',
-    name: 'Wispr Flow',
-    category: 'Work Faster',
-    headline: 'Stop typing every thought into AI.',
-    description:
-      "When AI is part of your work all day, typing becomes the bottleneck. Wispr Flow lets you speak naturally and turns it into clean text wherever you're already working.",
-    useCases: [
-      'Long prompts',
-      'Claude and Codex context',
-      'Emails',
-      'Scripts',
-      'Technical dictation',
-      'Hands-free writing',
+    slug: 'apify',
+    redirectSlug: 'apify',
+    name: 'Apify',
+    prompt: 'I use Apify when I need to give AI real data from the web.',
+    paragraphs: [
+      'A lot of my social-media systems start here. I can pull videos, comments or other public web data, then give that information to Claude or another model to work out what is actually performing.',
+      'It is much more useful than asking AI to guess.',
     ],
-    proofTitle: 'Everyday input layer',
-    proofDescription: "The voice-input layer in Lubosi's daily AI workflow.",
-    destinationUrl: 'https://ref.wisprflow.ai/lubosi-kongwa',
-    isAffiliate: true,
+    destinationUrl: 'https://apify.com/',
+    isAffiliate: false,
     offerText: null,
-    cta: 'Try Wispr Flow',
-    logo: 'WF',
+    cta: 'Try Apify',
+    logo: 'AP',
     media: [],
     status: 'active',
-    lastVerified: '2026-08-09',
+    lastVerified: '2026-08-10',
+  },
+  {
+    slug: 'unipile',
+    redirectSlug: 'unipile',
+    name: 'Unipile',
+    prompt: 'I use the Unipile MCP when I want an AI system to work with LinkedIn.',
+    paragraphs: [
+      'I have used it in real outreach workflows, including a capital-formation system where an AI workflow could work across LinkedIn and email.',
+      'It is one of the most useful tools I have found when I want the AI to actually do something in a communication channel instead of just generating text for me to copy and paste.',
+    ],
+    destinationUrl: 'https://www.unipile.com/',
+    isAffiliate: false,
+    offerText: null,
+    cta: 'Try Unipile',
+    logo: 'UP',
+    media: [],
+    status: 'active',
+    lastVerified: '2026-08-10',
+  },
+  {
+    slug: 'claude-code',
+    redirectSlug: 'claude-code',
+    name: 'Claude Code',
+    prompt: 'This is probably the tool I spend the most time building with.',
+    paragraphs: [
+      'I use Claude Code to work directly inside projects rather than going backwards and forwards copying code into a chatbot.',
+      'I have used it for websites, automations, internal systems and client builds.',
+    ],
+    destinationUrl: 'https://www.anthropic.com/product/claude-code',
+    isAffiliate: false,
+    offerText: null,
+    cta: 'Try Claude Code',
+    logo: 'CC',
+    media: [],
+    status: 'active',
+    lastVerified: '2026-08-10',
+  },
+  {
+    slug: 'codex',
+    redirectSlug: 'codex',
+    name: 'Codex',
+    prompt: 'I use Codex when I want engineering work running in parallel.',
+    paragraphs: [
+      'I use it alongside Claude Code, especially when I want separate agents handling implementation, review, testing or different parts of a project at the same time.',
+    ],
+    destinationUrl: 'https://openai.com/codex/',
+    isAffiliate: false,
+    offerText: null,
+    cta: 'Explore Codex',
+    logo: 'CX',
+    media: [],
+    status: 'active',
+    lastVerified: '2026-08-10',
   },
 ]
 
