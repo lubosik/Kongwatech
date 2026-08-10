@@ -41,6 +41,18 @@ export default function AiStackPage() {
               useful, using these links is an easy way to support what I make. I appreciate it.
             </p>
           </aside>
+
+          <nav className="simple-stack-start-here" aria-label="Recommended places to start">
+            <span>Start here: </span>
+            <a href="#instantly">Instantly for outbound</a>
+            <span aria-hidden="true"> · </span>
+            <a href="#higgsfield">Higgsfield for AI video</a>
+            <span aria-hidden="true"> · </span>
+            <a href="#wispr-flow">Wispr Flow for dictation</a>
+            <span aria-hidden="true"> · </span>
+            <a href="#dataforseo">DataForSEO for SEO data</a>
+            <span aria-hidden="true"> ↓</span>
+          </nav>
         </div>
       </header>
 

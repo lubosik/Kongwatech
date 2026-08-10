@@ -8,6 +8,19 @@ export type ToolMedia = {
   caption: string
 }
 
+export type ToolLink = {
+  redirectSlug: string
+  destinationUrl: string
+  label: string
+}
+
+export type ToolProof = {
+  heading: string
+  paragraphs: string[]
+  href: string
+  linkLabel: string
+}
+
 export type AiTool = {
   slug: string
   redirectSlug: string
@@ -17,7 +30,12 @@ export type AiTool = {
   bullets?: string[]
   destinationUrl: string
   isAffiliate: boolean
+  affiliateLabel?: string
   offerText: string | null
+  actionNote?: string
+  secondaryLink?: ToolLink
+  additionalRedirects?: Array<Omit<ToolLink, 'label'>>
+  proof?: ToolProof
   cta: string
   logo: string
   media: ToolMedia[]
@@ -99,6 +117,68 @@ export const aiTools: AiTool[] = [
     offerText: null,
     cta: 'Try Wispr Flow',
     logo: 'WF',
+    media: [],
+    status: 'active',
+    lastVerified: '2026-08-10',
+  },
+  {
+    slug: 'dataforseo',
+    redirectSlug: 'dataforseo',
+    name: 'DataForSEO',
+    prompt: 'This is one of the tools I use when I want a website to actually rank on Google.',
+    paragraphs: [
+      "When I'm building an SEO-focused website, I don't want AI guessing which keywords people search for or what is already ranking.",
+      'I use DataForSEO to pull real search data: what people are searching for, what Google is ranking, which locations and keywords are worth targeting, and how a site is performing.',
+      "I've used this kind of data when building SEO sites such as South Florida Site Work, where the site is designed around the actual services and locations people search for rather than random AI-generated pages.",
+    ],
+    destinationUrl: 'https://app.dataforseo.com/?aff=324879',
+    isAffiliate: true,
+    affiliateLabel: 'Affiliate links',
+    offerText: null,
+    actionNote:
+      'Good if you want keyword, ranking, on-page and backlink data without building against the API yourself.',
+    secondaryLink: {
+      redirectSlug: 'dataforseo-sheets',
+      destinationUrl:
+        'https://dataforseo.com/google-sheets-connector?connector_aff=324879',
+      label: 'Prefer no-code? Use DataForSEO in Google Sheets',
+    },
+    additionalRedirects: [
+      {
+        redirectSlug: 'dataforseo-site',
+        destinationUrl: 'https://dataforseo.com/?aff=324879',
+      },
+    ],
+    proof: {
+      heading: 'A real site I use this approach on',
+      paragraphs: [
+        'I built South Florida Site Work around search demand, service pages and location-specific SEO. It now brings in project enquiries every week.',
+      ],
+      href: 'https://southfloridasitework.com/',
+      linkLabel: 'Visit South Florida Site Work',
+    },
+    cta: 'Create a DataForSEO account',
+    logo: 'DF',
+    media: [],
+    status: 'active',
+    lastVerified: '2026-08-10',
+  },
+  {
+    slug: 'gojiberry',
+    redirectSlug: 'gojiberry',
+    name: 'Gojiberry AI',
+    prompt: 'I use this when I want outbound to be much more hands-off.',
+    paragraphs: [
+      'I used Gojiberry for a couple of months and really liked the way it approaches outreach.',
+      'Instead of starting with a giant list and blasting everyone, you tell it the kind of people you want to reach and it looks for buying signals, researches the prospects and helps run outreach across LinkedIn and email.',
+      'I think of it more like a sniper than a machine gun. If you want AI doing more of the prospecting and research for you, this is worth trying.',
+    ],
+    bullets: ['Buying signals', 'AI prospect research', 'LinkedIn + email outreach'],
+    destinationUrl: 'https://gojiberry.ai/?ref=lubosi',
+    isAffiliate: true,
+    offerText: null,
+    cta: 'Try Gojiberry AI',
+    logo: 'GJ',
     media: [],
     status: 'active',
     lastVerified: '2026-08-10',
@@ -215,4 +295,21 @@ export const aiTools: AiTool[] = [
 
 export function getAiTool(slug: string) {
   return aiTools.find((tool) => tool.slug === slug)
+}
+
+export function getAiToolRedirect(redirectSlug: string) {
+  for (const tool of aiTools) {
+    if (tool.status !== 'active') continue
+    if (tool.redirectSlug === redirectSlug) return tool.destinationUrl
+    if (tool.secondaryLink?.redirectSlug === redirectSlug) {
+      return tool.secondaryLink.destinationUrl
+    }
+
+    const additionalRedirect = tool.additionalRedirects?.find(
+      (redirect) => redirect.redirectSlug === redirectSlug,
+    )
+    if (additionalRedirect) return additionalRedirect.destinationUrl
+  }
+
+  return undefined
 }
