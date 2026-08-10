@@ -79,7 +79,11 @@ export default function AiStackExplorer({ tools }: { tools: AiTool[] }) {
               <div className="simple-tool__content">
                 <div className="simple-tool__title-row">
                   <h2>{tool.name}</h2>
-                  {tool.isAffiliate && <span className="simple-tool__affiliate">Affiliate link</span>}
+                  {tool.isAffiliate && (
+                    <span className="simple-tool__affiliate">
+                      {tool.affiliateLabel ?? 'Affiliate link'}
+                    </span>
+                  )}
                 </div>
 
                 <p className="simple-tool__prompt">{tool.prompt}</p>
@@ -94,6 +98,19 @@ export default function AiStackExplorer({ tools }: { tools: AiTool[] }) {
                   </ul>
                 )}
 
+                {tool.proof && (
+                  <aside className="simple-tool__proof" aria-label={`${tool.name} proof example`}>
+                    <p className="simple-tool__proof-label">PROOF EXAMPLE</p>
+                    <h3>{tool.proof.heading}</h3>
+                    {tool.proof.paragraphs.map((paragraph) => (
+                      <p key={paragraph}>{paragraph}</p>
+                    ))}
+                    <a href={tool.proof.href} target="_blank" rel="noopener noreferrer">
+                      {tool.proof.linkLabel} <span aria-hidden="true">↗</span>
+                    </a>
+                  </aside>
+                )}
+
                 {tool.media.length > 0 && <HiggsfieldExamples tool={tool} />}
 
                 <div className="simple-tool__action">
@@ -105,7 +122,19 @@ export default function AiStackExplorer({ tools }: { tools: AiTool[] }) {
                   >
                     {tool.cta} <span aria-hidden="true">→</span>
                   </a>
+                  {tool.secondaryLink && (
+                    <a
+                      className="simple-tool__secondary-link"
+                      href={`/go/${tool.secondaryLink.redirectSlug}`}
+                      target="_blank"
+                      rel={tool.isAffiliate ? 'noopener noreferrer sponsored' : 'noopener noreferrer'}
+                      onClick={() => trackToolClick(tool, position)}
+                    >
+                      {tool.secondaryLink.label} <span aria-hidden="true">→</span>
+                    </a>
+                  )}
                   {tool.offerText && <p>{tool.offerText} for new users.</p>}
+                  {tool.actionNote && <p>{tool.actionNote}</p>}
                 </div>
               </div>
             </article>

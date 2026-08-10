@@ -1,28 +1,16 @@
 import { NextResponse, type NextRequest } from 'next/server'
-import { getAiTool } from '@/lib/ai-tools'
-
-const brandedToolSlugs: Record<string, string> = {
-  heygen: 'heygen',
-  elevenlabs: 'elevenlabs',
-  wispr: 'wispr-flow',
-  higgsfield: 'higgsfield',
-  apify: 'apify',
-  instantly: 'instantly',
-  unipile: 'unipile',
-  'claude-code': 'claude-code',
-  codex: 'codex',
-}
+import { getAiToolRedirect } from '@/lib/ai-tools'
 
 export async function GET(
   _request: NextRequest,
   context: { params: Promise<{ slug: string }> },
 ) {
   const { slug } = await context.params
-  const tool = getAiTool(brandedToolSlugs[slug])
+  const destinationUrl = getAiToolRedirect(slug)
 
-  if (!tool || tool.status !== 'active') {
+  if (!destinationUrl) {
     return NextResponse.json({ error: 'Unknown tool' }, { status: 404 })
   }
 
-  return NextResponse.redirect(tool.destinationUrl, 307)
+  return NextResponse.redirect(destinationUrl, 307)
 }
