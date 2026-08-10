@@ -189,11 +189,11 @@ Heading:
 
 #### Scale
 
-> Where the fit and structure are right, we participate in the upside rather than act as a traditional vendor.
+> Where the fit is right, we add an equity-aligned structure so long-term upside stays aligned as the venture grows.
 
 Small clarification below the model:
 
-> Partnership structures vary by project.
+> **Commercial structure.** Every accepted partnership is scoped around the work required. We agree an initial setup fee and ongoing operating cost before work begins; where appropriate, an equity position is added to align long-term upside. Equity does not replace the cost of delivery.
 
 ### 4. Selected Ventures and Operating Work
 
@@ -335,7 +335,7 @@ Introduction:
 
 Expectation-setting note:
 
-> Share the context, the opportunity and where you think Kongwa Tech could create leverage. Partnership structures vary, and not every project is an equity engagement.
+> Share the context, the opportunity and where you think Kongwa Tech could create leverage. If there is a fit, we scope the work, agree an initial setup fee and ongoing operating cost, then set any strategic or equity-aligned terms separately. Equity alignment does not replace delivery costs.
 
 Fields:
 
