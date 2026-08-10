@@ -109,7 +109,7 @@ Detailed evidence:
 
 ## Deployment record
 
-- Preview URL: pending branch deployment
+- Preview URL: `https://kongwatech-git-agent-ai-sta-4a5473-lubosikongwa5-7492s-projects.vercel.app/ai-stack` (deployment ready; access controlled by Vercel SSO)
 - Production URL: `https://kongwatech.com/ai-stack`
 - Production commit/status: pending merge
 - DNS changes: none
