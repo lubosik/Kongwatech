@@ -111,5 +111,5 @@ Detailed evidence:
 
 - Preview URL: `https://kongwatech-git-agent-ai-sta-4a5473-lubosikongwa5-7492s-projects.vercel.app/ai-stack` (deployment ready; access controlled by Vercel SSO)
 - Production URL: `https://kongwatech.com/ai-stack`
-- Production commit/status: pending merge
+- Production commit/status: `4ede53590d09b039fde88b2e703e86aef90d04c0` — Vercel deployment successful; public Cloudflare response `200`; rebuilt content, exact tool order, four affiliate labels and all nine branded redirects verified live
 - DNS changes: none
