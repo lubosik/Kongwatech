@@ -36,6 +36,28 @@ export default function ConsultPage() {
             <p className="mt-5 text-sm leading-relaxed text-charcoal/65">
               Share the venture, its current stage and the leverage you believe Kongwa Tech could bring. We review each project for strategic fit, operating relevance and aligned upside.
             </p>
+            <div className="mt-9 border-t border-navy/15 pt-7">
+              <p className="text-xs font-medium uppercase tracking-[0.18em] text-gold">How an engagement starts</p>
+              <ol className="mt-5 space-y-5">
+                {[
+                  ['01', 'Scope', 'Define the project, outcomes and operating work required.'],
+                  ['02', 'Structure', 'Agree the initial setup fee and ongoing operating cost.'],
+                  ['03', 'Align', 'Set any strategic or equity-aligned terms separately, where appropriate.'],
+                  ['04', 'Operate', 'Begin the build and establish the ongoing operating cadence.'],
+                ].map(([number, title, copy]) => (
+                  <li className="grid grid-cols-[2rem_1fr] gap-3" key={number}>
+                    <span className="pt-0.5 text-xs font-semibold tracking-wider text-gold" aria-hidden="true">{number}</span>
+                    <div>
+                      <strong className="block text-sm font-semibold text-navy">{title}</strong>
+                      <span className="mt-1 block text-sm leading-relaxed text-charcoal/65">{copy}</span>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+              <p className="mt-6 border-l-2 border-gold pl-4 text-sm leading-relaxed text-charcoal/75">
+                Equity alignment, when used, sits alongside delivery costs rather than replacing them.
+              </p>
+            </div>
             <p className="mt-5 text-sm leading-relaxed text-charcoal/65">
               Prefer email? Write to{' '}
               <a className="inline-flex min-h-11 items-center align-middle font-medium text-navy underline decoration-gold underline-offset-4" href="mailto:lubosi@kongwatech.com">

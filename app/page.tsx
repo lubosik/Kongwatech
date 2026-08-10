@@ -61,7 +61,7 @@ const operatingModel = [
   },
   {
     step: 'Scale',
-    copy: 'Where the fit and structure are right, we participate in the upside rather than act as a traditional vendor.',
+    copy: 'Where the fit is right, we add an equity-aligned structure so long-term upside stays aligned as the venture grows.',
   },
 ] as const
 
@@ -173,7 +173,12 @@ export default function HomePage() {
               </li>
             ))}
           </ol>
-          <p className="model-section__note">Partnership structures vary by project.</p>
+          <p className="model-section__note">
+            <strong>Commercial structure.</strong> Every accepted partnership is scoped around the
+            work required. We agree an initial setup fee and ongoing operating cost before work
+            begins; where appropriate, an equity position is added to align long-term upside.
+            Equity does not replace the cost of delivery.
+          </p>
         </div>
       </section>
 
